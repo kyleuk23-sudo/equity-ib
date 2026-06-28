@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Dark navy circle background -->
+  <circle cx="32" cy="32" r="32" fill="#080B1A"/>
+  <!-- Gold ring border -->
+  <circle cx="32" cy="32" r="29" fill="none" stroke="url(#goldRing)" stroke-width="2.5"/>
+  <!-- Inner glow ring -->
+  <circle cx="32" cy="32" r="27" fill="none" stroke="rgba(200,149,42,0.15)" stroke-width="1"/>
+
+  <!-- E — three gold parallelogram bars -->
+  <rect x="14" y="18" width="16" height="4.5" rx="1.2" fill="url(#goldBar)" transform="skewX(-6)"/>
+  <rect x="14" y="27.5" width="12" height="4.5" rx="1.2" fill="url(#goldBar)" transform="skewX(-6)"/>
+  <rect x="14" y="37" width="16" height="4.5" rx="1.2" fill="url(#goldBar)" transform="skewX(-6)"/>
+
+  <!-- B — silver/platinum letterform -->
+  <path d="M33 18h9a5 5 0 0 1 0 10H33V18z" fill="url(#silverTop)"/>
+  <path d="M33 28h10a6 6 0 0 1 0 12H33V28z" fill="url(#silverBot)"/>
+  <rect x="33" y="18" width="3" height="22" rx="1" fill="#E8E8E8"/>
+
+  <defs>
+    <linearGradient id="goldRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5C842"/>
+      <stop offset="50%" stop-color="#C8952A"/>
+      <stop offset="100%" stop-color="#F5C842"/>
+    </linearGradient>
+    <linearGradient id="goldBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F5C842"/>
+      <stop offset="100%" stop-color="#C8952A"/>
+    </linearGradient>
+    <linearGradient id="silverTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#B0B8C8"/>
+    </linearGradient>
+    <linearGradient id="silverBot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D8DDE8"/>
+      <stop offset="100%" stop-color="#9AA0B0"/>
+    </linearGradient>
+  </defs>
+</svg>
