@@ -6,7 +6,7 @@ const NAV = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
   { label: "IB Rebates",    href: "/#ib-rebates"    },
   { label: "Why PU Prime",  href: "/#why-pu-prime"  },
-  { label: "FAQ",           href: "/#faq"            },
+  { label: "FAQ",           href: "/faq"              },
   { label: "Contact",       href: "/contact"         },
   { label: "Apply Now",     href: "/#apply"          },
 ];
