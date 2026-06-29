@@ -1,50 +1,45 @@
-﻿"use client";
+"use client";
 
-import { useState } from "react";
+import { useState }             from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { toast } from "sonner";
+import { useForm }              from "react-hook-form";
+import { zodResolver }          from "@hookform/resolvers/zod";
+import { z }                    from "zod";
+import { toast }                from "sonner";
 import {
-  Send,
-  Calendar,
-  MessageCircle,
-  MapPin,
-  Mail,
-  CheckCircle2,
-  Globe,
+  Send, Calendar, MessageCircle, MapPin, Mail, CheckCircle2, Globe,
 } from "lucide-react";
+import { submitApplication }    from "@/app/actions/submit-application";
 
 const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  telegram: z.string().optional(),
-  country: z.string().min(2, "Please enter your country"),
-  monthlyLots: z.string().min(1, "Please select your estimated monthly lots"),
+  name:          z.string().min(2, "Name must be at least 2 characters"),
+  email:         z.string().email("Please enter a valid email address"),
+  telegram:      z.string().optional(),
+  country:       z.string().min(2, "Please enter your country"),
+  monthlyLots:   z.string().min(1, "Please select your estimated monthly lots"),
   currentBroker: z.string().optional(),
-  yearsAsIB: z.string().min(1, "Please select your IB experience"),
-  website: z.string().optional(),
-  message: z.string().optional(),
+  yearsAsIB:     z.string().min(1, "Please select your IB experience"),
+  website:       z.string().optional(),
+  message:       z.string().optional(),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const lotsOptions = [
-  { value: "0-99", label: "0–99 Lots (Starter)" },
-  { value: "100-249", label: "100–249 Lots (Bronze)" },
-  { value: "250-499", label: "250–499 Lots (Silver)" },
-  { value: "500-999", label: "500–999 Lots (Gold)" },
-  { value: "1000-2499", label: "1,000–2,499 Lots (Platinum)" },
-  { value: "2500+", label: "2,500+ Lots (Diamond)" },
+  { value: "0-99",      label: "0–99 Lots (Starter)"          },
+  { value: "100-249",   label: "100–249 Lots (Bronze)"         },
+  { value: "250-499",   label: "250–499 Lots (Silver)"         },
+  { value: "500-999",   label: "500–999 Lots (Gold)"           },
+  { value: "1000-2499", label: "1,000–2,499 Lots (Platinum)"   },
+  { value: "2500+",     label: "2,500+ Lots (Diamond)"         },
 ];
 
 const yearsOptions = [
-  { value: "0", label: "New to IB — first time" },
-  { value: "1", label: "Less than 1 year" },
-  { value: "1-3", label: "1–3 years" },
-  { value: "3-5", label: "3–5 years" },
-  { value: "5+", label: "5+ years" },
+  { value: "0",   label: "New to IB — first time" },
+  { value: "1",   label: "Less than 1 year"        },
+  { value: "1-3", label: "1–3 years"               },
+  { value: "3-5", label: "3–5 years"               },
+  { value: "5+",  label: "5+ years"                },
 ];
 
 const inputClass =
@@ -64,10 +59,25 @@ export default function ContactContent() {
   } = useForm<FormData>({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: FormData) => {
-    await new Promise((r) => setTimeout(r, 1200));
-    console.log(data);
-    setSubmitted(true);
-    reset();
+    const result = await submitApplication({
+      name:           data.name,
+      email:          data.email,
+      telegram:       data.telegram,
+      country:        data.country,
+      monthly_lots:   data.monthlyLots,
+      current_broker: data.currentBroker,
+      years_as_ib:    data.yearsAsIB,
+      website:        data.website,
+      message:        data.message,
+      source:         "contact",
+    });
+
+    if (result.success) {
+      setSubmitted(true);
+      reset();
+    } else {
+      toast.error(result.error ?? "Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -132,8 +142,7 @@ export default function ContactContent() {
                   <h2 className="text-2xl font-bold text-white mb-3">Application Received</h2>
                   <p className="text-slate-400 mb-6 leading-relaxed">
                     Thank you for applying to the Equity IB partner program. Your dedicated account
-                    manager will review your application and reach out within 24 hours to discuss
-                    your partnership.
+                    manager will review your application and reach out within 24 hours.
                   </p>
                   <div className="flex flex-wrap justify-center gap-3 text-sm text-slate-400 mb-8">
                     {[
@@ -170,115 +179,71 @@ export default function ContactContent() {
                   {/* Name + Email */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className={labelClass}>Full Name *</label>
-                      <input
-                        {...register("name")}
-                        placeholder="John Smith"
-                        className={inputClass}
-                      />
-                      {errors.name && (
-                        <p className="text-xs text-red-400 mt-1">{errors.name.message}</p>
-                      )}
+                      <label htmlFor="ct-name" className={labelClass}>Full Name *</label>
+                      <input id="ct-name" {...register("name")} placeholder="John Smith" className={inputClass} />
+                      {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name.message}</p>}
                     </div>
                     <div>
-                      <label className={labelClass}>Email Address *</label>
-                      <input
-                        {...register("email")}
-                        type="email"
-                        placeholder="john@example.com"
-                        className={inputClass}
-                      />
-                      {errors.email && (
-                        <p className="text-xs text-red-400 mt-1">{errors.email.message}</p>
-                      )}
+                      <label htmlFor="ct-email" className={labelClass}>Email Address *</label>
+                      <input id="ct-email" {...register("email")} type="email" placeholder="john@example.com" className={inputClass} />
+                      {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email.message}</p>}
                     </div>
                   </div>
 
                   {/* Telegram + Country */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className={labelClass}>Telegram Username</label>
-                      <input
-                        {...register("telegram")}
-                        placeholder="@yourusername"
-                        className={inputClass}
-                      />
+                      <label htmlFor="ct-telegram" className={labelClass}>Telegram Username</label>
+                      <input id="ct-telegram" {...register("telegram")} placeholder="@yourusername" className={inputClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Country *</label>
-                      <input
-                        {...register("country")}
-                        placeholder="United Kingdom"
-                        className={inputClass}
-                      />
-                      {errors.country && (
-                        <p className="text-xs text-red-400 mt-1">{errors.country.message}</p>
-                      )}
+                      <label htmlFor="ct-country" className={labelClass}>Country *</label>
+                      <input id="ct-country" {...register("country")} placeholder="United Kingdom" className={inputClass} />
+                      {errors.country && <p className="text-xs text-red-400 mt-1">{errors.country.message}</p>}
                     </div>
                   </div>
 
                   {/* Monthly Lots + Years as IB */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className={labelClass}>Estimated Monthly Lots *</label>
-                      <select {...register("monthlyLots")} className={selectClass}>
-                        <option value="" className="bg-[#050509]">
-                          Select your volume...
-                        </option>
+                      <label htmlFor="ct-lots" className={labelClass}>Estimated Monthly Lots *</label>
+                      <select id="ct-lots" {...register("monthlyLots")} className={selectClass}>
+                        <option value="" className="bg-[#050509]">Select your volume...</option>
                         {lotsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509]">
-                            {o.label}
-                          </option>
+                          <option key={o.value} value={o.value} className="bg-[#050509]">{o.label}</option>
                         ))}
                       </select>
-                      {errors.monthlyLots && (
-                        <p className="text-xs text-red-400 mt-1">{errors.monthlyLots.message}</p>
-                      )}
+                      {errors.monthlyLots && <p className="text-xs text-red-400 mt-1">{errors.monthlyLots.message}</p>}
                     </div>
                     <div>
-                      <label className={labelClass}>Years As An IB *</label>
-                      <select {...register("yearsAsIB")} className={selectClass}>
-                        <option value="" className="bg-[#050509]">
-                          Select experience...
-                        </option>
+                      <label htmlFor="ct-years" className={labelClass}>Years As An IB *</label>
+                      <select id="ct-years" {...register("yearsAsIB")} className={selectClass}>
+                        <option value="" className="bg-[#050509]">Select experience...</option>
                         {yearsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509]">
-                            {o.label}
-                          </option>
+                          <option key={o.value} value={o.value} className="bg-[#050509]">{o.label}</option>
                         ))}
                       </select>
-                      {errors.yearsAsIB && (
-                        <p className="text-xs text-red-400 mt-1">{errors.yearsAsIB.message}</p>
-                      )}
+                      {errors.yearsAsIB && <p className="text-xs text-red-400 mt-1">{errors.yearsAsIB.message}</p>}
                     </div>
                   </div>
 
                   {/* Current Broker + Website */}
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className={labelClass}>Current Broker (if any)</label>
-                      <input
-                        {...register("currentBroker")}
-                        placeholder="e.g. IC Markets, XM..."
-                        className={inputClass}
-                      />
+                      <label htmlFor="ct-broker" className={labelClass}>Current Broker (if any)</label>
+                      <input id="ct-broker" {...register("currentBroker")} placeholder="e.g. IC Markets, XM..." className={inputClass} />
                     </div>
                     <div>
-                      <label className={labelClass}>Website / Social Profile</label>
-                      <input
-                        {...register("website")}
-                        placeholder="https://yoursite.com"
-                        className={inputClass}
-                      />
+                      <label htmlFor="ct-website" className={labelClass}>Website / Social Profile</label>
+                      <input id="ct-website" {...register("website")} placeholder="https://yoursite.com" className={inputClass} />
                     </div>
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label className={labelClass}>
-                      Tell Us About Your Business
-                    </label>
+                    <label htmlFor="ct-message" className={labelClass}>Tell Us About Your Business</label>
                     <textarea
+                      id="ct-message"
                       {...register("message")}
                       rows={4}
                       placeholder="Describe your audience, how you refer traders, what you're looking for from an IB partnership..."
@@ -306,14 +271,10 @@ export default function ContactContent() {
 
                   <p className="text-xs text-slate-500 text-center">
                     By submitting you agree to our{" "}
-                    <a href="#" className="text-primary hover:underline">
-                      Privacy Policy
-                    </a>{" "}
-                    and{" "}
-                    <a href="#" className="text-primary hover:underline">
-                      IB Partner Terms
-                    </a>
-                    . Rebate rates quoted are indicative and subject to individual agreement.
+                    <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>
+                    {" "}and{" "}
+                    <a href="/legal/ib-terms" className="text-primary hover:underline">IB Partner Terms</a>.
+                    Rebate rates quoted are indicative and subject to individual agreement.
                   </p>
                 </motion.form>
               )}
@@ -366,17 +327,14 @@ export default function ContactContent() {
             {/* Contact details */}
             <div className="glass rounded-2xl p-6 space-y-4">
               {[
-                { icon: Mail, label: "Email", value: "partners@equityib.com", color: "#6366F1" },
-                { icon: Globe, label: "Presence", value: "125+ Countries", color: "#34D399" },
-                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom", color: "#A78BFA" },
+                { icon: Mail,   label: "Email",        value: "partners@equityib.com", color: "#6366F1" },
+                { icon: Globe,  label: "Presence",     value: "125+ Countries",        color: "#34D399" },
+                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom",color: "#A78BFA" },
               ].map((c) => {
                 const Icon = c.icon;
                 return (
                   <div key={c.label} className="flex items-center gap-3">
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${c.color}15` }}
-                    >
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${c.color}15` }}>
                       <Icon className="w-4 h-4" style={{ color: c.color }} />
                     </div>
                     <div>
@@ -388,7 +346,7 @@ export default function ContactContent() {
               })}
             </div>
 
-            {/* Trust indicators */}
+            {/* What happens next */}
             <div className="glass rounded-2xl p-5">
               <p className="text-xs text-slate-400 mb-3 font-medium uppercase tracking-wider">
                 What Happens Next
