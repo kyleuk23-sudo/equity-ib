@@ -239,9 +239,9 @@ export function ApplicationSection() {
 
                     <div>
                       <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-lots">Estimated Monthly Volume *</label>
-                      <select id="app-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} bg-[#0a0a14]`}>
-                        <option value="">Select monthly lots</option>
-                        {LOTS_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
+                      <select id="app-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} bg-[#0a0a14] [color-scheme:dark]`}>
+                        <option value="" className="bg-[#0a0a14] text-white">Select monthly lots</option>
+                        {LOTS_OPTIONS.map((o) => <option key={o} value={o} className="bg-[#0a0a14] text-white">{o}</option>)}
                       </select>
                     </div>
 

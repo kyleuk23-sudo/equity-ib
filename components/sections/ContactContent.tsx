@@ -46,7 +46,7 @@ const inputClass =
   "w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/30 transition-all";
 const labelClass = "block text-xs font-medium text-slate-300 mb-1.5";
 const selectClass =
-  "w-full glass rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all bg-transparent";
+  "w-full glass rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all bg-[#0d0d1a] [color-scheme:dark]";
 
 export default function ContactContent() {
   const [submitted, setSubmitted] = useState(false);
@@ -208,9 +208,9 @@ export default function ContactContent() {
                     <div>
                       <label htmlFor="ct-lots" className={labelClass}>Estimated Monthly Lots *</label>
                       <select id="ct-lots" {...register("monthlyLots")} className={selectClass}>
-                        <option value="" className="bg-[#050509]">Select your volume...</option>
+                        <option value="" className="bg-[#050509] text-white">Select your volume...</option>
                         {lotsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509]">{o.label}</option>
+                          <option key={o.value} value={o.value} className="bg-[#050509] text-white">{o.label}</option>
                         ))}
                       </select>
                       {errors.monthlyLots && <p className="text-xs text-red-400 mt-1">{errors.monthlyLots.message}</p>}
@@ -218,9 +218,9 @@ export default function ContactContent() {
                     <div>
                       <label htmlFor="ct-years" className={labelClass}>Years As An IB *</label>
                       <select id="ct-years" {...register("yearsAsIB")} className={selectClass}>
-                        <option value="" className="bg-[#050509]">Select experience...</option>
+                        <option value="" className="bg-[#050509] text-white">Select experience...</option>
                         {yearsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509]">{o.label}</option>
+                          <option key={o.value} value={o.value} className="bg-[#050509] text-white">{o.label}</option>
                         ))}
                       </select>
                       {errors.yearsAsIB && <p className="text-xs text-red-400 mt-1">{errors.yearsAsIB.message}</p>}
