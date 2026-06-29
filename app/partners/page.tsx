@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PartnersContent from "@/components/sections/PartnersContent";
-import { CTASection } from "@/components/sections/CTASection";
 
 export const metadata: Metadata = {
   title: "IB Rebate Programme — Earn Up To $30 Per Lot",
@@ -8,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function PartnersPage() {
-  return (
-    <>
-      <PartnersContent />
-      <CTASection />
-    </>
-  );
+  return <PartnersContent />;
 }

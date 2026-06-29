@@ -3,8 +3,28 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, BookOpen, CheckCircle2, Clock, FileText, Star, Shield, Mail, ArrowRight } from "lucide-react";
-import type { PremiumGuide } from "@/lib/marketingHubData";
-import { DIFFICULTY_COLORS } from "@/lib/marketingHubData";
+export interface PremiumGuide {
+  title: string;
+  subtitle: string;
+  description: string;
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
+  readTime: string;
+  pages: number;
+  chapters: string[];
+  keyTakeaways: string[];
+  lastUpdated: string;
+  color: string;
+  coverFrom: string;
+  coverTo: string;
+  isNew?: boolean;
+  isPopular?: boolean;
+}
+
+const DIFFICULTY_COLORS: Record<string, string> = {
+  Beginner:     "#34D399",
+  Intermediate: "#F5C842",
+  Advanced:     "#C8952A",
+};
 
 interface DownloadModalProps {
   guide: PremiumGuide | null;
@@ -149,7 +169,7 @@ export function DownloadModal({ guide, onClose }: DownloadModalProps) {
                     {guide.chapters.length} Chapters
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-x-4 gap-y-2">
-                    {guide.chapters.map((ch, i) => (
+                    {guide.chapters.map((ch: string, i: number) => (
                       <div key={i} className="flex items-start gap-2 text-xs text-slate-400">
                         <span
                           className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5"
@@ -170,7 +190,7 @@ export function DownloadModal({ guide, onClose }: DownloadModalProps) {
                     Key Takeaways
                   </h3>
                   <div className="space-y-2.5">
-                    {guide.keyTakeaways.map((kt, i) => (
+                    {guide.keyTakeaways.map((kt: string, i: number) => (
                       <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
                         <CheckCircle2 className="w-3.5 h-3.5 text-accent flex-shrink-0 mt-0.5" />
                         <span className="leading-relaxed">{kt}</span>

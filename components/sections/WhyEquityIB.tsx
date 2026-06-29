@@ -1,64 +1,33 @@
-﻿"use client";
+"use client";
 
 import { motion } from "framer-motion";
 import {
-  TrendingUp,
-  CalendarCheck,
-  HeadphonesIcon,
-  Shield,
-  Layers,
-  BarChart3,
+  BarChart3, Clock, Headphones, Shield, Globe, Zap,
+  MessageSquare, LineChart, Lock, Megaphone, RefreshCw, Handshake,
 } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const features = [
-  {
-    icon: TrendingUp,
-    title: "Highest Rebates",
-    desc: "Earn up to $30 per traded lot — one of the most competitive rebate structures available to professional Introducing Brokers in the industry.",
-    color: "#FFD700",
-    bg: "rgba(255,215,0,0.08)",
-  },
-  {
-    icon: CalendarCheck,
-    title: "Daily Rebates",
-    desc: "Receive your earned IB rebates every trading day. Fast, transparent daily settlement — no 30-day hold, no waiting, just daily earnings.",
-    color: "#6366F1",
-    bg: "rgba(99,102,241,0.08)",
-  },
-  {
-    icon: HeadphonesIcon,
-    title: "Dedicated IB Manager",
-    desc: "Every partner receives a named account manager providing personal support to help scale your IB business — not a generic help desk.",
-    color: "#34D399",
-    bg: "rgba(52,211,153,0.08)",
-  },
-  {
-    icon: Shield,
-    title: "Premium Broker Network",
-    desc: "We partner only with carefully selected, regulated brokers that meet our standards for trading conditions, withdrawal reliability, and client treatment.",
-    color: "#A78BFA",
-    bg: "rgba(167,139,250,0.08)",
-  },
-  {
-    icon: Layers,
-    title: "Marketing Support",
-    desc: "Professional banners, custom landing pages, email sequences and promotional assets — all provided and co-branded so you look institutional.",
-    color: "#6366F1",
-    bg: "rgba(99,102,241,0.08)",
-  },
-  {
-    icon: BarChart3,
-    title: "Long-Term Growth",
-    desc: "Build a sustainable, recurring revenue business — not a short-term promotion. Our tier system rewards loyalty and growth with increasing rebate rates.",
-    color: "#34D399",
-    bg: "rgba(52,211,153,0.08)",
-  },
+  { icon: BarChart3,    title: "Competitive Rebate Tiers",   desc: "Earn up to $30 per traded lot across six tier levels, with rates that grow automatically as your volume increases.",    color: "#C8952A" },
+  { icon: Clock,        title: "Daily Payments",              desc: "IB rebates are settled every trading day — no 30-day holds, no weekly batches. Your income arrives as it's earned.",   color: "#34D399" },
+  { icon: Zap,          title: "Premium Broker Technology",   desc: "Your clients trade on a professional platform with tight spreads, fast execution and reliable infrastructure.",          color: "#F5C842" },
+  { icon: Headphones,   title: "Dedicated Account Manager",  desc: "Every partner receives a named account manager — not a generic helpdesk — available to support your growth directly.",  color: "#A78BFA" },
+  { icon: Shield,       title: "Fast Approval",               desc: "Most IB applications are reviewed and approved within 24 hours. You can start referring clients almost immediately.",    color: "#6366F1" },
+  { icon: Globe,        title: "Global Reach",                desc: "Accept clients from 120+ countries with multi-language support and regionally relevant payment methods for deposits.",   color: "#34D399" },
+  { icon: MessageSquare,title: "Professional Support",        desc: "Round-the-clock partner assistance from a team that understands the IB business and responds to real queries.",          color: "#C8952A" },
+  { icon: LineChart,    title: "Transparent Reporting",       desc: "Full visibility into your lot volumes, rebate accrual, tier status and payment history — updated in real time.",         color: "#F5C842" },
+  { icon: Lock,         title: "Secure Client Portal",        desc: "Clients manage their accounts through a regulated, secure portal with professional-grade account protection.",            color: "#A78BFA" },
+  { icon: Megaphone,    title: "Marketing Assistance",        desc: "Access branded marketing assets, referral tracking tools and co-branded materials to help you grow your audience.",      color: "#6366F1" },
+  { icon: RefreshCw,    title: "Recurring Income Potential",  desc: "Unlike one-time referral fees, IB rebates recur for the lifetime of the client relationship — building lasting income.",  color: "#34D399" },
+  { icon: Handshake,    title: "Long-Term Partnership",       desc: "We invest in partners who think long-term. Our tier system, bespoke Diamond deals and dedicated support reflect that.",  color: "#C8952A" },
 ];
 
 export function WhyEquityIB() {
   return (
-    <section id="why" className="py-24 relative">
+    <section id="why-equity-ib" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,17 +39,16 @@ export function WhyEquityIB() {
             Why Choose Equity IB
           </div>
           <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-            Everything You Need To{" "}
-            <span className="gradient-text">Scale Faster</span>
+            Built For IBs Who Take<br />
+            <span className="gradient-text">Their Business Seriously</span>
           </h2>
           <p className="mt-4 text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed">
-            Equity IB is built for professionals who take their IB business seriously. Not a
-            short-term affiliate program — a long-term partnership built on trust, transparency
-            and performance.
+            Equity IB is not a short-term affiliate programme. It is a professional partnership
+            built on transparent rebates, daily payments and long-term growth support.
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {features.map((f, i) => {
             const Icon = f.icon;
             return (
@@ -89,35 +57,43 @@ export function WhyEquityIB() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
+                transition={{ duration: 0.45, delay: i * 0.05 }}
                 whileHover={{ y: -4 }}
-                className="glass rounded-2xl p-7 group cursor-default relative overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all"
+                className="glass rounded-2xl p-6 group cursor-default relative overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all"
               >
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                  style={{
-                    background: `radial-gradient(circle at 20% 0%, ${f.color}10 0%, transparent 60%)`,
-                  }}
+                  style={{ background: `radial-gradient(circle at 20% 0%, ${f.color}12 0%, transparent 65%)` }}
                 />
-
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform"
-                  style={{ background: f.bg }}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                  style={{ background: `${f.color}18` }}
                 >
-                  <Icon className="w-5 h-5" style={{ color: f.color }} />
+                  <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" style={{ color: f.color }} />
                 </div>
-
-                <h3 className="font-bold text-white text-lg mb-2">{f.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{f.desc}</p>
-
-                <div
-                  className="w-8 h-0.5 rounded-full mt-4 transition-all group-hover:w-16"
-                  style={{ background: f.color }}
-                />
+                <h3 className="font-bold text-white mb-1.5 text-sm">{f.title}</h3>
+                <p className="text-xs text-slate-400 leading-relaxed">{f.desc}</p>
+                <div className="w-6 h-0.5 rounded-full mt-3 transition-all group-hover:w-12" style={{ background: f.color }} />
               </motion.div>
             );
           })}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="text-center mt-12"
+        >
+          <Link
+            href="#apply"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm"
+          >
+            Apply as an IB Partner
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );

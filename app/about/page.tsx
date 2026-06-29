@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { motion } from "framer-motion";
-import { CTASection } from "@/components/sections/CTASection";
 import AboutContent from "@/components/sections/AboutContent";
 
 export const metadata: Metadata = {
@@ -9,10 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <>
-      <AboutContent />
-      <CTASection />
-    </>
-  );
+  return <AboutContent />;
 }
