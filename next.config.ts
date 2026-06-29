@@ -23,6 +23,8 @@ const SECURITY_HEADERS = [
   { key: "Content-Security-Policy",   value: CSP },
 ];
 
+const isDev = process.env.NODE_ENV === "development";
+
 const nextConfig: NextConfig = {
   experimental: {
     optimizePackageImports: ["lucide-react", "framer-motion"],
@@ -39,11 +41,8 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
-      // Security headers on all routes
-      {
-        source: "/(.*)",
-        headers: SECURITY_HEADERS,
-      },
+      // Security headers on all routes — production only (dev mode requires eval + ws for HMR)
+      ...(!isDev ? [{ source: "/(.*)", headers: SECURITY_HEADERS }] : []),
       // Immutable cache for hashed Next.js bundles
       {
         source: "/_next/static/(.*)",
