@@ -17,6 +17,7 @@ dist/
 .env.development.local
 .env.test.local
 .env.production.local
+# .env.production is intentionally tracked (contains only NEXT_PUBLIC_ keys)
 
 # debug logs
 npm-debug.log*
