@@ -1,82 +1,69 @@
 "use client";
 
-import { useState }             from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useForm }              from "react-hook-form";
-import { zodResolver }          from "@hookform/resolvers/zod";
-import { z }                    from "zod";
-import { toast }                from "sonner";
+import { useState }                  from "react";
+import { motion, AnimatePresence }   from "framer-motion";
 import {
-  Send, Calendar, MessageCircle, MapPin, Mail, CheckCircle2, Globe,
+  ArrowRight, MessageCircle, MapPin, Mail,
+  CheckCircle2, Globe, AlertCircle,
 } from "lucide-react";
-import { submitApplication }    from "@/app/actions/submit-application";
+import { submitApplication }          from "@/app/actions/submit-application";
 
-const schema = z.object({
-  name:          z.string().min(2, "Name must be at least 2 characters"),
-  email:         z.string().email("Please enter a valid email address"),
-  telegram:      z.string().optional(),
-  country:       z.string().min(2, "Please enter your country"),
-  monthlyLots:   z.string().min(1, "Please select your estimated monthly lots"),
-  currentBroker: z.string().optional(),
-  yearsAsIB:     z.string().min(1, "Please select your IB experience"),
-  website:       z.string().optional(),
-  message:       z.string().optional(),
-});
-
-type FormData = z.infer<typeof schema>;
-
-const lotsOptions = [
-  { value: "0-99",      label: "0–99 Lots (Starter)"          },
-  { value: "100-249",   label: "100–249 Lots (Bronze)"         },
-  { value: "250-499",   label: "250–499 Lots (Silver)"         },
-  { value: "500-999",   label: "500–999 Lots (Gold)"           },
-  { value: "1000-2499", label: "1,000–2,499 Lots (Platinum)"   },
-  { value: "2500+",     label: "2,500+ Lots (Diamond)"         },
+const LOTS_OPTIONS = [
+  "< 100 lots / month",
+  "100 – 249 lots / month",
+  "250 – 499 lots / month",
+  "500 – 999 lots / month",
+  "1,000 – 2,499 lots / month",
+  "2,500+ lots / month",
+  "Not sure yet",
 ];
 
-const yearsOptions = [
-  { value: "0",   label: "New to IB — first time" },
-  { value: "1",   label: "Less than 1 year"        },
-  { value: "1-3", label: "1–3 years"               },
-  { value: "3-5", label: "3–5 years"               },
-  { value: "5+",  label: "5+ years"                },
-];
+interface FormData {
+  name: string; email: string; phone: string; telegram: string;
+  country: string; broker: string; lots: string; message: string;
+}
 
-const inputClass =
-  "w-full glass rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-primary/40 focus:border-primary/30 transition-all";
-const labelClass = "block text-xs font-medium text-slate-300 mb-1.5";
-const selectClass =
-  "w-full glass rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-primary/40 transition-all bg-[#0d0d1a] [color-scheme:dark]";
+const EMPTY: FormData = {
+  name: "", email: "", phone: "", telegram: "",
+  country: "", broker: "", lots: "", message: "",
+};
+
+const inputCls =
+  "w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 focus:bg-white/[0.06] transition-all";
 
 export default function ContactContent() {
+  const [form, setForm]           = useState<FormData>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading]     = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(schema) });
+  const set = (k: keyof FormData) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.value }));
 
-  const onSubmit = async (data: FormData) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setServerError(null);
+
     const result = await submitApplication({
-      name:           data.name,
-      email:          data.email,
-      telegram:       data.telegram,
-      country:        data.country,
-      monthly_lots:   data.monthlyLots,
-      current_broker: data.currentBroker,
-      years_as_ib:    data.yearsAsIB,
-      website:        data.website,
-      message:        data.message,
+      name:           form.name,
+      email:          form.email,
+      phone:          form.phone,
+      telegram:       form.telegram,
+      country:        form.country,
+      current_broker: form.broker,
+      monthly_lots:   form.lots,
+      message:        form.message,
       source:         "contact",
     });
 
+    setLoading(false);
+
     if (result.success) {
       setSubmitted(true);
-      reset();
     } else {
-      toast.error(result.error ?? "Something went wrong. Please try again.");
+      setServerError(result.error ?? "Something went wrong. Please try again.");
     }
   };
 
@@ -85,6 +72,7 @@ export default function ContactContent() {
       <div className="absolute inset-0 bg-gradient-hero opacity-50 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+
         {/* Header */}
         <div className="mb-14">
           <motion.div
@@ -116,6 +104,7 @@ export default function ContactContent() {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-10">
+
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -123,162 +112,129 @@ export default function ContactContent() {
             transition={{ delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <AnimatePresence mode="wait">
-              {submitted ? (
-                <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="glass-strong rounded-3xl p-10 text-center"
-                >
+            <div
+              className="glass-strong rounded-3xl p-8 border border-white/[0.08]"
+              style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}
+            >
+              <AnimatePresence mode="wait">
+                {submitted ? (
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.1 }}
-                    className="w-20 h-20 bg-accent/15 rounded-full flex items-center justify-center mx-auto mb-6"
+                    key="success"
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-12 text-center"
                   >
-                    <CheckCircle2 className="w-10 h-10 text-accent" />
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                      className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center mx-auto mb-5"
+                    >
+                      <CheckCircle2 className="w-8 h-8 text-primary" />
+                    </motion.div>
+                    <h3 className="text-2xl font-bold text-white mb-2">Application Received</h3>
+                    <p className="text-slate-400 text-sm max-w-sm mx-auto">
+                      Thank you — a member of our IB team will review your application and
+                      contact you within 24 hours.
+                    </p>
                   </motion.div>
-                  <h2 className="text-2xl font-bold text-white mb-3">Application Received</h2>
-                  <p className="text-slate-400 mb-6 leading-relaxed">
-                    Thank you for applying to the Equity IB partner program. Your dedicated account
-                    manager will review your application and reach out within 24 hours.
-                  </p>
-                  <div className="flex flex-wrap justify-center gap-3 text-sm text-slate-400 mb-8">
-                    {[
-                      "Application reviewed personally",
-                      "Response within 24 hours",
-                      "IB manager assigned on approval",
-                    ].map((item) => (
-                      <div key={item} className="flex items-center gap-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-accent" />
-                        {item}
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="text-sm text-primary hover:underline"
-                  >
-                    Submit another application
-                  </button>
-                </motion.div>
-              ) : (
-                <motion.form
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="glass-strong rounded-3xl p-8 space-y-5"
-                >
-                  <h2 className="text-xl font-bold text-white mb-2">IB Partner Application</h2>
-                  <p className="text-xs text-slate-400 mb-4">
-                    All fields marked * are required. This takes under 5 minutes.
-                  </p>
+                ) : (
+                  <motion.form key="form" onSubmit={handleSubmit} className="space-y-4">
 
-                  {/* Name + Email */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="ct-name" className={labelClass}>Full Name *</label>
-                      <input id="ct-name" {...register("name")} placeholder="John Smith" className={inputClass} />
-                      {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name.message}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="ct-email" className={labelClass}>Email Address *</label>
-                      <input id="ct-email" {...register("email")} type="email" placeholder="john@example.com" className={inputClass} />
-                      {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email.message}</p>}
-                    </div>
-                  </div>
-
-                  {/* Telegram + Country */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="ct-telegram" className={labelClass}>Telegram Username</label>
-                      <input id="ct-telegram" {...register("telegram")} placeholder="@yourusername" className={inputClass} />
-                    </div>
-                    <div>
-                      <label htmlFor="ct-country" className={labelClass}>Country *</label>
-                      <input id="ct-country" {...register("country")} placeholder="United Kingdom" className={inputClass} />
-                      {errors.country && <p className="text-xs text-red-400 mt-1">{errors.country.message}</p>}
-                    </div>
-                  </div>
-
-                  {/* Monthly Lots + Years as IB */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="ct-lots" className={labelClass}>Estimated Monthly Lots *</label>
-                      <select id="ct-lots" {...register("monthlyLots")} className={selectClass}>
-                        <option value="" className="bg-[#050509] text-white">Select your volume...</option>
-                        {lotsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509] text-white">{o.label}</option>
-                        ))}
-                      </select>
-                      {errors.monthlyLots && <p className="text-xs text-red-400 mt-1">{errors.monthlyLots.message}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="ct-years" className={labelClass}>Years As An IB *</label>
-                      <select id="ct-years" {...register("yearsAsIB")} className={selectClass}>
-                        <option value="" className="bg-[#050509] text-white">Select experience...</option>
-                        {yearsOptions.map((o) => (
-                          <option key={o.value} value={o.value} className="bg-[#050509] text-white">{o.label}</option>
-                        ))}
-                      </select>
-                      {errors.yearsAsIB && <p className="text-xs text-red-400 mt-1">{errors.yearsAsIB.message}</p>}
-                    </div>
-                  </div>
-
-                  {/* Current Broker + Website */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="ct-broker" className={labelClass}>Current Broker (if any)</label>
-                      <input id="ct-broker" {...register("currentBroker")} placeholder="e.g. IC Markets, XM..." className={inputClass} />
-                    </div>
-                    <div>
-                      <label htmlFor="ct-website" className={labelClass}>Website / Social Profile</label>
-                      <input id="ct-website" {...register("website")} placeholder="https://yoursite.com" className={inputClass} />
-                    </div>
-                  </div>
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="ct-message" className={labelClass}>Tell Us About Your Business</label>
-                    <textarea
-                      id="ct-message"
-                      {...register("message")}
-                      rows={4}
-                      placeholder="Describe your audience, how you refer traders, what you're looking for from an IB partnership..."
-                      className={`${inputClass} resize-none`}
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white font-semibold py-3.5 rounded-xl transition-all hover:shadow-glow text-sm"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Submitting Application...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Submit IB Application
-                      </>
+                    {serverError && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-start gap-3 p-3.5 rounded-xl"
+                        style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)" }}
+                      >
+                        <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                        <p className="text-xs text-red-400">{serverError}</p>
+                      </motion.div>
                     )}
-                  </button>
 
-                  <p className="text-xs text-slate-500 text-center">
-                    By submitting you agree to our{" "}
-                    <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>
-                    {" "}and{" "}
-                    <a href="/legal/ib-terms" className="text-primary hover:underline">IB Partner Terms</a>.
-                    Rebate rates quoted are indicative and subject to individual agreement.
-                  </p>
-                </motion.form>
-              )}
-            </AnimatePresence>
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-name">Full Name *</label>
+                        <input id="ct-name" required value={form.name} onChange={set("name")} placeholder="Your name" className={inputCls} />
+                      </div>
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-email">Email Address *</label>
+                        <input id="ct-email" required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className={inputCls} />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-phone">Phone Number</label>
+                        <input id="ct-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 8900" className={inputCls} />
+                      </div>
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-telegram">Telegram Handle</label>
+                        <input id="ct-telegram" value={form.telegram} onChange={set("telegram")} placeholder="@yourusername" className={inputCls} />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-country">Country *</label>
+                        <input id="ct-country" required value={form.country} onChange={set("country")} placeholder="United Kingdom" className={inputCls} />
+                      </div>
+                      <div>
+                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-broker">Current Broker</label>
+                        <input id="ct-broker" value={form.broker} onChange={set("broker")} placeholder="e.g. IC Markets" className={inputCls} />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-lots">Estimated Monthly Volume *</label>
+                      <select id="ct-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} bg-[#0a0a14] [color-scheme:dark]`}>
+                        <option value="" className="bg-[#0a0a14] text-white">Select monthly lots</option>
+                        {LOTS_OPTIONS.map((o) => (
+                          <option key={o} value={o} className="bg-[#0a0a14] text-white">{o}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-message">Tell Us About Your Client Base</label>
+                      <textarea
+                        id="ct-message"
+                        value={form.message}
+                        onChange={set("message")}
+                        placeholder="Briefly describe your audience, IB experience and how you intend to refer clients..."
+                        rows={4}
+                        className={`${inputCls} resize-none`}
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn-glow w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 rounded-xl text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 relative overflow-hidden group"
+                    >
+                      <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+                      {loading ? (
+                        <span className="flex items-center gap-2">
+                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Submitting…
+                        </span>
+                      ) : (
+                        <span className="flex items-center gap-2">
+                          Submit Application
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </span>
+                      )}
+                    </button>
+
+                    <p className="text-xs text-slate-500 text-center">
+                      Applications reviewed within 24 hours. By submitting you agree to our{" "}
+                      <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                    </p>
+                  </motion.form>
+                )}
+              </AnimatePresence>
+            </div>
           </motion.div>
 
           {/* Sidebar */}
@@ -288,23 +244,6 @@ export default function ContactContent() {
             transition={{ delay: 0.3 }}
             className="lg:col-span-2 space-y-4"
           >
-            {/* Book a call */}
-            <div className="glass rounded-2xl p-6">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="font-semibold text-white">Book A Discovery Call</h3>
-              </div>
-              <p className="text-sm text-slate-400 mb-4 leading-relaxed">
-                Prefer to talk first? Schedule a 30-minute discovery call with an IB account
-                manager to discuss your situation before applying.
-              </p>
-              <button className="w-full glass hover:bg-white/[0.07] text-sm font-medium text-white py-2.5 rounded-xl transition-all border border-white/[0.06] hover:border-white/[0.12]">
-                Book A Time →
-              </button>
-            </div>
-
             {/* Live chat */}
             <div className="glass rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
@@ -327,14 +266,17 @@ export default function ContactContent() {
             {/* Contact details */}
             <div className="glass rounded-2xl p-6 space-y-4">
               {[
-                { icon: Mail,   label: "Email",        value: "partners@equityib.com", color: "#6366F1" },
-                { icon: Globe,  label: "Presence",     value: "125+ Countries",        color: "#34D399" },
-                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom",color: "#A78BFA" },
+                { icon: Mail,   label: "Email",        value: "partners@equityib.com",  color: "#6366F1" },
+                { icon: Globe,  label: "Presence",     value: "125+ Countries",         color: "#34D399" },
+                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom", color: "#A78BFA" },
               ].map((c) => {
                 const Icon = c.icon;
                 return (
                   <div key={c.label} className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: `${c.color}15` }}>
+                    <div
+                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${c.color}15` }}
+                    >
                       <Icon className="w-4 h-4" style={{ color: c.color }} />
                     </div>
                     <div>

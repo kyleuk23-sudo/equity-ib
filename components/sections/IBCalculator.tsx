@@ -48,8 +48,11 @@ const METRICS_BG = [
 ];
 
 export function IBCalculator() {
-  const [lots, setLots] = useState(500);
-  const tier = getTier(lots);
+  const [clients, setClients]   = useState(50);
+  const [avgLots, setAvgLots]   = useState(10);
+
+  const lots    = clients * avgLots;
+  const tier    = getTier(lots);
   const monthly = lots * tier.rebate;
   const annual  = monthly * 12;
   const fiveYr  = annual  * 5;
@@ -65,6 +68,9 @@ export function IBCalculator() {
   const pct = tier.next !== null
     ? ((lots - tier.min) / (tier.next - tier.min)) * 100
     : 100;
+
+  const sliderBg = (val: number, max: number) =>
+    `linear-gradient(to right, ${tier.color} ${(val / max) * 100}%, rgba(255,255,255,0.07) ${(val / max) * 100}%)`;
 
   return (
     <section id="calculator" className="py-24 relative overflow-hidden">
@@ -87,8 +93,8 @@ export function IBCalculator() {
             <span className="gradient-text">Potential Earnings</span>
           </h2>
           <p className="mt-4 text-slate-400 text-sm max-w-xl mx-auto">
-            Adjust the slider to model different monthly lot volumes and see your estimated rebates.
-            All figures are illustrative — actual rebates depend on your commercial agreement.
+            Set your number of clients and average lots per client to model your monthly rebate
+            potential. All figures are illustrative — actual rebates depend on your commercial agreement.
           </p>
         </motion.div>
 
@@ -100,24 +106,59 @@ export function IBCalculator() {
           className="glass-strong rounded-3xl p-8 sm:p-10 border border-white/[0.08]"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.35)" }}
         >
-          {/* Slider */}
-          <div className="mb-10">
-            <div className="flex items-baseline justify-between mb-3">
-              <label className="text-sm font-semibold text-white">Monthly Lots</label>
-              <div className="text-3xl font-extrabold gradient-text">{lots.toLocaleString()}</div>
+          {/* Sliders */}
+          <div className="mb-10 space-y-7">
+
+            {/* Clients slider */}
+            <div>
+              <div className="flex items-baseline justify-between mb-3">
+                <label className="text-sm font-semibold text-white">Number of Clients</label>
+                <div className="text-3xl font-extrabold gradient-text">{clients.toLocaleString()}</div>
+              </div>
+              <input
+                type="range" min={1} max={200} step={1} value={clients}
+                onChange={(e) => setClients(Number(e.target.value))}
+                className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                style={{ accentColor: tier.color, background: sliderBg(clients, 200) }}
+              />
+              <div className="flex justify-between text-xs text-slate-500 mt-2">
+                <span>1 client</span>
+                <span>200 clients</span>
+              </div>
             </div>
-            <input
-              type="range" min={1} max={3000} step={1} value={lots}
-              onChange={(e) => setLots(Number(e.target.value))}
-              className="w-full h-2 rounded-full appearance-none cursor-pointer"
-              style={{
-                accentColor: tier.color,
-                background: `linear-gradient(to right, ${tier.color} ${(lots / 3000) * 100}%, rgba(255,255,255,0.07) ${(lots / 3000) * 100}%)`,
-              }}
-            />
-            <div className="flex justify-between text-xs text-slate-500 mt-2">
-              <span>1 lot</span>
-              <span>3,000 lots</span>
+
+            {/* Avg lots per client slider */}
+            <div>
+              <div className="flex items-baseline justify-between mb-3">
+                <label className="text-sm font-semibold text-white">Avg Lots / Client / Month</label>
+                <div className="text-3xl font-extrabold gradient-text">{avgLots.toLocaleString()}</div>
+              </div>
+              <input
+                type="range" min={1} max={100} step={1} value={avgLots}
+                onChange={(e) => setAvgLots(Number(e.target.value))}
+                className="w-full h-2 rounded-full appearance-none cursor-pointer"
+                style={{ accentColor: tier.color, background: sliderBg(avgLots, 100) }}
+              />
+              <div className="flex justify-between text-xs text-slate-500 mt-2">
+                <span>1 lot</span>
+                <span>100 lots</span>
+              </div>
+            </div>
+
+            {/* Derived total */}
+            <div
+              className="flex items-center justify-between rounded-2xl px-5 py-4 border border-white/[0.06]"
+              style={{ background: `${tier.color}0c` }}
+            >
+              <div>
+                <div className="text-xs text-slate-400">Total Monthly Lots</div>
+                <div className="text-xs text-slate-500 mt-0.5">
+                  {clients.toLocaleString()} clients × {avgLots.toLocaleString()} lots
+                </div>
+              </div>
+              <div className="text-3xl font-extrabold" style={{ color: tier.color }}>
+                {lots.toLocaleString()}
+              </div>
             </div>
           </div>
 
@@ -220,7 +261,9 @@ export function IBCalculator() {
 
           <p className="text-xs text-slate-500 text-center">
             Illustrative projections based on{" "}
-            <strong className="text-slate-400">${tier.rebate}/lot × {lots.toLocaleString()} lots/month</strong>.
+            <strong className="text-slate-400">
+              {clients.toLocaleString()} clients × {avgLots.toLocaleString()} lots = {lots.toLocaleString()} lots/month × ${tier.rebate}/lot
+            </strong>.
             Actual rebates depend on your IB agreement, broker, instruments traded and trading conditions.
             Not a guarantee of income.
           </p>
