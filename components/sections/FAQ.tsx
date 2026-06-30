@@ -14,6 +14,10 @@ const faqs = [
     a: "Your tier is determined by your total qualifying monthly trading volume across all referred clients. The tier structure is: Starter (0–99 lots), Bronze (100–249 lots), Silver (250–499 lots), Gold (500–999 lots), Platinum (1,000–2,499 lots), Diamond (2,500+ lots). Tiers are assessed monthly based on your verified trading volume.",
   },
   {
+    q: "Does it cost anything to join Equity IB?",
+    a: "No. Joining the Equity IB Introducing Broker Programme is completely free. There are no registration fees, membership costs or subscription charges. Once approved, you can begin referring clients and participating in the programme according to the applicable broker and IB terms.",
+  },
+  {
     q: "Can my rebate rate increase over time?",
     a: "Yes — absolutely. As your referred clients generate more monthly trading volume, you automatically progress into higher tiers, which carry higher rebate rates per lot. There is no ceiling: growth is rewarded. At the Diamond tier, our highest-performing IBs also benefit from bespoke partnership structures negotiated directly with your account manager.",
   },

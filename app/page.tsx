@@ -10,6 +10,7 @@ import { SuccessMetrics }      from "@/components/sections/SuccessMetrics";
 import { Testimonials }        from "@/components/sections/Testimonials";
 import { ApplicationSection }  from "@/components/sections/ApplicationSection";
 import { FAQ }                 from "@/components/sections/FAQ";
+import { FreeToJoin }          from "@/components/sections/FreeToJoin";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://equityib.com" },
@@ -67,6 +68,7 @@ export default function Home() {
       <Hero />
       <ValueProposition />
       <WhyEquityIB />
+      <FreeToJoin />
       <TierTable />
       <IBCalculator />
       <HowItWorksTimeline />

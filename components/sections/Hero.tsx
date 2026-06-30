@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, TrendingUp, Users, Globe, ChevronDown, Star, Zap } from "lucide-react";
+import { ArrowRight, TrendingUp, Users, Globe, ChevronDown, Star, Zap, CheckCircle2 } from "lucide-react";
 
 const PARTICLES = [
   { top: "12%", left: "7%",  w: 3, delay: 0.0 },
@@ -118,8 +118,8 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.22 }}
               className="mt-6 text-lg text-slate-400 leading-relaxed max-w-lg"
             >
-              Partner with Equity IB and access competitive rebate tiers, daily rebate payments,
-              premium broker technology and dedicated support designed to help you grow.
+              Join for free and access competitive rebate tiers, daily rebate payments,
+              premium broker technology and dedicated support designed to grow your IB business.
             </motion.p>
 
             <motion.div
@@ -133,7 +133,7 @@ export function Hero() {
                 className="btn-glow relative flex items-center gap-2 bg-primary text-white font-semibold px-8 py-4 rounded-xl transition-all hover:opacity-90 active:scale-[0.97] text-sm overflow-hidden group"
               >
                 <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                Become an IB
+                Apply Free Today
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
               </a>
               <a
@@ -143,6 +143,29 @@ export function Hero() {
                 <Zap className="w-4 h-4 text-accent" />
                 Calculate Your Earnings
               </a>
+            </motion.div>
+
+            {/* Free trust badges */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.44 }}
+              className="flex flex-wrap items-center gap-2 mt-6"
+            >
+              {[
+                "100% Free to Join",
+                "No Sign-Up Fees",
+                "No Monthly Costs",
+              ].map((badge) => (
+                <div
+                  key={badge}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold border"
+                  style={{ background: "rgba(52,211,153,0.08)", color: "#34D399", borderColor: "rgba(52,211,153,0.22)" }}
+                >
+                  <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
+                  {badge}
+                </div>
+              ))}
             </motion.div>
 
             {/* Trust stats */}

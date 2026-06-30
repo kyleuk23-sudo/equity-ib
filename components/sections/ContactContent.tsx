@@ -228,7 +228,7 @@ export default function ContactContent() {
                     </button>
 
                     <p className="text-xs text-slate-500 text-center">
-                      Applications reviewed within 24 hours. By submitting you agree to our{" "}
+                      Free Application · No Joining Fee · By submitting you agree to our{" "}
                       <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
                     </p>
                   </motion.form>

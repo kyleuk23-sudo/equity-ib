@@ -51,7 +51,7 @@ export function Footer() {
               <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
               <span className="text-xs text-accent font-medium">Daily Rebate Settlements</span>
             </div>
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5 mb-5">
               {[Twitter, Linkedin, Youtube, Mail].map((Icon, i) => (
                 <a key={i} href="#"
                   className="w-8 h-8 glass rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/30 transition-colors">
@@ -59,6 +59,10 @@ export function Footer() {
                 </a>
               ))}
             </div>
+            <p className="text-xs text-slate-500 leading-relaxed pt-4 border-t border-white/[0.05]">
+              Joining Equity IB is completely free. Apply today and begin your Introducing Broker
+              journey with no registration or membership fees.
+            </p>
           </div>
 
           {/* Navigation */}
@@ -92,15 +96,16 @@ export function Footer() {
           {/* CTA */}
           <div>
             <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Get Started</h4>
-            <p className="text-sm text-slate-400 leading-relaxed mb-5">
-              Ready to build a recurring rebate income? Apply to become an Equity IB partner today.
+            <p className="text-sm text-slate-400 leading-relaxed mb-2">
+              Ready to build a recurring rebate income? Joining is completely free — apply today.
             </p>
+            <p className="text-xs text-slate-500 mb-5">No registration fees · No membership costs</p>
             <Link
               href="/#apply"
               className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
             >
               <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-              Apply Now
+              Apply Free Today
             </Link>
           </div>
         </div>

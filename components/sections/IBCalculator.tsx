@@ -282,7 +282,7 @@ export function IBCalculator() {
             className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-            Start Earning — Apply Now
+            Start Earning — Apply Free
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>

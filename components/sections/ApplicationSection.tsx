@@ -162,6 +162,24 @@ export function ApplicationSection() {
             transition={{ duration: 0.55 }}
             className="lg:col-span-3"
           >
+            {/* Free banner */}
+            <motion.div
+              initial={{ opacity: 0, y: -8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-start gap-3 p-4 rounded-2xl mb-4 border"
+              style={{ background: "rgba(52,211,153,0.06)", borderColor: "rgba(52,211,153,0.2)" }}
+            >
+              <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+              <div>
+                <div className="text-sm font-bold text-white mb-0.5">Your Application Is Completely Free</div>
+                <div className="text-xs text-slate-400 leading-relaxed">
+                  There is no cost to apply or become an Equity IB partner. Once approved, you&apos;ll receive
+                  onboarding support and access to the broker&apos;s tools to help you grow your IB business.
+                </div>
+              </div>
+            </motion.div>
+
             <div
               className="glass-strong rounded-3xl p-8 border border-white/[0.08]"
               style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}
@@ -270,7 +288,7 @@ export function ApplicationSection() {
                         </span>
                       ) : (
                         <span className="flex items-center gap-2">
-                          Apply Now
+                          Apply Free Today
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </span>
                       )}
@@ -280,6 +298,14 @@ export function ApplicationSection() {
                       Applications reviewed within 24 hours. By submitting you agree to our{" "}
                       <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
                     </p>
+                    <div className="flex flex-wrap justify-center gap-4 mt-3">
+                      {["100% Free to Join", "No Hidden Fees", "Dedicated IB Support", "Daily Rebate Payments"].map((t) => (
+                        <div key={t} className="flex items-center gap-1.5 text-xs text-slate-500">
+                          <CheckCircle2 className="w-3 h-3 text-accent flex-shrink-0" />
+                          {t}
+                        </div>
+                      ))}
+                    </div>
                   </motion.form>
                 )}
               </AnimatePresence>

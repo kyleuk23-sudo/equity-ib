@@ -1,9 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BarChart3, Clock, Users } from "lucide-react";
+import { BarChart3, Clock, Users, Gift } from "lucide-react";
 
 const cards = [
+  {
+    icon: Gift,
+    title: "Free to Join",
+    desc: "Apply to become an Equity IB partner without paying any registration, membership or subscription fees. Focus on growing your client network while we support your long-term success.",
+    color: "#34D399",
+    badge: "Zero Fees",
+    delay: 0,
+  },
   {
     icon: BarChart3,
     title: "Industry-Leading Rebate Tiers",
@@ -34,7 +42,7 @@ export function ValueProposition() {
   return (
     <section className="relative py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card) => {
             const Icon = card.icon;
             return (
