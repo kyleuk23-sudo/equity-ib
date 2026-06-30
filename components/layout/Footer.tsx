@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Twitter, Linkedin, Youtube, Mail } from "lucide-react";
+import { Twitter, Linkedin, Youtube, Mail, ArrowRight } from "lucide-react";
 
 const NAV = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
@@ -106,6 +106,7 @@ export function Footer() {
             >
               <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
               Apply Free Today
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </Link>
           </div>
         </div>

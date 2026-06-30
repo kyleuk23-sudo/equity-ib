@@ -18,7 +18,7 @@ const cards = [
     desc: "Earn competitive rebates based on monthly trading volume, with top-performing partners qualifying for up to $30 per traded lot.",
     color: "#C8952A",
     badge: "Up to $30 / lot",
-    delay: 0,
+    delay: 0.08,
   },
   {
     icon: Clock,
@@ -26,7 +26,7 @@ const cards = [
     desc: "Receive eligible IB rebates every trading day through the broker's supported withdrawal methods. No 30-day holds.",
     color: "#34D399",
     badge: "Paid Daily",
-    delay: 0.1,
+    delay: 0.16,
   },
   {
     icon: Users,
@@ -34,7 +34,7 @@ const cards = [
     desc: "Work with experienced IB managers focused on helping you build and scale your introducing broker business.",
     color: "#A78BFA",
     badge: "Personal Manager",
-    delay: 0.2,
+    delay: 0.24,
   },
 ];
 

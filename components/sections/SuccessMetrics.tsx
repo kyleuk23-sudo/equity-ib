@@ -135,7 +135,7 @@ export function SuccessMetrics() {
             <TrendingUp className="w-3 h-3" />
             By The Numbers
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             A Network Built On{" "}
             <span className="gradient-text">Proven Results</span>
           </h2>

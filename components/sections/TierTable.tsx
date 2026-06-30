@@ -130,7 +130,7 @@ export function TierTable() {
             <BarChart3 className="w-3 h-3" />
             Rebate Tier System
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Grow Your Tier,{" "}
             <span className="gradient-text">Grow Your Income</span>
           </h2>
@@ -186,6 +186,20 @@ export function TierTable() {
                     {tier.rebate}
                   </div>
                   <div className="text-xs text-slate-400">per lot rebate</div>
+                </div>
+
+                {/* Earnings bar */}
+                <div className="mb-4">
+                  <div className="h-1 rounded-full bg-white/[0.05] overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{ width: `${(tier.rebateNum / 30) * 100}%`, background: tier.color }}
+                    />
+                  </div>
+                  <div className="flex justify-between text-[9px] text-slate-600 mt-1">
+                    <span>$0</span>
+                    <span>$30</span>
+                  </div>
                 </div>
 
                 {/* Benefits */}

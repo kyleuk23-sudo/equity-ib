@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { RefreshCw, Home, ArrowRight } from "lucide-react";
+import { RefreshCw, Home, ArrowRight, AlertTriangle } from "lucide-react";
 
 export default function ErrorPage({
   error,
@@ -41,7 +41,7 @@ export default function ErrorPage({
           className="w-20 h-20 rounded-2xl mx-auto mb-6 flex items-center justify-center"
           style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.2)" }}
         >
-          <span className="text-4xl" role="img" aria-label="Error">⚡</span>
+          <AlertTriangle className="w-9 h-9 text-red-400" />
         </div>
 
         <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">

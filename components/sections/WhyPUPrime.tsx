@@ -2,33 +2,32 @@
 
 import { motion } from "framer-motion";
 import {
-  Monitor, Globe, Zap, Shield, BarChart3, RefreshCw,
-  Smartphone, CreditCard, Headphones, Award,
+  Monitor, Globe, Zap, Shield, BarChart3, Headphones, Award, ArrowRight,
 } from "lucide-react";
 
 const features = [
   {
     icon: Monitor,
     title: "Professional Client Portal",
-    desc: "A full-featured trading environment with real-time account management, performance analytics and trade history.",
+    desc: "A full-featured trading environment with real-time account management, performance analytics and complete trade history.",
     color: "#C8952A",
   },
   {
     icon: Globe,
     title: "Global Market Access",
-    desc: "Trade forex, commodities, indices and more across international markets with deep liquidity.",
+    desc: "Trade forex, commodities, indices and more across international markets with deep liquidity and competitive conditions.",
     color: "#34D399",
   },
   {
     icon: Zap,
     title: "Fast Execution",
-    desc: "Low-latency execution with tight spreads designed to deliver a professional trading experience for your clients.",
+    desc: "Low-latency execution with tight spreads designed to deliver a professional trading experience for every client you refer.",
     color: "#F5C842",
   },
   {
     icon: Shield,
     title: "Regulated & Secure",
-    desc: "Regulated broker infrastructure with client fund protection, secure account management and compliance standards.",
+    desc: "Regulated broker infrastructure with client fund protection, secure account management and full compliance standards.",
     color: "#A78BFA",
   },
   {
@@ -38,27 +37,9 @@ const features = [
     color: "#6366F1",
   },
   {
-    icon: RefreshCw,
-    title: "Reliable Infrastructure",
-    desc: "High-availability trading infrastructure with minimal downtime, ensuring your clients can trade whenever they need to.",
-    color: "#34D399",
-  },
-  {
-    icon: Smartphone,
-    title: "Multi-Device Access",
-    desc: "Fully responsive trading platform accessible on desktop, tablet and mobile — your clients can trade anywhere.",
-    color: "#C8952A",
-  },
-  {
-    icon: CreditCard,
-    title: "Multiple Funding Methods",
-    desc: "Clients can fund their accounts via bank transfer, cards and digital payment methods — reducing friction to deposit.",
-    color: "#F5C842",
-  },
-  {
     icon: Headphones,
     title: "Dedicated Client Support",
-    desc: "Client-facing support provided by the broker partner, freeing you to focus on growing your IB network.",
+    desc: "Professional client-facing support provided by the broker, freeing you to focus on growing your IB network and volume.",
     color: "#A78BFA",
   },
 ];
@@ -81,7 +62,7 @@ export function WhyPUPrime() {
             <Award className="w-3 h-3" />
             Our Broker Partner
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Premium Technology<br />
             <span className="gradient-text">Your Clients Can Trust</span>
           </h2>
@@ -101,7 +82,7 @@ export function WhyPUPrime() {
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
                 whileHover={{ y: -4 }}
                 className="glass rounded-2xl p-6 border border-white/[0.06] hover:border-white/[0.12] transition-all group relative overflow-hidden"
               >
@@ -110,13 +91,14 @@ export function WhyPUPrime() {
                   style={{ background: `radial-gradient(circle at 20% 0%, ${f.color}10 0%, transparent 65%)` }}
                 />
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: `${f.color}18` }}
+                  className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: `${f.color}18`, boxShadow: `0 0 0 1px ${f.color}22` }}
                 >
-                  <Icon className="w-4.5 h-4.5 w-[18px] h-[18px]" style={{ color: f.color }} />
+                  <Icon className="w-[18px] h-[18px]" style={{ color: f.color }} />
                 </div>
                 <h3 className="font-bold text-white mb-2">{f.title}</h3>
                 <p className="text-sm text-slate-400 leading-relaxed">{f.desc}</p>
+                <div className="w-6 h-0.5 rounded-full mt-3 transition-all duration-300 group-hover:w-10" style={{ background: f.color }} />
               </motion.div>
             );
           })}
@@ -136,9 +118,11 @@ export function WhyPUPrime() {
           </p>
           <a
             href="#apply"
-            className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3.5 rounded-xl text-sm transition-all hover:shadow-glow hover:opacity-90"
+            className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
           >
-            Apply as an IB Partner
+            <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+            Apply Free Today
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>
       </div>

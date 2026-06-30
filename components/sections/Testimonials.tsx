@@ -92,7 +92,7 @@ export function Testimonials() {
           <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-secondary mb-4">
             Partner Stories
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Trusted By Hundreds Of{" "}
             <span className="gradient-text">IB Professionals</span>
           </h2>
@@ -205,7 +205,7 @@ export function Testimonials() {
         </div>
 
         {/* Side testimonial cards */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mt-8 max-w-4xl mx-auto">
           {testimonials.map((t, i) => (
             <button
               key={t.name}

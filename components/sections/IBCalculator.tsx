@@ -88,7 +88,7 @@ export function IBCalculator() {
           <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-5">
             IB Earnings Calculator
           </div>
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Calculate Your{" "}
             <span className="gradient-text">Potential Earnings</span>
           </h2>

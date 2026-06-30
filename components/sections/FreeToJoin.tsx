@@ -53,7 +53,7 @@ export function FreeToJoin() {
             100% Free to Join
           </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
             Why Pay to{" "}
             <span className="gradient-text">Become an IB?</span>
           </h2>

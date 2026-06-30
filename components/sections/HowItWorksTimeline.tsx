@@ -124,7 +124,7 @@ export function HowItWorksTimeline() {
               <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-5">
                 How It Works
               </div>
-              <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
                 From Application<br />
                 To{" "}
                 <span className="gradient-text">Daily Income</span>

@@ -35,7 +35,10 @@ export function Navbar() {
       <div className="fixed top-0 inset-x-0 z-50 h-10 flex items-center justify-center overflow-hidden"
         style={{ background: "linear-gradient(90deg, rgba(200,149,42,0.14) 0%, rgba(52,211,153,0.08) 50%, rgba(200,149,42,0.10) 100%)" }}>
         <Link href="/#apply" className="text-xs text-slate-300 hover:text-white transition-colors flex items-center gap-2">
-          <span className="hidden sm:inline">🚀</span>
+          <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
+          </span>
           Earn Up To $30 Per Lot As An Introducing Broker
           <ArrowRight className="w-3 h-3 text-primary" />
         </Link>
@@ -143,7 +146,7 @@ export function Navbar() {
                   onClick={() => setMenuOpen(false)}
                   className="flex items-center justify-center gap-2 bg-primary text-white font-semibold px-5 py-3.5 rounded-xl text-sm w-full"
                 >
-                  Apply Now
+                  Apply Free Today
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
