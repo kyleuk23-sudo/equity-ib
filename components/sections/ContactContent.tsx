@@ -266,7 +266,7 @@ export default function ContactContent() {
             {/* Contact details */}
             <div className="glass rounded-2xl p-6 space-y-4">
               {[
-                { icon: Mail,   label: "Email",        value: "partners@equityib.com",  color: "#6366F1" },
+                { icon: Mail,   label: "Email",        value: "partners@equityib.uk",  color: "#6366F1" },
                 { icon: Globe,  label: "Presence",     value: "125+ Countries",         color: "#34D399" },
                 { icon: MapPin, label: "Headquarters", value: "London, United Kingdom", color: "#A78BFA" },
               ].map((c) => {
