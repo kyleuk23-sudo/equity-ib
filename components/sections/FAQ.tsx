@@ -38,6 +38,18 @@ const faqs = [
     a: "We work exclusively with regulated, vetted broker partners that meet our standards for regulatory standing, trading conditions, withdrawal reliability, and client treatment. We match you with the broker partners best suited to your audience profile and geographic focus. Specific broker names are disclosed during your onboarding conversation.",
   },
   {
+    q: "What markets and instruments can my referred clients trade?",
+    a: "Clients you refer can trade a broad range of instruments through our broker partner, including major and minor forex pairs, gold (XAUUSD) and other precious metals, indices, commodities and CFDs on global equities. Wider market access matters for your business — the more instruments your audience can trade, the more trading volume your referrals tend to generate across different market conditions, which supports steadier rebate income.",
+  },
+  {
+    q: "What is trade execution quality and why does it matter for my clients?",
+    a: "Execution quality is how quickly and accurately a broker fills an order at the requested price. Deep liquidity, low-latency infrastructure and tight spreads all contribute to better execution — meaning less slippage and a more consistent trading experience. As an IB, this affects client retention directly: traders who get reliable fills and competitive spreads are more likely to stay active, which is what sustains your recurring rebate income over time.",
+  },
+  {
+    q: "How does Equity IB think about broker risk and client protection?",
+    a: "We only partner with regulated brokers that meet defined standards for capital adequacy, segregated client funds and transparent trading conditions. Risk management is a shared responsibility — your clients trade at their own risk in volatile markets like forex, gold and CFDs, but a properly regulated broker infrastructure reduces counterparty risk and gives your referrals confidence in where their funds are held.",
+  },
+  {
     q: "How do I become an IB with Equity IB?",
     a: "Click 'Become an IB' on this page and complete the short application form — it takes under 5 minutes. You'll be asked for your name, contact details, current trading volume, IB experience, and a brief description of your client base. Our team reviews all applications and responds within 24 hours. Most approvals happen the same day.",
   },

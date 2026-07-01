@@ -198,6 +198,7 @@ export function LegalHubContent() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
                 >
                   <X className="w-4 h-4" />
@@ -314,7 +315,7 @@ export function LegalHubContent() {
               Our team is available to answer questions about our legal documents, privacy practices or IB programme terms.
             </p>
             <Link href="/contact">
-              <button className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all">
+              <button className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-xl text-sm transition-all">
                 Contact Our Team
                 <ArrowRight className="w-4 h-4" />
               </button>

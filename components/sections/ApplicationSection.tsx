@@ -278,7 +278,7 @@ export function ApplicationSection() {
                     <button
                       type="submit"
                       disabled={loading}
-                      className="btn-glow w-full flex items-center justify-center gap-2 bg-primary text-white font-bold py-4 rounded-xl text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 relative overflow-hidden group"
+                      className="btn-glow w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-4 rounded-xl text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 relative overflow-hidden group"
                     >
                       <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
                       {loading ? (

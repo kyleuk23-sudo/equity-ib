@@ -69,7 +69,7 @@ export default function ErrorPage({
           </button>
           <Link
             href="/"
-            className="flex items-center gap-2 bg-primary text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:opacity-90 w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:opacity-90 w-full sm:w-auto justify-center"
           >
             <Home className="w-4 h-4" />
             Return Home

@@ -59,7 +59,7 @@ export default function HTMLSitemapPage() {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-xs text-slate-500">
+          <ol className="flex items-center gap-2 text-xs text-slate-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li aria-hidden="true">/</li>
             <li className="text-slate-300" aria-current="page">Sitemap</li>

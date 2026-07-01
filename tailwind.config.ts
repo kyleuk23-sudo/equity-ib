@@ -15,7 +15,7 @@ const config: Config = {
           DEFAULT: "#C8952A",   // gold — Equity IB brand
           light:   "#F5C842",
           dark:    "#8B6000",
-          foreground: "#ffffff",
+          foreground: "#050509", // dark text on gold bg — WCAG AA contrast (~7.3:1 vs 2.7:1 for white)
         },
         accent: {
           DEFAULT: "#34D399",   // emerald-400

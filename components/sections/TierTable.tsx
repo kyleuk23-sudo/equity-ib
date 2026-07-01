@@ -233,7 +233,7 @@ export function TierTable() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-glow text-sm"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-glow text-sm"
           >
             Discuss Your Tier
             <ArrowRight className="w-4 h-4" />

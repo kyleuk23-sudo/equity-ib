@@ -104,6 +104,23 @@ export function WhyPUPrime() {
           })}
         </div>
 
+        {/* Markets & execution */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-12 max-w-3xl mx-auto text-center"
+        >
+          <h3 className="text-sm font-bold text-white mb-2">Markets, Execution &amp; Analysis Tools</h3>
+          <p className="text-xs text-slate-400 leading-relaxed">
+            Your clients get access to major and minor forex pairs, gold (XAUUSD), indices and CFD
+            instruments across global markets, backed by deep liquidity and low-latency execution.
+            Real-time market analysis, economic calendars and charting tools are built into the client
+            portal — helping your referrals trade with more consistency, which supports your long-term
+            rebate income.
+          </p>
+        </motion.div>
+
         {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -118,7 +135,7 @@ export function WhyPUPrime() {
           </p>
           <a
             href="#apply"
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-7 py-3.5 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
+            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-7 py-3.5 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             Apply Free Today

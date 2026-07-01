@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Instagram, ArrowRight } from "lucide-react";
+import { CookiePreferencesButton } from "@/components/ui/CookiePreferencesButton";
 
 const NAV = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
@@ -70,7 +71,7 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Navigation</h4>
+            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Navigation</h3>
             <ul className="space-y-2.5">
               {NAV.map((l) => (
                 <li key={l.label}>
@@ -84,7 +85,7 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Legal</h4>
+            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Legal</h3>
             <ul className="space-y-2.5">
               {LEGAL.map((l) => (
                 <li key={l.label}>
@@ -93,19 +94,22 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <CookiePreferencesButton className="text-sm text-slate-400 hover:text-white transition-colors" />
+              </li>
             </ul>
           </div>
 
           {/* CTA */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Get Started</h4>
+            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Get Started</h3>
             <p className="text-sm text-slate-400 leading-relaxed mb-2">
               Ready to build a recurring rebate income? Joining is completely free — apply today.
             </p>
             <p className="text-xs text-slate-500 mb-5">No registration fees · No membership costs</p>
             <Link
               href="/#apply"
-              className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-3 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
+              className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-3 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
             >
               <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
               Apply Free Today

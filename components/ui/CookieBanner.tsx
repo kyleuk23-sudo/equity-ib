@@ -3,17 +3,22 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie, X } from "lucide-react";
+import { getConsent, setConsent, onReopenRequest } from "@/lib/consent";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const accepted = localStorage.getItem("equity-ib-cookies");
-    if (!accepted) setTimeout(() => setVisible(true), 2000);
+    if (!getConsent()) {
+      const t = setTimeout(() => setVisible(true), 2000);
+      return () => clearTimeout(t);
+    }
   }, []);
 
-  const accept = () => {
-    localStorage.setItem("equity-ib-cookies", "accepted");
+  useEffect(() => onReopenRequest(() => setVisible(true)), []);
+
+  const decide = (analytics: boolean) => {
+    setConsent(analytics);
     setVisible(false);
   };
 
@@ -34,25 +39,26 @@ export function CookieBanner() {
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-white mb-1">We use cookies</p>
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  To improve your experience and analyze traffic. View our{" "}
-                  <a href="#" className="text-primary hover:underline">Privacy Policy</a>.
+                  Necessary cookies keep the site working. With your permission we&apos;d also like to use
+                  analytics cookies to understand traffic. View our{" "}
+                  <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
                 </p>
                 <div className="flex gap-2 mt-3">
                   <button
-                    onClick={accept}
-                    className="text-xs font-semibold bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-primary/90 transition-colors"
+                    onClick={() => decide(true)}
+                    className="text-xs font-semibold bg-primary text-primary-foreground px-3 py-1.5 rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     Accept All
                   </button>
                   <button
-                    onClick={accept}
+                    onClick={() => decide(false)}
                     className="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors"
                   >
                     Necessary Only
                   </button>
                 </div>
               </div>
-              <button onClick={() => setVisible(false)} className="text-slate-500 hover:text-white transition-colors flex-shrink-0">
+              <button onClick={() => decide(false)} aria-label="Dismiss cookie notice" className="text-slate-500 hover:text-white transition-colors flex-shrink-0">
                 <X className="w-4 h-4" />
               </button>
             </div>

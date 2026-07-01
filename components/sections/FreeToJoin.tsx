@@ -114,7 +114,7 @@ export function FreeToJoin() {
         >
           <a
             href="#apply"
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
+            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             Start Your Free IB Partnership

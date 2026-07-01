@@ -112,10 +112,11 @@ export function IBCalculator() {
             {/* Clients slider */}
             <div>
               <div className="flex items-baseline justify-between mb-3">
-                <label className="text-sm font-semibold text-white">Number of Clients</label>
+                <label htmlFor="calc-clients" className="text-sm font-semibold text-white">Number of Clients</label>
                 <div className="text-3xl font-extrabold gradient-text">{clients.toLocaleString()}</div>
               </div>
               <input
+                id="calc-clients"
                 type="range" min={1} max={200} step={1} value={clients}
                 onChange={(e) => setClients(Number(e.target.value))}
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
@@ -130,10 +131,11 @@ export function IBCalculator() {
             {/* Avg lots per client slider */}
             <div>
               <div className="flex items-baseline justify-between mb-3">
-                <label className="text-sm font-semibold text-white">Avg Lots / Client / Month</label>
+                <label htmlFor="calc-avg-lots" className="text-sm font-semibold text-white">Avg Lots / Client / Month</label>
                 <div className="text-3xl font-extrabold gradient-text">{avgLots.toLocaleString()}</div>
               </div>
               <input
+                id="calc-avg-lots"
                 type="range" min={1} max={100} step={1} value={avgLots}
                 onChange={(e) => setAvgLots(Number(e.target.value))}
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
@@ -279,7 +281,7 @@ export function IBCalculator() {
         >
           <a
             href="#apply"
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-white font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
+            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             Start Earning — Apply Free

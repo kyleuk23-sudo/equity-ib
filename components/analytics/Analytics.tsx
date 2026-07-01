@@ -1,17 +1,32 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Script from "next/script";
+import { getConsent, onConsentChange } from "@/lib/consent";
 
 const GA_ID      = process.env.NEXT_PUBLIC_GA_ID;
 const GTM_ID     = process.env.NEXT_PUBLIC_GTM_ID;
 const CLARITY_ID = process.env.NEXT_PUBLIC_CLARITY_ID;
 
+const HAS_ANY_TRACKER = Boolean(GA_ID || GTM_ID || CLARITY_ID);
+
 /**
- * All trackers are inert unless the matching NEXT_PUBLIC_* env var is set.
- * Nothing loads on localhost/staging by default — configure real IDs only
- * in the production environment when ready to go live with tracking.
+ * Trackers are inert unless the matching NEXT_PUBLIC_* env var is set AND
+ * the visitor has granted analytics consent via the cookie banner. Consent
+ * is re-checked live so accepting mid-session starts tracking without a
+ * page reload; declining or never deciding means nothing ever loads.
  */
 export function Analytics() {
+  const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
+
+  useEffect(() => {
+    if (!HAS_ANY_TRACKER) return;
+    setAnalyticsAllowed(getConsent()?.analytics === true);
+    return onConsentChange((state) => setAnalyticsAllowed(state.analytics === true));
+  }, []);
+
+  if (!analyticsAllowed) return null;
+
   return (
     <>
       {GA_ID && (

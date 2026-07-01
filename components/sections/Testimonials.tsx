@@ -179,18 +179,22 @@ export function Testimonials() {
               <ChevronLeft className="w-4 h-4 text-slate-300" />
             </button>
 
-            <div className="flex gap-2">
+            <div className="flex">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
-                  className="w-2 h-2 rounded-full transition-all"
-                  style={{
-                    background: i === active ? "#6366F1" : "rgba(255,255,255,0.15)",
-                    transform: i === active ? "scale(1.3)" : "scale(1)",
-                  }}
+                  className="w-6 h-6 flex items-center justify-center transition-all"
                   aria-label={`Go to testimonial ${i + 1}`}
-                />
+                >
+                  <span
+                    className="block w-2 h-2 rounded-full transition-all"
+                    style={{
+                      background: i === active ? "#6366F1" : "rgba(255,255,255,0.15)",
+                      transform: i === active ? "scale(1.3)" : "scale(1)",
+                    }}
+                  />
+                </button>
               ))}
             </div>
 

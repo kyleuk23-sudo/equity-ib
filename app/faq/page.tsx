@@ -32,6 +32,11 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name:    "Does it cost anything to join Equity IB?",
+      acceptedAnswer: { "@type": "Answer", text: "No. Joining the Equity IB Introducing Broker Programme is completely free — no registration fees, membership costs or subscription charges. Once approved, you can begin referring clients under the applicable broker and IB terms." },
+    },
+    {
+      "@type": "Question",
       name:    "Can my rebate rate increase over time?",
       acceptedAnswer: { "@type": "Answer", text: "Yes. As your referred clients generate more monthly volume, you automatically progress into higher tiers with higher rebate rates. At the Diamond tier, highest-performing IBs benefit from bespoke partnership structures." },
     },
@@ -54,6 +59,21 @@ const faqSchema = {
       "@type": "Question",
       name:    "Which brokers do you partner with?",
       acceptedAnswer: { "@type": "Answer", text: "We work exclusively with regulated, vetted broker partners meeting our standards for regulatory standing, trading conditions, withdrawal reliability, and client treatment. Specific broker names are disclosed during onboarding." },
+    },
+    {
+      "@type": "Question",
+      name:    "What markets and instruments can my referred clients trade?",
+      acceptedAnswer: { "@type": "Answer", text: "Clients you refer can trade major and minor forex pairs, gold (XAUUSD) and other precious metals, indices, commodities and CFDs on global equities. Wider market access tends to generate more trading volume across different market conditions, supporting steadier rebate income." },
+    },
+    {
+      "@type": "Question",
+      name:    "What is trade execution quality and why does it matter?",
+      acceptedAnswer: { "@type": "Answer", text: "Execution quality is how quickly and accurately a broker fills an order at the requested price. Deep liquidity, low-latency infrastructure and tight spreads mean less slippage and a more consistent trading experience — which supports client retention and your recurring rebate income." },
+    },
+    {
+      "@type": "Question",
+      name:    "How does Equity IB think about broker risk and client protection?",
+      acceptedAnswer: { "@type": "Answer", text: "We only partner with regulated brokers that meet defined standards for capital adequacy, segregated client funds and transparent trading conditions, reducing counterparty risk for the clients you refer." },
     },
     {
       "@type": "Question",
@@ -84,7 +104,7 @@ export default function FAQPage() {
       {/* Page header */}
       <div className="pt-32 pb-0 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs text-slate-500">
+          <ol className="flex items-center gap-2 text-xs text-slate-400">
             <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
             <li aria-hidden="true">/</li>
             <li className="text-slate-300" aria-current="page">FAQ</li>

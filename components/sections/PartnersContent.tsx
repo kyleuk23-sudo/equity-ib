@@ -234,7 +234,7 @@ export default function PartnersContent() {
           >
             <Link
               href="/contact"
-              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm w-full sm:w-auto justify-center"
+              className="flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm w-full sm:w-auto justify-center"
             >
               Become an Introducing Broker
               <ArrowRight className="w-4 h-4" />
@@ -588,7 +588,7 @@ export default function PartnersContent() {
             </p>
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 mt-6 bg-primary hover:bg-primary/90 text-white font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm"
+              className="inline-flex items-center gap-2 mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm"
             >
               Start Earning IB Rebates
               <ArrowRight className="w-4 h-4" />

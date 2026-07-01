@@ -78,7 +78,7 @@ export function ValueProposition() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 leading-snug">{card.title}</h3>
+                <h2 className="text-xl font-bold text-white mb-3 leading-snug">{card.title}</h2>
                 <p className="text-sm text-slate-400 leading-relaxed">{card.desc}</p>
 
                 {/* Bottom accent line */}

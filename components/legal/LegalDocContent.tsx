@@ -417,6 +417,7 @@ export function LegalDocContent({ doc }: { doc: LegalDoc }) {
                     {searchQuery && (
                       <button
                         onClick={() => setSearchQuery("")}
+                        aria-label="Clear search"
                         className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white transition-colors"
                       >
                         <X className="w-4 h-4" />
