@@ -7,26 +7,26 @@ export const metadata: Metadata = {
   title: "Become an Introducing Broker — Apply Now",
   description:
     "Apply to join the Equity IB Introducing Broker program. Earn up to $30 per traded lot with daily rebate settlements. Approval in under 24 hours.",
-  alternates: { canonical: "https://equityib.com/apply" },
+  alternates: { canonical: "https://equityib.uk/apply" },
   openGraph: {
     title:       "Apply to Become an IB Partner | Equity IB",
     description: "Start your Introducing Broker journey with Equity IB. Daily rebates, dedicated support, six tier levels up to $30 per lot.",
-    url:         "https://equityib.com/apply",
+    url:         "https://equityib.uk/apply",
   },
 };
 
 const applySchema = {
   "@context": "https://schema.org",
   "@type":    "WebPage",
-  "@id":      "https://equityib.com/apply",
+  "@id":      "https://equityib.uk/apply",
   name:       "Apply to Become an Equity IB Introducing Broker",
   description: "Application page for the Equity IB Introducing Broker partner program.",
-  url:        "https://equityib.com/apply",
+  url:        "https://equityib.uk/apply",
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home",  item: "https://equityib.com" },
-      { "@type": "ListItem", position: 2, name: "Apply", item: "https://equityib.com/apply" },
+      { "@type": "ListItem", position: 1, name: "Home",  item: "https://equityib.uk" },
+      { "@type": "ListItem", position: 2, name: "Apply", item: "https://equityib.uk/apply" },
     ],
   },
 };
@@ -48,6 +48,7 @@ export default function ApplyPage() {
             <li className="text-slate-300" aria-current="page">Apply</li>
           </ol>
         </nav>
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">Become an Introducing Broker</h1>
       </div>
 
       <ApplicationSection />

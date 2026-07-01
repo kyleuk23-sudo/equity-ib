@@ -17,11 +17,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title:       doc.title,
     description: doc.description,
-    alternates:  { canonical: `https://equityib.com/legal/${doc.slug}` },
+    alternates:  { canonical: `https://equityib.uk/legal/${doc.slug}` },
     openGraph: {
       title:       `${doc.title} | Equity IB`,
       description: doc.description,
-      url:         `https://equityib.com/legal/${doc.slug}`,
+      url:         `https://equityib.uk/legal/${doc.slug}`,
     },
     robots: { index: true, follow: false },
   };

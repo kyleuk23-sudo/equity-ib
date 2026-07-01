@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { LEGAL_DOCS } from "@/lib/legalContent";
 
-const BASE = "https://equityib.com";
+const BASE = "https://equityib.uk";
 const NOW  = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {

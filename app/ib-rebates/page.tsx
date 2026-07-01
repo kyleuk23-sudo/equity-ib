@@ -8,26 +8,26 @@ export const metadata: Metadata = {
   title: "IB Rebate Tiers — Earn $10–$30 Per Lot",
   description:
     "Explore all six Equity IB rebate tiers from Starter to Diamond. See exactly how much you can earn per lot at each volume level, plus use our interactive IB earnings calculator.",
-  alternates: { canonical: "https://equityib.com/ib-rebates" },
+  alternates: { canonical: "https://equityib.uk/ib-rebates" },
   openGraph: {
     title:       "IB Rebate Tiers | $10–$30 Per Lot | Equity IB",
     description: "Six commission tiers for Introducing Brokers — Starter ($10/lot) to Diamond ($30/lot). Model your earnings with our interactive calculator.",
-    url:         "https://equityib.com/ib-rebates",
+    url:         "https://equityib.uk/ib-rebates",
   },
 };
 
 const pageSchema = {
   "@context": "https://schema.org",
   "@type":    "WebPage",
-  "@id":      "https://equityib.com/ib-rebates",
+  "@id":      "https://equityib.uk/ib-rebates",
   name:       "IB Rebate Tiers — Earn $10–$30 Per Lot",
   description: "Equity IB six-tier rebate structure for Introducing Brokers.",
-  url:        "https://equityib.com/ib-rebates",
+  url:        "https://equityib.uk/ib-rebates",
   breadcrumb: {
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home",      item: "https://equityib.com" },
-      { "@type": "ListItem", position: 2, name: "IB Rebates", item: "https://equityib.com/ib-rebates" },
+      { "@type": "ListItem", position: 1, name: "Home",      item: "https://equityib.uk" },
+      { "@type": "ListItem", position: 2, name: "IB Rebates", item: "https://equityib.uk/ib-rebates" },
     ],
   },
 };
@@ -49,6 +49,7 @@ export default function IBRebatesPage() {
             <li className="text-slate-300" aria-current="page">IB Rebates</li>
           </ol>
         </nav>
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">IB Rebate Tiers — Earn $10 to $30 Per Lot</h1>
       </div>
 
       <TierTable />

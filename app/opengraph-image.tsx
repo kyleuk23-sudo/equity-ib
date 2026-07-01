@@ -123,7 +123,7 @@ export default function OgImage() {
               opacity: 0.85,
             }}
           >
-            equityib.com
+            equityib.uk
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Twitter, Linkedin, Youtube, Mail, ArrowRight } from "lucide-react";
+import { Instagram, ArrowRight } from "lucide-react";
 
 const NAV = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
@@ -52,12 +52,15 @@ export function Footer() {
               <span className="text-xs text-accent font-medium">Daily Rebate Settlements</span>
             </div>
             <div className="flex items-center gap-2.5 mb-5">
-              {[Twitter, Linkedin, Youtube, Mail].map((Icon, i) => (
-                <a key={i} href="#"
-                  className="w-8 h-8 glass rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/30 transition-colors">
-                  <Icon className="w-3.5 h-3.5" />
-                </a>
-              ))}
+              <a
+                href="https://www.instagram.com/equityib"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Equity IB on Instagram"
+                className="w-8 h-8 glass rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/30 transition-colors"
+              >
+                <Instagram className="w-3.5 h-3.5" />
+              </a>
             </div>
             <p className="text-xs text-slate-500 leading-relaxed pt-4 border-t border-white/[0.05]">
               Joining Equity IB is completely free. Apply today and begin your Introducing Broker

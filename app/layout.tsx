@@ -7,6 +7,7 @@ import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { BackToTop }    from "@/components/ui/BackToTop";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
+import { Analytics }    from "@/components/analytics/Analytics";
 import { Toaster }      from "sonner";
 
 const inter = Inter({
@@ -27,7 +28,7 @@ export const viewport: Viewport = {
 
 /* ── Site-wide metadata ─────────────────────────────────────────────────── */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://equityib.com"),
+  metadataBase: new URL("https://equityib.uk"),
 
   title: {
     default:  "Equity IB — Earn Up To $30 Per Lot | Daily IB Rebates",
@@ -48,18 +49,18 @@ export const metadata: Metadata = {
     "forex rebates",
   ],
 
-  authors:  [{ name: "Equity IB", url: "https://equityib.com" }],
+  authors:  [{ name: "Equity IB", url: "https://equityib.uk" }],
   creator:  "Equity IB",
   publisher: "Equity IB",
 
   alternates: {
-    canonical: "https://equityib.com",
+    canonical: "https://equityib.uk",
   },
 
   openGraph: {
     type:      "website",
     locale:    "en_US",
-    url:       "https://equityib.com",
+    url:       "https://equityib.uk",
     siteName:  "Equity IB",
     title:     "Equity IB — Earn Up To $30 Per Lot | Daily IB Rebates",
     description:
@@ -100,7 +101,7 @@ export const metadata: Metadata = {
   },
 
   verification: {
-    google: "YOUR_GOOGLE_VERIFICATION_TOKEN",
+    // google: "paste-your-real-search-console-code-here",
   },
 };
 
@@ -110,15 +111,15 @@ const siteSchema = {
   "@graph": [
     {
       "@type":       "Organization",
-      "@id":         "https://equityib.com/#organization",
+      "@id":         "https://equityib.uk/#organization",
       name:          "Equity IB",
-      url:           "https://equityib.com",
+      url:           "https://equityib.uk",
       description:
         "Premium Introducing Broker partner program offering up to $30 per lot in daily rebates, dedicated account management and premium broker partnerships.",
       logo: {
         "@type":   "ImageObject",
-        "@id":     "https://equityib.com/#logo",
-        url:       "https://equityib.com/logo.png",
+        "@id":     "https://equityib.uk/#logo",
+        url:       "https://equityib.uk/logo.png",
         width:     512,
         height:    512,
         caption:   "Equity IB",
@@ -126,23 +127,23 @@ const siteSchema = {
       contactPoint: {
         "@type":       "ContactPoint",
         contactType:   "customer service",
-        email:         "support@equityib.com",
+        email:         "support@equityib.uk",
         availableLanguage: "English",
       },
-      sameAs: [],
+      sameAs: ["https://www.instagram.com/equityib"],
     },
     {
       "@type":       "WebSite",
-      "@id":         "https://equityib.com/#website",
+      "@id":         "https://equityib.uk/#website",
       name:          "Equity IB",
-      url:           "https://equityib.com",
+      url:           "https://equityib.uk",
       description:   "Equity IB — Daily Introducing Broker Rebates Up To $30 Per Lot",
-      publisher:     { "@id": "https://equityib.com/#organization" },
+      publisher:     { "@id": "https://equityib.uk/#organization" },
       potentialAction: {
         "@type":      "SearchAction",
         target: {
           "@type":    "EntryPoint",
-          urlTemplate: "https://equityib.com/?q={search_term_string}",
+          urlTemplate: "https://equityib.uk/?q={search_term_string}",
         },
         "query-input": "required name=search_term_string",
       },
@@ -163,6 +164,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
       </head>
       <body className={`${inter.variable} font-sans bg-background text-white antialiased`}>
+        <Analytics />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"

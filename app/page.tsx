@@ -13,7 +13,7 @@ import { FAQ }                 from "@/components/sections/FAQ";
 import { FreeToJoin }          from "@/components/sections/FreeToJoin";
 
 export const metadata: Metadata = {
-  alternates: { canonical: "https://equityib.com" },
+  alternates: { canonical: "https://equityib.uk" },
 };
 
 const homeSchema = {
@@ -21,13 +21,13 @@ const homeSchema = {
   "@graph": [
     {
       "@type":    "WebPage",
-      "@id":      "https://equityib.com/#webpage",
-      url:        "https://equityib.com",
+      "@id":      "https://equityib.uk/#webpage",
+      url:        "https://equityib.uk",
       name:       "Equity IB — Earn Up To $30 Per Lot | Daily IB Rebates",
       description:
         "Join the Equity IB Introducing Broker program. Earn daily rebates of up to $30 per lot across six tier levels with dedicated support and premium broker technology.",
-      isPartOf:   { "@id": "https://equityib.com/#website" },
-      about:      { "@id": "https://equityib.com/#organization" },
+      isPartOf:   { "@id": "https://equityib.uk/#website" },
+      about:      { "@id": "https://equityib.uk/#organization" },
       inLanguage: "en-US",
     },
     {

@@ -5,7 +5,12 @@ import { LEGAL_DOCS } from "@/lib/legalContent";
 export const metadata: Metadata = {
   title:       "Sitemap",
   description: "Complete HTML sitemap for the Equity IB website — all pages listed for easy navigation.",
-  alternates:  { canonical: "https://equityib.com/sitemap-html" },
+  alternates:  { canonical: "https://equityib.uk/sitemap-html" },
+  openGraph: {
+    title:       "Sitemap | Equity IB",
+    description: "Complete HTML sitemap for the Equity IB website — all pages listed for easy navigation.",
+    url:         "https://equityib.uk/sitemap-html",
+  },
   robots:      { index: false, follow: true },
 };
 

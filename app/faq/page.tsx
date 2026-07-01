@@ -8,11 +8,11 @@ export const metadata: Metadata = {
   title: "FAQ — Introducing Broker Questions Answered",
   description:
     "Answers to the most common questions about the Equity IB partner program: rebate tiers, payment methods, approval timelines, and how to become an Introducing Broker.",
-  alternates: { canonical: "https://equityib.com/faq" },
+  alternates: { canonical: "https://equityib.uk/faq" },
   openGraph: {
     title:       "IB Partner FAQ | Equity IB",
     description: "Everything you need to know about joining the Equity IB Introducing Broker program — tiers, rebates, payments and more.",
-    url:         "https://equityib.com/faq",
+    url:         "https://equityib.uk/faq",
   },
 };
 
@@ -90,6 +90,7 @@ export default function FAQPage() {
             <li className="text-slate-300" aria-current="page">FAQ</li>
           </ol>
         </nav>
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">Introducing Broker FAQ</h1>
       </div>
 
       <FAQ />

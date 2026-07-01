@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/dashboard", "/_next/", "/api/"],
       },
     ],
-    sitemap: "https://equityib.com/sitemap.xml",
-    host:    "https://equityib.com",
+    sitemap: "https://equityib.uk/sitemap.xml",
+    host:    "https://equityib.uk",
   };
 }
