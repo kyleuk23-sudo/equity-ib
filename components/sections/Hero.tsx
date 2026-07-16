@@ -130,6 +130,9 @@ export function Hero() {
             >
               <a
                 href="#apply"
+                data-track-event="cta"
+                data-track-label="Apply Free Today"
+                data-track-section="hero"
                 className="btn-glow relative flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl transition-all hover:opacity-90 active:scale-[0.97] text-sm overflow-hidden group"
               >
                 <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />

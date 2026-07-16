@@ -4,6 +4,7 @@ import { useState }             from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ArrowRight, DollarSign, Users, Clock, Shield, Globe, BarChart3, AlertCircle } from "lucide-react";
 import { submitApplication }    from "@/app/actions/submit-application";
+import { useFormAnalytics }     from "@/lib/analytics/useFormAnalytics";
 
 const benefits = [
   { icon: DollarSign, text: "Earn up to $30 per traded lot",     color: "#C8952A" },
@@ -39,10 +40,13 @@ export function ApplicationSection() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]   = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const { onFieldTouch, onValidationError, onSubmitResult } = useFormAnalytics("homepage_application");
 
   const set = (k: keyof FormData) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      onFieldTouch();
       setForm((f) => ({ ...f, [k]: e.target.value }));
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,8 +69,10 @@ export function ApplicationSection() {
 
     if (result.success) {
       setSubmitted(true);
+      onSubmitResult(true, { country: form.country, estimatedMonthlyLots: form.lots, currentBroker: form.broker });
     } else {
       setServerError(result.error ?? "Something went wrong. Please try again.");
+      onSubmitResult(false);
     }
   };
 
@@ -207,7 +213,7 @@ export function ApplicationSection() {
                     </p>
                   </motion.div>
                 ) : (
-                  <motion.form key="form" onSubmit={handleSubmit} className="space-y-4">
+                  <motion.form key="form" onSubmit={handleSubmit} onInvalidCapture={onValidationError} className="space-y-4">
 
                     {/* Server error banner */}
                     {serverError && (

@@ -588,6 +588,9 @@ export default function PartnersContent() {
             </p>
             <Link
               href="/contact"
+              data-track-event="cta"
+              data-track-label="Start Earning IB Rebates"
+              data-track-section="partners_page"
               className="inline-flex items-center gap-2 mt-6 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-7 py-3.5 rounded-xl transition-all hover:shadow-glow text-sm"
             >
               Start Earning IB Rebates

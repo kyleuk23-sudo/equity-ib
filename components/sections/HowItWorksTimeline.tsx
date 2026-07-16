@@ -153,6 +153,9 @@ export function HowItWorksTimeline() {
                 href="#apply"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                data-track-event="cta"
+                data-track-label="Start Your Application"
+                data-track-section="how_it_works"
                 className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3.5 rounded-xl mt-8 text-sm relative overflow-hidden group"
               >
                 <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />

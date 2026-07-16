@@ -7,6 +7,7 @@ import {
   CheckCircle2, Globe, AlertCircle,
 } from "lucide-react";
 import { submitApplication }          from "@/app/actions/submit-application";
+import { useFormAnalytics }           from "@/lib/analytics/useFormAnalytics";
 
 const LOTS_OPTIONS = [
   "< 100 lots / month",
@@ -36,10 +37,13 @@ export default function ContactContent() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const { onFieldTouch, onValidationError, onSubmitResult } = useFormAnalytics("contact_page");
 
   const set = (k: keyof FormData) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      onFieldTouch();
       setForm((f) => ({ ...f, [k]: e.target.value }));
+    };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,8 +66,10 @@ export default function ContactContent() {
 
     if (result.success) {
       setSubmitted(true);
+      onSubmitResult(true, { country: form.country, estimatedMonthlyLots: form.lots, currentBroker: form.broker });
     } else {
       setServerError(result.error ?? "Something went wrong. Please try again.");
+      onSubmitResult(false);
     }
   };
 
@@ -139,7 +145,7 @@ export default function ContactContent() {
                     </p>
                   </motion.div>
                 ) : (
-                  <motion.form key="form" onSubmit={handleSubmit} className="space-y-4">
+                  <motion.form key="form" onSubmit={handleSubmit} onInvalidCapture={onValidationError} className="space-y-4">
 
                     {serverError && (
                       <motion.div
@@ -266,7 +272,7 @@ export default function ContactContent() {
             {/* Contact details */}
             <div className="glass rounded-2xl p-6 space-y-4">
               {[
-                { icon: Mail,   label: "Email",        value: "partners@equityib.uk",  color: "#6366F1" },
+                { icon: Mail,   label: "Email",        value: "partners@equityib.uk",  color: "#6366F1", href: "mailto:partners@equityib.uk" },
                 { icon: Globe,  label: "Presence",     value: "125+ Countries",         color: "#34D399" },
                 { icon: MapPin, label: "Headquarters", value: "London, United Kingdom", color: "#A78BFA" },
               ].map((c) => {
@@ -281,7 +287,13 @@ export default function ContactContent() {
                     </div>
                     <div>
                       <div className="text-xs text-slate-500">{c.label}</div>
-                      <div className="text-sm text-white font-medium">{c.value}</div>
+                      {c.href ? (
+                        <a href={c.href} className="text-sm text-white font-medium hover:text-primary transition-colors">
+                          {c.value}
+                        </a>
+                      ) : (
+                        <div className="text-sm text-white font-medium">{c.value}</div>
+                      )}
                     </div>
                   </div>
                 );

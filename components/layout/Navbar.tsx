@@ -80,6 +80,8 @@ export function Navbar() {
                 <li key={item.label}>
                   <Link
                     href={item.href}
+                    data-track-event="nav"
+                    data-track-label={item.label}
                     className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] transition-all"
                   >
                     {item.label}
@@ -92,6 +94,9 @@ export function Navbar() {
             <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
               <Link
                 href="/#apply"
+                data-track-event="cta"
+                data-track-label="Apply Now"
+                data-track-section="navbar_desktop"
                 className="btn-glow relative flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90 overflow-hidden group"
               >
                 <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
@@ -134,6 +139,8 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
+                    data-track-event="nav"
+                    data-track-label={item.label}
                     className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] transition-all"
                   >
                     {item.label}
@@ -144,6 +151,9 @@ export function Navbar() {
                 <Link
                   href="/#apply"
                   onClick={() => setMenuOpen(false)}
+                  data-track-event="cta"
+                  data-track-label="Apply Free Today"
+                  data-track-section="navbar_mobile"
                   className="flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-3.5 rounded-xl text-sm w-full"
                 >
                   Apply Free Today

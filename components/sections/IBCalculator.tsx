@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { trackCalculatorOpen, trackCalculatorInteraction, trackTierViewed } from "@/lib/analytics/events";
 
 const TIERS = [
   { name: "Starter",  color: "#94a3b8", min: 0,    max: 99,       rebate: 10, next: 100  },
@@ -59,6 +60,25 @@ export function IBCalculator() {
 
   const lotsToNext = tier.next !== null ? tier.next - lots : null;
   const tierIndex  = TIERS.indexOf(tier);
+
+  useEffect(() => {
+    trackCalculatorOpen();
+  }, []);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      trackCalculatorInteraction({ clients, avgLots, totalLots: lots });
+    }, 800);
+    return () => clearTimeout(t);
+  }, [clients, avgLots, lots]);
+
+  const prevTier = useRef(tier.name);
+  useEffect(() => {
+    if (prevTier.current !== tier.name) {
+      prevTier.current = tier.name;
+      trackTierViewed(tier.name);
+    }
+  }, [tier.name]);
 
   const animMonthly = useAnimatedValue(monthly);
   const animAnnual  = useAnimatedValue(annual);
@@ -281,6 +301,9 @@ export function IBCalculator() {
         >
           <a
             href="#apply"
+            data-track-event="cta"
+            data-track-label="Start Earning — Apply Free"
+            data-track-section="calculator"
             className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Home, MessageSquare, BarChart3 } from "lucide-react";
+import { NotFoundTracker } from "@/components/analytics/NotFoundTracker";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -19,6 +20,7 @@ const QUICK_LINKS = [
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-32 relative overflow-hidden">
+      <NotFoundTracker />
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -70,6 +72,9 @@ export default function NotFound() {
           </Link>
           <Link
             href="/#apply"
+            data-track-event="cta"
+            data-track-label="Become an IB Partner"
+            data-track-section="404_page"
             className="flex items-center gap-2 glass text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:bg-white/[0.08] w-full sm:w-auto justify-center"
           >
             Become an IB Partner

@@ -233,6 +233,9 @@ export function TierTable() {
           </p>
           <Link
             href="/contact"
+            data-track-event="cta"
+            data-track-label="Discuss Your Tier"
+            data-track-section="tier_table"
             className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-glow text-sm"
           >
             Discuss Your Tier

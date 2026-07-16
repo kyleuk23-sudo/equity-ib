@@ -75,7 +75,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {NAV.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm text-slate-400 hover:text-white transition-colors">
+                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-slate-400 hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -89,7 +89,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {LEGAL.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} className="text-sm text-slate-400 hover:text-white transition-colors">
+                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-slate-400 hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -109,6 +109,9 @@ export function Footer() {
             <p className="text-xs text-slate-500 mb-5">No registration fees · No membership costs</p>
             <Link
               href="/#apply"
+              data-track-event="cta"
+              data-track-label="Apply Free Today"
+              data-track-section="footer_cta"
               className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-3 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
             >
               <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />

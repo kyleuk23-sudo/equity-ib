@@ -8,6 +8,9 @@ import { BackToTop }    from "@/components/ui/BackToTop";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
 import { Analytics }    from "@/components/analytics/Analytics";
+import { PageViewTracker }   from "@/components/analytics/PageViewTracker";
+import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
+import { ClickTracker }      from "@/components/analytics/ClickTracker";
 import { Toaster }      from "sonner";
 
 const inter = Inter({
@@ -165,6 +168,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className={`${inter.variable} font-sans bg-background text-white antialiased`}>
         <Analytics />
+        <PageViewTracker />
+        <ScrollDepthTracker />
+        <ClickTracker />
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"

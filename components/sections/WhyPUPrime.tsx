@@ -135,6 +135,9 @@ export function WhyPUPrime() {
           </p>
           <a
             href="#apply"
+            data-track-event="cta"
+            data-track-label="Apply Free Today"
+            data-track-section="why_pu_prime"
             className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-7 py-3.5 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
           >
             <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />

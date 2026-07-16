@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
+import { trackFaqExpand } from "@/lib/analytics/events";
 
 const faqs = [
   {
@@ -100,7 +101,11 @@ export function FAQ() {
               }`}
             >
               <button
-                onClick={() => setOpen(open === i ? null : i)}
+                onClick={() => {
+                  const opening = open !== i;
+                  setOpen(opening ? i : null);
+                  if (opening) trackFaqExpand(faq.q);
+                }}
                 className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
                 aria-expanded={open === i}
               >
