@@ -39,6 +39,20 @@ const nextConfig: NextConfig = {
 
   compress: true,
 
+  async redirects() {
+    return [
+      // Consolidate www → apex domain with a real 301 instead of relying on
+      // canonical tags alone (Search Console flagged www URLs as duplicate
+      // "alternate page with proper canonical tag" — this closes that gap).
+      {
+        source:      "/:path*",
+        has:         [{ type: "host", value: "www.equityib.uk" }],
+        destination: "https://equityib.uk/:path*",
+        permanent:   true,
+      },
+    ];
+  },
+
   async headers() {
     return [
       // Security headers on all routes — production only (dev mode requires eval + ws for HMR)
