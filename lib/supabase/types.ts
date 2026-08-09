@@ -65,6 +65,30 @@ export type Database = {
         }
         Relationships: []
       }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          source: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          source?: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          source?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -208,3 +232,7 @@ export const Constants = {
 export type ApplicationStatus = "pending" | "reviewing" | "approved" | "rejected";
 export type ApplicationSource  = "homepage" | "contact" | "apply";
 export type IBApplication = Database["public"]["Tables"]["ib_applications"]["Row"];
+
+export type SubscriberStatus = "subscribed" | "unsubscribed";
+export type SubscriberSource = "insights" | "how-to-guide" | "introducing-broker-program";
+export type Subscriber       = Database["public"]["Tables"]["subscribers"]["Row"];

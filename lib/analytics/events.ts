@@ -92,3 +92,7 @@ export function trackFaqExpand(question: string) {
 export function trackNotFound(path: string) {
   gtagEvent("page_not_found", { page_path: path });
 }
+
+export function trackNewsletterSubscribe(source: string) {
+  gtagEvent("newsletter_subscribe", { source });
+}

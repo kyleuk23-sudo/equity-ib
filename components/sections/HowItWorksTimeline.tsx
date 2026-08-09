@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Link from "next/link";
 import { ClipboardList, CheckCircle2, Link2, TrendingUp, Wallet } from "lucide-react";
 
 const steps = [
@@ -161,6 +162,12 @@ export function HowItWorksTimeline() {
                 <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
                 Start Your Application
               </motion.a>
+              <p className="text-xs text-slate-500 mt-4">
+                Want the full breakdown first?{" "}
+                <Link href="/how-to-become-an-introducing-broker" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+                  Read the complete step-by-step guide
+                </Link>
+              </p>
             </motion.div>
           </div>
 

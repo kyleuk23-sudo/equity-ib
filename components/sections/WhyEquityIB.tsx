@@ -92,6 +92,12 @@ export function WhyEquityIB() {
             Apply Free Today
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
+          <p className="text-xs text-slate-500 mt-4">
+            Comparing IB programmes?{" "}
+            <Link href="/introducing-broker-program" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+              See what to look for and how we measure up
+            </Link>
+          </p>
         </motion.div>
       </div>
     </section>
