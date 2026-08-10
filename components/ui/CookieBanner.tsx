@@ -41,7 +41,7 @@ export function CookieBanner() {
                 <p className="text-xs text-slate-400 leading-relaxed">
                   Necessary cookies keep the site working. With your permission we&apos;d also like to use
                   analytics cookies to understand traffic. View our{" "}
-                  <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                  <a href="/legal/privacy-policy" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">Privacy Policy</a>.
                 </p>
                 <div className="flex gap-2 mt-3">
                   <button

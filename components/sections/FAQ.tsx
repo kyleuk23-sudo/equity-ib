@@ -79,11 +79,11 @@ export function FAQ() {
           <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-4">
             Common Questions
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             Frequently Asked{" "}
             <span className="gradient-text">Questions</span>
           </h2>
-          <p className="mt-4 text-slate-400 text-sm">
+          <p className="mt-4 text-stone-400 text-sm">
             Everything you need to know before applying as an Introducing Broker.
           </p>
         </motion.div>
@@ -109,7 +109,7 @@ export function FAQ() {
                 className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
                 aria-expanded={open === i}
               >
-                <span className="font-medium text-white text-sm leading-snug">{faq.q}</span>
+                <span className="font-medium text-stone-100 text-sm leading-snug">{faq.q}</span>
                 <div
                   className={`w-7 h-7 rounded-xl flex-shrink-0 flex items-center justify-center transition-all ${
                     open === i ? "bg-primary/20 rotate-0" : "bg-white/5"
@@ -118,7 +118,7 @@ export function FAQ() {
                   {open === i ? (
                     <Minus className="w-3.5 h-3.5 text-primary" />
                   ) : (
-                    <Plus className="w-3.5 h-3.5 text-slate-400" />
+                    <Plus className="w-3.5 h-3.5 text-stone-400" />
                   )}
                 </div>
               </button>
@@ -134,7 +134,7 @@ export function FAQ() {
                   >
                     <div className="px-6 pb-5">
                       <div className="h-px bg-white/[0.05] mb-4" />
-                      <p className="text-sm text-slate-400 leading-relaxed">{faq.a}</p>
+                      <p className="text-sm text-stone-400 leading-relaxed">{faq.a}</p>
                     </div>
                   </motion.div>
                 )}
@@ -148,10 +148,10 @@ export function FAQ() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="text-center text-sm text-slate-500 mt-8"
+          className="text-center text-sm text-stone-400 mt-8"
         >
           Still have questions?{" "}
-          <a href="/contact" className="text-primary hover:underline">
+          <a href="/contact" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
             Speak to our IB team →
           </a>
         </motion.p>

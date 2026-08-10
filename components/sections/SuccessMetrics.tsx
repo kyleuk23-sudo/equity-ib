@@ -5,51 +5,11 @@ import { motion, useInView } from "framer-motion";
 import { DollarSign, Users, Globe, TrendingUp, Headphones } from "lucide-react";
 
 const metrics = [
-  {
-    icon: DollarSign,
-    prefix: "$",
-    value: 50,
-    suffix: "M+",
-    label: "IB Rebates Generated",
-    color: "#FFD700",
-    desc: "Paid to IB partners across our network",
-  },
-  {
-    icon: Users,
-    prefix: "",
-    value: 750,
-    suffix: "+",
-    label: "Active IB Partners",
-    color: "#6366F1",
-    desc: "Professional IBs earning with us today",
-  },
-  {
-    icon: Globe,
-    prefix: "",
-    value: 125,
-    suffix: "+",
-    label: "Countries",
-    color: "#34D399",
-    desc: "Global reach with local support",
-  },
-  {
-    icon: TrendingUp,
-    prefix: "",
-    value: 98,
-    suffix: "%",
-    label: "Partner Retention",
-    color: "#A78BFA",
-    desc: "IBs who stay and grow with us",
-  },
-  {
-    icon: Headphones,
-    prefix: "",
-    value: 24,
-    suffix: "/5",
-    label: "Dedicated Support",
-    color: "#34D399",
-    desc: "Around-the-clock partner assistance",
-  },
+  { icon: DollarSign,  prefix: "$", value: 50,  suffix: "M+", label: "IB Rebates Generated", color: "#C8952A", desc: "Paid to IB partners across our network" },
+  { icon: Users,       prefix: "",  value: 750, suffix: "+",  label: "Active IB Partners",    color: "#34D399", desc: "Professional IBs earning with us today" },
+  { icon: Globe,       prefix: "",  value: 125, suffix: "+",  label: "Countries",              color: "#C8952A", desc: "Global reach with local support" },
+  { icon: TrendingUp,  prefix: "",  value: 98,  suffix: "%",  label: "Partner Retention",      color: "#34D399", desc: "IBs who stay and grow with us" },
+  { icon: Headphones,  prefix: "",  value: 24,  suffix: "/5", label: "Dedicated Support",      color: "#C8952A", desc: "Around-the-clock partner assistance" },
 ];
 
 function useCounter(target: number, duration: number, active: boolean) {
@@ -107,14 +67,14 @@ function MetricCard({
         <Icon className="w-5 h-5" style={{ color: metric.color }} />
       </div>
 
-      <div className="text-4xl sm:text-5xl font-extrabold text-white mb-1">
+      <div className="text-4xl sm:text-5xl font-semibold text-stone-100 mb-1">
         <span style={{ color: metric.color }}>{metric.prefix}</span>
         {count}
         <span style={{ color: metric.color }}>{metric.suffix}</span>
       </div>
 
-      <div className="text-sm font-semibold text-white mb-1.5">{metric.label}</div>
-      <div className="text-xs text-slate-500 leading-snug">{metric.desc}</div>
+      <div className="text-sm font-semibold text-stone-100 mb-1.5">{metric.label}</div>
+      <div className="text-xs text-stone-400 leading-snug">{metric.desc}</div>
     </motion.div>
   );
 }
@@ -135,11 +95,11 @@ export function SuccessMetrics() {
             <TrendingUp className="w-3 h-3" />
             By The Numbers
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             A Network Built On{" "}
             <span className="gradient-text">Proven Results</span>
           </h2>
-          <p className="mt-4 text-slate-400 max-w-xl mx-auto text-sm">
+          <p className="mt-4 text-stone-400 max-w-xl mx-auto text-sm">
             Equity IB has been paying out rebates to professional Introducing Brokers across the
             globe, building long-term partnerships founded on transparency and performance.
           </p>
@@ -159,7 +119,7 @@ export function SuccessMetrics() {
           transition={{ delay: 0.4 }}
           className="mt-10 text-center"
         >
-          <p className="text-xs text-slate-500 uppercase tracking-widest mb-4">
+          <p className="text-xs text-stone-400 uppercase tracking-widest mb-4">
             Trusted Worldwide
           </p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -177,7 +137,7 @@ export function SuccessMetrics() {
             ].map((country) => (
               <div
                 key={country}
-                className="glass px-3 py-1.5 rounded-full text-xs text-slate-300"
+                className="glass px-3 py-1.5 rounded-full text-xs text-stone-300"
               >
                 {country}
               </div>

@@ -1,117 +1,52 @@
 ﻿"use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import {
-  HeadphonesIcon,
   Zap,
   Shield,
   Star,
   Crown,
   BarChart3,
   Check,
-  ArrowRight,
 } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
+// A single gold accent scaling in intensity with tier — not a rainbow of
+// unrelated colors per card. Only the featured tier gets a distinct highlight.
 const tiers = [
   {
-    name: "Starter",
-    lots: "0–99",
-    rebate: "$10",
-    rebateNum: 10,
-    color: "#94a3b8",
-    bg: "rgba(148,163,184,0.06)",
-    border: "rgba(148,163,184,0.2)",
-    icon: Star,
-    featured: false,
+    name: "Starter", lots: "0–99", rebate: "$10", rebateNum: 10,
+    intensity: 0.35, icon: Star, featured: false,
     benefits: ["Standard Support", "Partner Dashboard", "Basic Reporting", "Tracking Links"],
   },
   {
-    name: "Bronze",
-    lots: "100–249",
-    rebate: "$12",
-    rebateNum: 12,
-    color: "#CD7F32",
-    bg: "rgba(205,127,50,0.06)",
-    border: "rgba(205,127,50,0.2)",
-    icon: Shield,
-    featured: false,
-    benefits: [
-      "All Starter Benefits",
-      "Faster Payments",
-      "Priority Onboarding",
-      "Marketing Templates",
-    ],
+    name: "Bronze", lots: "100–249", rebate: "$12", rebateNum: 12,
+    intensity: 0.5, icon: Shield, featured: false,
+    benefits: ["All Starter Benefits", "Faster Payments", "Priority Onboarding", "Marketing Templates"],
   },
   {
-    name: "Silver",
-    lots: "250–499",
-    rebate: "$15",
-    rebateNum: 15,
-    color: "#C0C0C0",
-    bg: "rgba(192,192,192,0.06)",
-    border: "rgba(192,192,192,0.2)",
-    icon: BarChart3,
-    featured: false,
-    benefits: [
-      "All Bronze Benefits",
-      "Marketing Materials",
-      "Co-branded Assets",
-      "Monthly Reviews",
-    ],
+    name: "Silver", lots: "250–499", rebate: "$15", rebateNum: 15,
+    intensity: 0.65, icon: BarChart3, featured: false,
+    benefits: ["All Bronze Benefits", "Marketing Materials", "Co-branded Assets", "Monthly Reviews"],
   },
   {
-    name: "Gold",
-    lots: "500–999",
-    rebate: "$20",
-    rebateNum: 20,
-    color: "#FFD700",
-    bg: "rgba(255,215,0,0.08)",
-    border: "rgba(255,215,0,0.3)",
-    icon: Star,
-    featured: true,
-    benefits: [
-      "All Silver Benefits",
-      "Dedicated Account Manager",
-      "Custom Landing Pages",
-      "Performance Bonuses",
-    ],
+    name: "Gold", lots: "500–999", rebate: "$20", rebateNum: 20,
+    intensity: 1, icon: Star, featured: true,
+    benefits: ["All Silver Benefits", "Dedicated Account Manager", "Custom Landing Pages", "Performance Bonuses"],
   },
   {
-    name: "Platinum",
-    lots: "1,000–2,499",
-    rebate: "$25",
-    rebateNum: 25,
-    color: "#6366F1",
-    bg: "rgba(99,102,241,0.08)",
-    border: "rgba(99,102,241,0.3)",
-    icon: Zap,
-    featured: false,
-    benefits: [
-      "All Gold Benefits",
-      "Priority Support",
-      "Advanced Analytics",
-      "Rate Increase Reviews",
-    ],
+    name: "Platinum", lots: "1,000–2,499", rebate: "$25", rebateNum: 25,
+    intensity: 1, icon: Zap, featured: false,
+    benefits: ["All Gold Benefits", "Priority Support", "Advanced Analytics", "Rate Increase Reviews"],
   },
   {
-    name: "Diamond",
-    lots: "2,500+",
-    rebate: "Up To $30",
-    rebateNum: 30,
-    color: "#34D399",
-    bg: "rgba(52,211,153,0.08)",
-    border: "rgba(52,211,153,0.3)",
-    icon: Crown,
-    featured: false,
-    benefits: [
-      "All Platinum Benefits",
-      "Custom Deal Structure",
-      "VIP Support Line",
-      "Bespoke Partnership",
-    ],
+    name: "Diamond", lots: "2,500+", rebate: "Up To $30", rebateNum: 30,
+    intensity: 1, icon: Crown, featured: false,
+    benefits: ["All Platinum Benefits", "Custom Deal Structure", "VIP Support Line", "Bespoke Partnership"],
   },
 ];
+
+const GOLD = "#C8952A";
 
 export function TierTable() {
   return (
@@ -130,11 +65,11 @@ export function TierTable() {
             <BarChart3 className="w-3 h-3" />
             Rebate Tier System
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             Grow Your Tier,{" "}
             <span className="gradient-text">Grow Your Income</span>
           </h2>
-          <p className="mt-4 text-slate-400 max-w-2xl mx-auto text-sm leading-relaxed">
+          <p className="mt-4 text-stone-400 max-w-2xl mx-auto text-sm leading-relaxed">
             Your rebate rate increases automatically as your monthly trading volume grows. The more
             volume your clients generate, the higher your rebate per lot — up to $30.
           </p>
@@ -151,18 +86,18 @@ export function TierTable() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: i * 0.07 }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -4 }}
                 className="relative rounded-2xl p-5 flex flex-col border transition-all group"
                 style={{
-                  background: tier.bg,
-                  borderColor: tier.featured ? tier.color : tier.border,
-                  boxShadow: tier.featured ? `0 0 30px ${tier.color}20` : undefined,
+                  background: "rgba(255,255,255,0.02)",
+                  borderColor: tier.featured ? `${GOLD}55` : "rgba(255,255,255,0.07)",
+                  boxShadow: tier.featured ? `0 0 30px ${GOLD}18` : undefined,
                 }}
               >
                 {tier.featured && (
                   <div
-                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap"
-                    style={{ background: tier.color, color: "#050509" }}
+                    className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap"
+                    style={{ background: GOLD, color: "#050509" }}
                   >
                     Most Popular
                   </div>
@@ -172,31 +107,35 @@ export function TierTable() {
                 <div className="mb-4">
                   <div
                     className="w-10 h-10 rounded-xl flex items-center justify-center mb-3"
-                    style={{ background: `${tier.color}18` }}
+                    style={{ background: `${GOLD}${Math.round(tier.intensity * 24).toString(16).padStart(2, "0")}` }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: tier.color }} />
+                    <Icon className="w-5 h-5" style={{ color: GOLD, opacity: 0.5 + tier.intensity * 0.5 }} />
                   </div>
-                  <h3 className="font-bold text-white text-lg">{tier.name}</h3>
-                  <p className="text-xs text-slate-400 mt-0.5">{tier.lots} lots/month</p>
+                  <h3 className="font-semibold text-stone-100 text-lg">{tier.name}</h3>
+                  <p className="text-xs text-stone-400 mt-0.5">{tier.lots} lots/month</p>
                 </div>
 
                 {/* Rebate */}
                 <div className="mb-5">
-                  <div className="text-2xl font-extrabold" style={{ color: tier.color }}>
+                  <div className="text-2xl font-semibold" style={{ color: GOLD, opacity: 0.55 + tier.intensity * 0.45 }}>
                     {tier.rebate}
                   </div>
-                  <div className="text-xs text-slate-400">per lot rebate</div>
+                  <div className="text-xs text-stone-400">per lot rebate</div>
                 </div>
 
                 {/* Earnings bar */}
                 <div className="mb-4">
                   <div className="h-1 rounded-full bg-white/[0.05] overflow-hidden">
-                    <div
-                      className="h-full rounded-full transition-all duration-500"
-                      style={{ width: `${(tier.rebateNum / 30) * 100}%`, background: tier.color }}
+                    <motion.div
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${(tier.rebateNum / 30) * 100}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 0.2 + i * 0.07, ease: "easeOut" }}
+                      className="h-full rounded-full"
+                      style={{ background: GOLD }}
                     />
                   </div>
-                  <div className="flex justify-between text-[9px] text-slate-600 mt-1">
+                  <div className="flex justify-between text-[9px] text-stone-500 mt-1">
                     <span>$0</span>
                     <span>$30</span>
                   </div>
@@ -208,9 +147,9 @@ export function TierTable() {
                     <li key={b} className="flex items-start gap-2">
                       <Check
                         className="w-3.5 h-3.5 mt-0.5 flex-shrink-0"
-                        style={{ color: tier.color }}
+                        style={{ color: GOLD, opacity: 0.6 + tier.intensity * 0.4 }}
                       />
-                      <span className="text-xs text-slate-300 leading-snug">{b}</span>
+                      <span className="text-xs text-stone-300 leading-snug">{b}</span>
                     </li>
                   ))}
                 </ul>
@@ -227,20 +166,18 @@ export function TierTable() {
           transition={{ delay: 0.3 }}
           className="text-center mt-10"
         >
-          <p className="text-sm text-slate-400 mb-4">
+          <p className="text-sm text-stone-400 mb-4">
             Tier classification is based on qualifying monthly trading volume. Rebate rates are
             indicative — your exact rate is confirmed in your individual IB agreement.
           </p>
-          <Link
+          <Button
             href="/contact"
             data-track-event="cta"
             data-track-label="Discuss Your Tier"
             data-track-section="tier_table"
-            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6 py-3 rounded-xl transition-all hover:shadow-glow text-sm"
           >
             Discuss Your Tier
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          </Button>
         </motion.div>
       </div>
     </section>

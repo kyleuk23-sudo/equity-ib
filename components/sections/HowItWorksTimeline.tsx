@@ -4,43 +4,26 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import { ClipboardList, CheckCircle2, Link2, TrendingUp, Wallet } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
+// One gold family progressing step to step, matching the tier/calculator
+// progression elsewhere on the site — not five unrelated hues.
 const steps = [
-  {
-    num: "01",
-    icon: ClipboardList,
-    title: "Apply Online",
+  { num: "01", icon: ClipboardList, title: "Apply Online",
     desc: "Complete our short IB application in under 5 minutes. Tell us about your audience, trading volume and goals. Our team reviews every application personally.",
-    color: "#C8952A",
-  },
-  {
-    num: "02",
-    icon: CheckCircle2,
-    title: "Receive Approval",
+    color: "#8a7458" },
+  { num: "02", icon: CheckCircle2, title: "Receive Approval",
     desc: "Most applications are approved within 24 hours. Your dedicated account manager will contact you to complete onboarding and confirm your rebate agreement.",
-    color: "#F5C842",
-  },
-  {
-    num: "03",
-    icon: Link2,
-    title: "Get Your Referral Links",
+    color: "#A88240" },
+  { num: "03", icon: Link2, title: "Get Your Referral Links",
     desc: "Receive your unique tracking links and access to the partner portal. Start sharing with your audience immediately — no minimum volume to get started.",
-    color: "#34D399",
-  },
-  {
-    num: "04",
-    icon: TrendingUp,
-    title: "Your Clients Trade",
+    color: "#C8952A" },
+  { num: "04", icon: TrendingUp, title: "Your Clients Trade",
     desc: "As your referred clients trade, volume accumulates against your IB account. Your tier automatically updates as your monthly volume grows.",
-    color: "#A78BFA",
-  },
-  {
-    num: "05",
-    icon: Wallet,
-    title: "Earn Daily Rebates",
+    color: "#DDA934" },
+  { num: "05", icon: Wallet, title: "Earn Daily Rebates",
     desc: "IB rebates are calculated and settled every trading day. Payments are processed automatically to your chosen withdrawal method — no chasing, no delays.",
-    color: "#6366F1",
-  },
+    color: "#F5C842" },
 ];
 
 function Step({ step, index, isLast }: { step: typeof steps[0]; index: number; isLast: boolean }) {
@@ -100,8 +83,8 @@ function Step({ step, index, isLast }: { step: typeof steps[0]; index: number; i
         <div className="text-xs font-bold tracking-widest uppercase mb-1" style={{ color: step.color }}>
           Step {step.num}
         </div>
-        <h3 className="text-xl font-bold text-white mb-2">{step.title}</h3>
-        <p className="text-sm text-slate-400 leading-relaxed max-w-lg">{step.desc}</p>
+        <h3 className="text-xl font-semibold text-stone-100 mb-2">{step.title}</h3>
+        <p className="text-sm text-stone-400 leading-relaxed max-w-lg">{step.desc}</p>
       </motion.div>
     </div>
   );
@@ -125,12 +108,12 @@ export function HowItWorksTimeline() {
               <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-5">
                 How It Works
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight leading-tight text-stone-100">
                 From Application<br />
                 To{" "}
                 <span className="gradient-text">Daily Income</span>
               </h2>
-              <p className="mt-5 text-slate-400 text-sm leading-relaxed max-w-md">
+              <p className="mt-5 text-stone-400 text-sm leading-relaxed max-w-md">
                 Becoming an Equity IB partner is straightforward. Most IBs receive their first daily
                 rebate payment within 48 hours of going live.
               </p>
@@ -143,26 +126,24 @@ export function HowItWorksTimeline() {
                   { val: "$30", label: "Max Per Lot" },
                 ].map((s) => (
                   <div key={s.label} className="glass rounded-xl p-4 text-center">
-                    <div className="text-xl font-extrabold gradient-text">{s.val}</div>
-                    <div className="text-xs text-slate-500 mt-0.5">{s.label}</div>
+                    <div className="text-xl font-semibold gradient-text">{s.val}</div>
+                    <div className="text-xs text-stone-400 mt-0.5">{s.label}</div>
                   </div>
                 ))}
               </div>
 
               {/* CTA */}
-              <motion.a
-                href="#apply"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                data-track-event="cta"
-                data-track-label="Start Your Application"
-                data-track-section="how_it_works"
-                className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3.5 rounded-xl mt-8 text-sm relative overflow-hidden group"
-              >
-                <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                Start Your Application
-              </motion.a>
-              <p className="text-xs text-slate-500 mt-4">
+              <div className="mt-8">
+                <Button
+                  href="#apply"
+                  data-track-event="cta"
+                  data-track-label="Start Your Application"
+                  data-track-section="how_it_works"
+                >
+                  Start Your Application
+                </Button>
+              </div>
+              <p className="text-xs text-stone-400 mt-4">
                 Want the full breakdown first?{" "}
                 <Link href="/how-to-become-an-introducing-broker" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
                   Read the complete step-by-step guide

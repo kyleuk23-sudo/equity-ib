@@ -2,17 +2,18 @@
 
 import { useState }             from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowRight, DollarSign, Users, Clock, Shield, Globe, BarChart3, AlertCircle } from "lucide-react";
+import { CheckCircle2, DollarSign, Users, Clock, Shield, Globe, BarChart3, AlertCircle } from "lucide-react";
 import { submitApplication }    from "@/app/actions/submit-application";
 import { useFormAnalytics }     from "@/lib/analytics/useFormAnalytics";
+import { Button } from "@/components/ui/Button";
 
 const benefits = [
   { icon: DollarSign, text: "Earn up to $30 per traded lot",     color: "#C8952A" },
   { icon: Clock,      text: "Daily rebate settlements",           color: "#34D399" },
-  { icon: Users,      text: "Dedicated personal account manager", color: "#A78BFA" },
-  { icon: Shield,     text: "Regulated broker infrastructure",    color: "#6366F1" },
-  { icon: Globe,      text: "Global programme — 120+ countries",  color: "#34D399" },
-  { icon: BarChart3,  text: "Transparent real-time IB dashboard", color: "#C8952A" },
+  { icon: Users,      text: "Dedicated personal account manager", color: "#C8952A" },
+  { icon: Shield,     text: "Regulated broker infrastructure",    color: "#34D399" },
+  { icon: Globe,      text: "Global programme — 120+ countries",  color: "#C8952A" },
+  { icon: BarChart3,  text: "Transparent real-time IB dashboard", color: "#34D399" },
 ];
 
 const LOTS_OPTIONS = [
@@ -77,13 +78,14 @@ export function ApplicationSection() {
   };
 
   const inputCls =
-    "w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 focus:bg-white/[0.06] transition-all";
+    "w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-stone-100 placeholder:text-stone-500 focus:outline-none focus:border-primary/50 focus:bg-white/[0.06] transition-all";
 
   return (
     <section id="apply" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero opacity-60 pointer-events-none" />
-      <div className="absolute inset-0 grid-bg opacity-[0.06] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/5 blur-[180px] pointer-events-none" />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-50"
+        style={{ background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(200,149,42,0.12) 0%, transparent 70%)" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 
@@ -101,11 +103,11 @@ export function ApplicationSection() {
             </span>
             Now Accepting Applications
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             Become An Equity IB<br />
             <span className="gradient-text">Partner Today</span>
           </h2>
-          <p className="mt-5 text-slate-400 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="mt-5 text-stone-400 max-w-xl mx-auto text-sm leading-relaxed">
             Join hundreds of professional Introducing Brokers earning daily rebates through
             the Equity IB network. Applications are reviewed within 24 hours.
           </p>
@@ -121,7 +123,7 @@ export function ApplicationSection() {
             transition={{ duration: 0.55 }}
             className="lg:col-span-2"
           >
-            <h3 className="text-xl font-bold text-white mb-6">What You&rsquo;ll Get</h3>
+            <h3 className="text-xl font-semibold text-stone-100 mb-6">What You&rsquo;ll Get</h3>
             <ul className="space-y-4 mb-10">
               {benefits.map((b) => {
                 const Icon = b.icon;
@@ -133,7 +135,7 @@ export function ApplicationSection() {
                     >
                       <Icon className="w-4 h-4" style={{ color: b.color }} />
                     </div>
-                    <span className="text-sm text-slate-300">{b.text}</span>
+                    <span className="text-sm text-stone-300">{b.text}</span>
                   </li>
                 );
               })}
@@ -145,15 +147,16 @@ export function ApplicationSection() {
                   {["JW", "PS", "MD", "AA"].map((ini) => (
                     <div
                       key={ini}
-                      className="w-7 h-7 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-[9px] font-bold text-white border border-background"
+                      className="w-7 h-7 rounded-full flex items-center justify-center text-[9px] font-semibold border border-background"
+                      style={{ background: "linear-gradient(135deg, #F5C842 0%, #C8952A 100%)", color: "#050509" }}
                     >
                       {ini}
                     </div>
                   ))}
                 </div>
-                <span className="text-xs text-slate-400">500+ active IB partners</span>
+                <span className="text-xs text-stone-400">500+ active IB partners</span>
               </div>
-              <p className="text-xs text-slate-500 leading-relaxed italic">
+              <p className="text-xs text-stone-400 leading-relaxed italic">
                 &ldquo;The onboarding was fast and my account manager has been excellent from day one.&rdquo;
               </p>
               <p className="text-xs text-primary mt-1.5">— James W., Platinum IB · 🇬🇧 UK</p>
@@ -178,8 +181,8 @@ export function ApplicationSection() {
             >
               <CheckCircle2 className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
               <div>
-                <div className="text-sm font-bold text-white mb-0.5">Your Application Is Completely Free</div>
-                <div className="text-xs text-slate-400 leading-relaxed">
+                <div className="text-sm font-semibold text-stone-100 mb-0.5">Your Application Is Completely Free</div>
+                <div className="text-xs text-stone-400 leading-relaxed">
                   There is no cost to apply or become an Equity IB partner. Once approved, you&apos;ll receive
                   onboarding support and access to the broker&apos;s tools to help you grow your IB business.
                 </div>
@@ -187,7 +190,7 @@ export function ApplicationSection() {
             </motion.div>
 
             <div
-              className="glass-strong rounded-3xl p-8 border border-white/[0.08]"
+              className="glass-strong rounded-2xl p-8 border border-white/[0.08]"
               style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}
             >
               <AnimatePresence mode="wait">
@@ -206,8 +209,8 @@ export function ApplicationSection() {
                     >
                       <CheckCircle2 className="w-8 h-8 text-primary" />
                     </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Application Received</h3>
-                    <p className="text-slate-400 text-sm max-w-sm mx-auto">
+                    <h3 className="text-2xl font-semibold text-stone-100 mb-2">Application Received</h3>
+                    <p className="text-stone-400 text-sm max-w-sm mx-auto">
                       Thank you — a member of our IB team will review your application and
                       contact you within 24 hours.
                     </p>
@@ -230,39 +233,39 @@ export function ApplicationSection() {
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-name">Full Name *</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-name">Full Name *</label>
                         <input id="app-name" required value={form.name} onChange={set("name")} placeholder="Your name" className={inputCls} />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-email">Email Address *</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-email">Email Address *</label>
                         <input id="app-email" required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className={inputCls} />
                       </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-phone">Phone Number</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-phone">Phone Number</label>
                         <input id="app-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 8900" className={inputCls} />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-telegram">Telegram Handle</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-telegram">Telegram Handle</label>
                         <input id="app-telegram" value={form.telegram} onChange={set("telegram")} placeholder="@yourusername" className={inputCls} />
                       </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-country">Country *</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-country">Country *</label>
                         <input id="app-country" required value={form.country} onChange={set("country")} placeholder="United Kingdom" className={inputCls} />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-broker">Current Broker</label>
+                        <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-broker">Current Broker</label>
                         <input id="app-broker" value={form.broker} onChange={set("broker")} placeholder="e.g. IC Markets" className={inputCls} />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-lots">Estimated Monthly Volume *</label>
+                      <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-lots">Estimated Monthly Volume *</label>
                       <select id="app-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} bg-[#0a0a14] [color-scheme:dark]`}>
                         <option value="" className="bg-[#0a0a14] text-white">Select monthly lots</option>
                         {LOTS_OPTIONS.map((o) => <option key={o} value={o} className="bg-[#0a0a14] text-white">{o}</option>)}
@@ -270,7 +273,7 @@ export function ApplicationSection() {
                     </div>
 
                     <div>
-                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="app-message">Tell Us About Your Client Base</label>
+                      <label className="text-xs text-stone-400 mb-1.5 block" htmlFor="app-message">Tell Us About Your Client Base</label>
                       <textarea
                         id="app-message"
                         value={form.message}
@@ -281,32 +284,17 @@ export function ApplicationSection() {
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="btn-glow w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-4 rounded-xl text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 relative overflow-hidden group"
-                    >
-                      <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                      {loading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Submitting…
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2">
-                          Apply Free Today
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      )}
-                    </button>
+                    <Button type="submit" loading={loading} className="w-full" icon={!loading}>
+                      Apply Free Today
+                    </Button>
 
-                    <p className="text-xs text-slate-500 text-center">
+                    <p className="text-xs text-stone-400 text-center">
                       Applications reviewed within 24 hours. By submitting you agree to our{" "}
-                      <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                      <a href="/legal/privacy-policy" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">Privacy Policy</a>.
                     </p>
                     <div className="flex flex-wrap justify-center gap-4 mt-3">
                       {["100% Free to Join", "No Hidden Fees", "Dedicated IB Support", "Daily Rebate Payments"].map((t) => (
-                        <div key={t} className="flex items-center gap-1.5 text-xs text-slate-500">
+                        <div key={t} className="flex items-center gap-1.5 text-xs text-stone-400">
                           <CheckCircle2 className="w-3 h-3 text-accent flex-shrink-0" />
                           {t}
                         </div>

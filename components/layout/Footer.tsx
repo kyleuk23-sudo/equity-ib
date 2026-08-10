@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, ArrowRight } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { CookiePreferencesButton } from "@/components/ui/CookiePreferencesButton";
+import { Button } from "@/components/ui/Button";
 
 const NAV = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
@@ -33,19 +34,19 @@ export function Footer() {
 
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="group inline-block mb-4">
+            <Link href="/" className="group inline-block mb-5">
               <Image
                 src="/logo.png"
                 alt="Equity IB"
-                width={64}
-                height={64}
-                className="rounded-full w-16 h-16 transition-all duration-200 group-hover:scale-[1.03] group-hover:[filter:drop-shadow(0_0_12px_rgba(200,149,42,0.5))]"
+                width={80}
+                height={80}
+                className="rounded-full w-20 h-20 transition-all duration-200 group-hover:scale-[1.03] group-hover:[filter:drop-shadow(0_0_14px_rgba(200,149,42,0.5))]"
               />
             </Link>
             <p className="text-xs font-semibold tracking-[0.18em] uppercase mb-3 gradient-text-gold">
               Grow &bull; Earn &bull; Succeed
             </p>
-            <p className="text-sm text-slate-400 leading-relaxed mb-4">
+            <p className="text-sm text-stone-400 leading-relaxed mb-4">
               Helping Introducing Brokers build long-term recurring rebate businesses through
               premium broker partnerships.
             </p>
@@ -59,12 +60,12 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Equity IB on Instagram"
-                className="w-8 h-8 glass rounded-lg flex items-center justify-center text-slate-400 hover:text-primary hover:border-primary/30 transition-colors"
+                className="w-8 h-8 glass rounded-lg flex items-center justify-center text-stone-400 hover:text-primary hover:border-primary/30 transition-colors"
               >
                 <Instagram className="w-3.5 h-3.5" />
               </a>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed pt-4 border-t border-white/[0.05]">
+            <p className="text-xs text-stone-400 leading-relaxed pt-4 border-t border-white/[0.05]">
               Joining Equity IB is completely free. Apply today and begin your Introducing Broker
               journey with no registration or membership fees.
             </p>
@@ -72,11 +73,11 @@ export function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Navigation</h3>
+            <h3 className="text-xs font-semibold text-stone-300 uppercase tracking-wider mb-4">Navigation</h3>
             <ul className="space-y-2.5">
               {NAV.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-slate-400 hover:text-white transition-colors">
+                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-stone-400 hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
@@ -86,55 +87,52 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Legal</h3>
+            <h3 className="text-xs font-semibold text-stone-300 uppercase tracking-wider mb-4">Legal</h3>
             <ul className="space-y-2.5">
               {LEGAL.map((l) => (
                 <li key={l.label}>
-                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-slate-400 hover:text-white transition-colors">
+                  <Link href={l.href} data-track-event="footer" data-track-label={l.label} className="text-sm text-stone-400 hover:text-white transition-colors">
                     {l.label}
                   </Link>
                 </li>
               ))}
               <li>
-                <CookiePreferencesButton className="text-sm text-slate-400 hover:text-white transition-colors" />
+                <CookiePreferencesButton className="text-sm text-stone-400 hover:text-white transition-colors" />
               </li>
             </ul>
           </div>
 
           {/* CTA */}
           <div>
-            <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Get Started</h3>
-            <p className="text-sm text-slate-400 leading-relaxed mb-2">
+            <h3 className="text-xs font-semibold text-stone-300 uppercase tracking-wider mb-4">Get Started</h3>
+            <p className="text-sm text-stone-400 leading-relaxed mb-2">
               Ready to build a recurring rebate income? Joining is completely free — apply today.
             </p>
-            <p className="text-xs text-slate-500 mb-5">No registration fees · No membership costs</p>
-            <Link
+            <p className="text-xs text-stone-400 mb-5">No registration fees · No membership costs</p>
+            <Button
               href="/#apply"
               data-track-event="cta"
               data-track-label="Apply Free Today"
               data-track-section="footer_cta"
-              className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-3 rounded-xl text-sm transition-all hover:opacity-90 relative overflow-hidden group"
             >
-              <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
               Apply Free Today
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-            </Link>
+            </Button>
           </div>
         </div>
 
         {/* Bottom */}
         <div className="mt-14 pt-8 border-t border-white/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs text-stone-400">
               © {new Date().getFullYear()} Equity IB. All rights reserved. Trading CFDs and forex involves significant risk of loss.
             </p>
-            <p className="text-xs text-slate-600 mt-0.5">
+            <p className="text-xs text-stone-400 mt-0.5">
               Rebate rates are indicative. Actual rebates depend on your individual agreement, trading volume, broker and instruments traded.
             </p>
           </div>
           <div className="flex items-center gap-2 flex-shrink-0">
             <div className="w-2 h-2 rounded-full bg-accent animate-pulse2" />
-            <span className="text-xs text-slate-400">All systems operational</span>
+            <span className="text-xs text-stone-400">All systems operational</span>
           </div>
         </div>
       </div>

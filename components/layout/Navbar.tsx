@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 const NAV_LINKS = [
   { label: "Why Equity IB", href: "/#why-equity-ib" },
@@ -34,7 +35,7 @@ export function Navbar() {
       {/* Announcement bar */}
       <div className="fixed top-0 inset-x-0 z-50 h-10 flex items-center justify-center overflow-hidden"
         style={{ background: "linear-gradient(90deg, rgba(200,149,42,0.14) 0%, rgba(52,211,153,0.08) 50%, rgba(200,149,42,0.10) 100%)" }}>
-        <Link href="/#apply" className="text-xs text-slate-300 hover:text-white transition-colors flex items-center gap-2">
+        <Link href="/#apply" className="text-xs text-stone-300 hover:text-white transition-colors flex items-center gap-2">
           <span className="relative flex h-1.5 w-1.5 flex-shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
@@ -69,7 +70,7 @@ export function Navbar() {
               >
                 <Image src="/logo.png" alt="Equity IB" width={42} height={42} className="rounded-full w-[42px] h-[42px]" priority />
               </motion.div>
-              <span className="font-extrabold text-[17px] tracking-tight hidden sm:block group-hover:opacity-90 transition-opacity">
+              <span className="font-semibold text-[17px] tracking-tight hidden sm:block group-hover:opacity-90 transition-opacity">
                 Equity <span className="gradient-text-gold">IB</span>
               </span>
             </Link>
@@ -82,9 +83,10 @@ export function Navbar() {
                     href={item.href}
                     data-track-event="nav"
                     data-track-label={item.label}
-                    className="px-4 py-2 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] transition-all"
+                    className="relative px-4 py-2 rounded-xl text-sm font-medium text-stone-300 hover:text-white transition-colors group/navlink"
                   >
                     {item.label}
+                    <span className="absolute left-4 right-4 -bottom-0.5 h-px bg-primary scale-x-0 group-hover/navlink:scale-x-100 transition-transform duration-300 origin-left" />
                   </Link>
                 </li>
               ))}
@@ -97,9 +99,14 @@ export function Navbar() {
                 data-track-event="cta"
                 data-track-label="Apply Now"
                 data-track-section="navbar_desktop"
-                className="btn-glow relative flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-2.5 rounded-xl text-sm transition-all hover:opacity-90 overflow-hidden group"
+                className="relative flex items-center gap-2 font-semibold px-5 py-2.5 rounded-xl text-sm overflow-hidden group transition-transform duration-300 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(135deg, #F5C842 0%, #C8952A 55%, #A97A1F 100%)",
+                  color: "#050509",
+                  boxShadow: "0 4px 16px rgba(200,149,42,0.24)",
+                }}
               >
-                <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+                <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/40 to-transparent" />
                 Apply Now
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
               </Link>
@@ -141,24 +148,23 @@ export function Navbar() {
                     onClick={() => setMenuOpen(false)}
                     data-track-event="nav"
                     data-track-label={item.label}
-                    className="block px-4 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-white/[0.06] transition-all"
+                    className="block px-4 py-3 rounded-xl text-sm font-medium text-stone-300 hover:text-white hover:bg-white/[0.06] transition-all"
                   >
                     {item.label}
                   </Link>
                 </motion.div>
               ))}
               <div className="pt-4 border-t border-white/[0.06]">
-                <Link
+                <Button
                   href="/#apply"
                   onClick={() => setMenuOpen(false)}
                   data-track-event="cta"
                   data-track-label="Apply Free Today"
                   data-track-section="navbar_mobile"
-                  className="flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-5 py-3.5 rounded-xl text-sm w-full"
+                  className="w-full"
                 >
                   Apply Free Today
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
+                </Button>
               </div>
             </div>
           </motion.div>

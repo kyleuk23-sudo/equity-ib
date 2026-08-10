@@ -2,16 +2,18 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { trackCalculatorOpen, trackCalculatorInteraction, trackTierViewed } from "@/lib/analytics/events";
+import { Button } from "@/components/ui/Button";
 
+// A single gold family, progressing from muted to radiant — not a rainbow
+// of unrelated hues per tier. All shades contrast-checked at 4.5:1+.
 const TIERS = [
-  { name: "Starter",  color: "#94a3b8", min: 0,    max: 99,       rebate: 10, next: 100  },
-  { name: "Bronze",   color: "#CD7F32", min: 100,  max: 249,      rebate: 12, next: 250  },
-  { name: "Silver",   color: "#C0C0C0", min: 250,  max: 499,      rebate: 15, next: 500  },
-  { name: "Gold",     color: "#FFD700", min: 500,  max: 999,      rebate: 20, next: 1000 },
-  { name: "Platinum", color: "#A78BFA", min: 1000, max: 2499,     rebate: 25, next: 2500 },
-  { name: "Diamond",  color: "#34D399", min: 2500, max: Infinity, rebate: 30, next: null },
+  { name: "Starter",  color: "#8a7458", min: 0,    max: 99,       rebate: 10, next: 100  },
+  { name: "Bronze",   color: "#A38243", min: 100,  max: 249,      rebate: 12, next: 250  },
+  { name: "Silver",   color: "#BB8E38", min: 250,  max: 499,      rebate: 15, next: 500  },
+  { name: "Gold",     color: "#C8952A", min: 500,  max: 999,      rebate: 20, next: 1000 },
+  { name: "Platinum", color: "#DDA934", min: 1000, max: 2499,     rebate: 25, next: 2500 },
+  { name: "Diamond",  color: "#F5C842", min: 2500, max: Infinity, rebate: 30, next: null },
 ];
 
 function getTier(lots: number) {
@@ -94,7 +96,10 @@ export function IBCalculator() {
 
   return (
     <section id="calculator" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 aurora-bg opacity-40 pointer-events-none" />
+      <div
+        className="absolute inset-0 pointer-events-none opacity-40"
+        style={{ background: "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(200,149,42,0.10) 0%, transparent 70%)" }}
+      />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -108,11 +113,11 @@ export function IBCalculator() {
           <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-5">
             IB Earnings Calculator
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             Calculate Your{" "}
             <span className="gradient-text">Potential Earnings</span>
           </h2>
-          <p className="mt-4 text-slate-400 text-sm max-w-xl mx-auto">
+          <p className="mt-4 text-stone-400 text-sm max-w-xl mx-auto">
             Set your number of clients and average lots per client to model your monthly rebate
             potential. All figures are illustrative — actual rebates depend on your commercial agreement.
           </p>
@@ -123,7 +128,7 @@ export function IBCalculator() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="glass-strong rounded-3xl p-8 sm:p-10 border border-white/[0.08]"
+          className="glass-strong rounded-2xl p-8 sm:p-10 border border-white/[0.08]"
           style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.35)" }}
         >
           {/* Sliders */}
@@ -132,8 +137,8 @@ export function IBCalculator() {
             {/* Clients slider */}
             <div>
               <div className="flex items-baseline justify-between mb-3">
-                <label htmlFor="calc-clients" className="text-sm font-semibold text-white">Number of Clients</label>
-                <div className="text-3xl font-extrabold gradient-text">{clients.toLocaleString()}</div>
+                <label htmlFor="calc-clients" className="text-sm font-semibold text-stone-100">Number of Clients</label>
+                <div className="text-3xl font-semibold gradient-text">{clients.toLocaleString()}</div>
               </div>
               <input
                 id="calc-clients"
@@ -142,7 +147,7 @@ export function IBCalculator() {
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
                 style={{ accentColor: tier.color, background: sliderBg(clients, 200) }}
               />
-              <div className="flex justify-between text-xs text-slate-500 mt-2">
+              <div className="flex justify-between text-xs text-stone-400 mt-2">
                 <span>1 client</span>
                 <span>200 clients</span>
               </div>
@@ -151,8 +156,8 @@ export function IBCalculator() {
             {/* Avg lots per client slider */}
             <div>
               <div className="flex items-baseline justify-between mb-3">
-                <label htmlFor="calc-avg-lots" className="text-sm font-semibold text-white">Avg Lots / Client / Month</label>
-                <div className="text-3xl font-extrabold gradient-text">{avgLots.toLocaleString()}</div>
+                <label htmlFor="calc-avg-lots" className="text-sm font-semibold text-stone-100">Avg Lots / Client / Month</label>
+                <div className="text-3xl font-semibold gradient-text">{avgLots.toLocaleString()}</div>
               </div>
               <input
                 id="calc-avg-lots"
@@ -161,7 +166,7 @@ export function IBCalculator() {
                 className="w-full h-2 rounded-full appearance-none cursor-pointer"
                 style={{ accentColor: tier.color, background: sliderBg(avgLots, 100) }}
               />
-              <div className="flex justify-between text-xs text-slate-500 mt-2">
+              <div className="flex justify-between text-xs text-stone-400 mt-2">
                 <span>1 lot</span>
                 <span>100 lots</span>
               </div>
@@ -173,12 +178,12 @@ export function IBCalculator() {
               style={{ background: `${tier.color}0c` }}
             >
               <div>
-                <div className="text-xs text-slate-400">Total Monthly Lots</div>
-                <div className="text-xs text-slate-500 mt-0.5">
+                <div className="text-xs text-stone-400">Total Monthly Lots</div>
+                <div className="text-xs text-stone-400 mt-0.5">
                   {clients.toLocaleString()} clients × {avgLots.toLocaleString()} lots
                 </div>
               </div>
-              <div className="text-3xl font-extrabold" style={{ color: tier.color }}>
+              <div className="text-3xl font-semibold" style={{ color: tier.color }}>
                 {lots.toLocaleString()}
               </div>
             </div>
@@ -206,20 +211,20 @@ export function IBCalculator() {
             </AnimatePresence>
 
             <div className="glass px-5 py-3 rounded-2xl">
-              <span className="text-xs text-slate-400 block">Rebate Per Lot</span>
-              <span className="text-2xl font-extrabold text-white">${tier.rebate}</span>
+              <span className="text-xs text-stone-400 block">Rebate Per Lot</span>
+              <span className="text-2xl font-semibold text-stone-100">${tier.rebate}</span>
             </div>
 
             {lotsToNext !== null ? (
               <div className="glass px-5 py-3 rounded-2xl">
-                <span className="text-xs text-slate-400 block">To Next Tier</span>
-                <span className="text-xl font-bold text-white">
-                  {lotsToNext.toLocaleString()} <span className="text-sm font-normal text-slate-400">lots</span>
+                <span className="text-xs text-stone-400 block">To Next Tier</span>
+                <span className="text-xl font-bold text-stone-100">
+                  {lotsToNext.toLocaleString()} <span className="text-sm font-normal text-stone-400">lots</span>
                 </span>
               </div>
             ) : (
               <div className="glass px-5 py-3 rounded-2xl">
-                <span className="text-xs text-slate-400 block">Status</span>
+                <span className="text-xs text-stone-400 block">Status</span>
                 <span className="text-base font-bold" style={{ color: tier.color }}>Maximum Tier ✦</span>
               </div>
             )}
@@ -227,7 +232,7 @@ export function IBCalculator() {
 
           {/* Tier progression bar */}
           <div className="mb-8">
-            <div className="flex justify-between text-xs text-slate-500 mb-2">
+            <div className="flex justify-between text-xs text-stone-400 mb-2">
               <span>Tier Progression</span>
               <span style={{ color: tier.color }}>{tier.name}</span>
             </div>
@@ -251,7 +256,7 @@ export function IBCalculator() {
                 <span
                   key={t.name}
                   className="text-[9px] font-medium"
-                  style={{ color: t.name === tier.name ? t.color : "rgba(255,255,255,0.25)" }}
+                  style={{ color: t.name === tier.name ? t.color : "#8a8380" }}
                 >
                   {t.name}
                 </span>
@@ -267,8 +272,8 @@ export function IBCalculator() {
                 className="relative rounded-2xl p-5 overflow-hidden border border-white/[0.06]"
                 style={{ background: `${m.color}0c` }}
               >
-                <div className="text-xs text-slate-400 mb-1">{m.label}</div>
-                <div className="text-2xl sm:text-3xl font-extrabold text-white">
+                <div className="text-xs text-stone-400 mb-1">{m.label}</div>
+                <div className="text-2xl sm:text-3xl font-semibold text-stone-100">
                   {m.prefix}
                   {animated[i].toLocaleString()}
                   {m.suffix}
@@ -281,9 +286,9 @@ export function IBCalculator() {
             ))}
           </div>
 
-          <p className="text-xs text-slate-500 text-center">
+          <p className="text-xs text-stone-400 text-center">
             Illustrative projections based on{" "}
-            <strong className="text-slate-400">
+            <strong className="text-stone-400">
               {clients.toLocaleString()} clients × {avgLots.toLocaleString()} lots = {lots.toLocaleString()} lots/month × ${tier.rebate}/lot
             </strong>.
             Actual rebates depend on your IB agreement, broker, instruments traded and trading conditions.
@@ -299,17 +304,14 @@ export function IBCalculator() {
           transition={{ delay: 0.25 }}
           className="text-center mt-8"
         >
-          <a
+          <Button
             href="#apply"
             data-track-event="cta"
             data-track-label="Start Earning — Apply Free"
             data-track-section="calculator"
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
-            <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             Start Earning — Apply Free
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </Button>
         </motion.div>
       </div>
     </section>

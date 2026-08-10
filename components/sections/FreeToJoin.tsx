@@ -1,7 +1,8 @@
 "use client";
 
 import { motion }    from "framer-motion";
-import { ArrowRight, CheckCircle2, BadgeCheck, Banknote, TrendingUp } from "lucide-react";
+import { CheckCircle2, BadgeCheck, Banknote, TrendingUp } from "lucide-react";
+import { Button } from "@/components/ui/Button";
 
 const cards = [
   {
@@ -29,8 +30,7 @@ const cards = [
 export function FreeToJoin() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero opacity-40 pointer-events-none" />
-      <div className="absolute inset-0 grid-bg opacity-[0.06] pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-hero opacity-30 pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] rounded-full bg-accent/[0.05] blur-[130px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -53,14 +53,14 @@ export function FreeToJoin() {
             100% Free to Join
           </motion.div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
             Why Pay to{" "}
             <span className="gradient-text">Become an IB?</span>
           </h2>
-          <p className="mt-3 text-lg font-semibold text-white">
+          <p className="mt-3 text-lg font-medium text-stone-100">
             Build Your Business Without Upfront Costs
           </p>
-          <p className="mt-4 text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-stone-400 text-sm max-w-2xl mx-auto leading-relaxed">
             At Equity IB, we believe professional Introducing Broker partnerships should be accessible.
             That&apos;s why joining our programme is completely free. Once approved, you&apos;ll receive
             access to competitive rebate tiers, dedicated support and professional broker technology —
@@ -93,8 +93,8 @@ export function FreeToJoin() {
                 >
                   <Icon className="w-5 h-5 text-accent" />
                 </div>
-                <h3 className="text-base font-bold text-white mb-2 leading-snug">{card.title}</h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{card.desc}</p>
+                <h3 className="text-base font-semibold text-stone-100 mb-2 leading-snug">{card.title}</h3>
+                <p className="text-sm text-stone-400 leading-relaxed">{card.desc}</p>
                 <div
                   className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{ background: "linear-gradient(90deg, transparent, rgba(52,211,153,0.55), transparent)" }}
@@ -112,18 +112,15 @@ export function FreeToJoin() {
           transition={{ delay: 0.4 }}
           className="text-center"
         >
-          <a
+          <Button
             href="#apply"
             data-track-event="cta"
             data-track-label="Start Your Free IB Partnership"
             data-track-section="free_to_join"
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl text-sm relative overflow-hidden group"
           >
-            <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
             Start Your Free IB Partnership
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
-          <p className="text-xs text-slate-500 mt-3">
+          </Button>
+          <p className="text-xs text-stone-400 mt-3">
             No registration fees &nbsp;·&nbsp; No membership costs &nbsp;·&nbsp; No hidden charges
           </p>
         </motion.div>
