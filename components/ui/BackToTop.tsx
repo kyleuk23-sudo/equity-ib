@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { V6 } from "@/lib/designTokensV6";
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -21,7 +22,8 @@ export function BackToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-6 right-6 z-50 w-11 h-11 glass rounded-xl flex items-center justify-center text-slate-300 hover:text-primary hover:border-primary/30 transition-colors shadow-glass"
+          className="card-v6 fixed bottom-6 right-6 z-50 w-11 h-11 rounded-xl flex items-center justify-center transition-colors"
+          style={{ color: V6.fgSecondary }}
           aria-label="Back to top"
         >
           <ArrowUp className="w-4 h-4" />

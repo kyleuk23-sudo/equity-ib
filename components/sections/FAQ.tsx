@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus } from "lucide-react";
 import { trackFaqExpand } from "@/lib/analytics/events";
+import { V6 } from "@/lib/designTokensV6";
 
 const faqs = [
   {
@@ -68,7 +69,7 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 relative">
+    <section id="faq" className="py-24 relative" style={{ background: V6.bg }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -76,14 +77,13 @@ export function FAQ() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-primary mb-4">
+          <p className="text-xs font-medium uppercase tracking-[0.14em] mb-4" style={{ color: V6.gold }}>
             Common Questions
-          </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
-            Frequently Asked{" "}
-            <span className="gradient-text">Questions</span>
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em]" style={{ color: V6.fgPrimary }}>
+            Frequently asked questions
           </h2>
-          <p className="mt-4 text-stone-400 text-sm">
+          <p className="mt-4 text-sm" style={{ color: V6.fgSecondary }}>
             Everything you need to know before applying as an Introducing Broker.
           </p>
         </motion.div>
@@ -95,10 +95,12 @@ export function FAQ() {
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className={`glass rounded-2xl overflow-hidden transition-all ${
-                open === i ? "border-primary/25 shadow-glow" : "hover:border-white/[0.10]"
-              }`}
+              transition={{ delay: i * 0.04 }}
+              className="rounded-2xl overflow-hidden transition-colors"
+              style={{
+                background: V6.bgSecondary,
+                border: `1px solid ${open === i ? V6.borderGold : V6.border}`,
+              }}
             >
               <button
                 onClick={() => {
@@ -109,16 +111,15 @@ export function FAQ() {
                 className="w-full flex items-center justify-between gap-4 px-6 py-4 text-left"
                 aria-expanded={open === i}
               >
-                <span className="font-medium text-stone-100 text-sm leading-snug">{faq.q}</span>
+                <span className="font-medium text-sm leading-snug" style={{ color: V6.fgPrimary }}>{faq.q}</span>
                 <div
-                  className={`w-7 h-7 rounded-xl flex-shrink-0 flex items-center justify-center transition-all ${
-                    open === i ? "bg-primary/20 rotate-0" : "bg-white/5"
-                  }`}
+                  className="w-8 h-8 rounded-xl flex-shrink-0 flex items-center justify-center transition-all"
+                  style={{ background: open === i ? "rgba(212,175,55,0.15)" : V6.bgInteractive }}
                 >
                   {open === i ? (
-                    <Minus className="w-3.5 h-3.5 text-primary" />
+                    <Minus className="w-3.5 h-3.5" style={{ color: V6.gold }} />
                   ) : (
-                    <Plus className="w-3.5 h-3.5 text-stone-400" />
+                    <Plus className="w-3.5 h-3.5" style={{ color: V6.fgMuted }} />
                   )}
                 </div>
               </button>
@@ -133,8 +134,8 @@ export function FAQ() {
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-5">
-                      <div className="h-px bg-white/[0.05] mb-4" />
-                      <p className="text-sm text-stone-400 leading-relaxed">{faq.a}</p>
+                      <div className="h-px mb-4" style={{ background: V6.border }} />
+                      <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>{faq.a}</p>
                     </div>
                   </motion.div>
                 )}
@@ -148,10 +149,11 @@ export function FAQ() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="text-center text-sm text-stone-400 mt-8"
+          className="text-center text-sm mt-8"
+          style={{ color: V6.fgSecondary }}
         >
           Still have questions?{" "}
-          <a href="/contact" className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors">
+          <a href="/contact" className="underline underline-offset-2 transition-colors" style={{ color: V6.gold }}>
             Speak to our IB team →
           </a>
         </motion.p>

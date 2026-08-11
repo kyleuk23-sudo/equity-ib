@@ -1,10 +1,11 @@
 "use client";
 
-import { motion }    from "framer-motion";
+import { motion } from "framer-motion";
 import { CheckCircle2, BadgeCheck, Banknote, TrendingUp } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { ButtonV6 } from "@/components/ui/ButtonV6";
+import { V6 } from "@/lib/designTokensV6";
 
-const cards = [
+const items = [
   {
     icon: CheckCircle2,
     title: "100% Free Application",
@@ -27,100 +28,87 @@ const cards = [
   },
 ];
 
+/**
+ * Single unified panel (not four separate cards) — reads as one proof
+ * statement rather than repeating the card-grid pattern a third time.
+ */
 export function FreeToJoin() {
   return (
     <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero opacity-30 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] rounded-full bg-accent/[0.05] blur-[130px] pointer-events-none" />
+      <div
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] rounded-full pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)" }}
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-
-        {/* Header */}
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-14"
+          className="text-center mb-12"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold mb-5 border"
-            style={{ background: "rgba(52,211,153,0.08)", color: "#34D399", borderColor: "rgba(52,211,153,0.25)" }}
+          <div
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-semibold mb-5"
+            style={{ background: "rgba(34,197,94,0.10)", color: V6.success, border: "1px solid rgba(34,197,94,0.25)" }}
           >
             <CheckCircle2 className="w-3.5 h-3.5" />
             100% Free to Join
-          </motion.div>
+          </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
-            Why Pay to{" "}
-            <span className="gradient-text">Become an IB?</span>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em]" style={{ color: V6.fgPrimary }}>
+            Why pay to become an IB?
           </h2>
-          <p className="mt-3 text-lg font-medium text-stone-100">
-            Build Your Business Without Upfront Costs
-          </p>
-          <p className="mt-4 text-stone-400 text-sm max-w-2xl mx-auto leading-relaxed">
-            At Equity IB, we believe professional Introducing Broker partnerships should be accessible.
-            That&apos;s why joining our programme is completely free. Once approved, you&apos;ll receive
-            access to competitive rebate tiers, dedicated support and professional broker technology —
-            without paying a joining fee.
+          <p className="mt-4 text-base leading-relaxed max-w-2xl mx-auto" style={{ color: V6.fgSecondary }}>
+            At Equity IB, we believe professional Introducing Broker partnerships should be
+            accessible. Joining is completely free — once approved, you get competitive rebate
+            tiers, dedicated support and professional broker technology, with no joining fee.
           </p>
         </motion.div>
 
-        {/* Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-          {cards.map((card, i) => {
-            const Icon = card.icon;
-            return (
-              <motion.div
-                key={card.title}
-                initial={{ opacity: 0, y: 28 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="relative glass-strong rounded-2xl p-6 border border-white/[0.07] hover:border-accent/25 transition-all group overflow-hidden"
-                style={{ boxShadow: "0 4px 32px rgba(0,0,0,0.25)" }}
-              >
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                  style={{ background: "radial-gradient(circle at 30% 0%, rgba(52,211,153,0.07) 0%, transparent 65%)" }}
-                />
-                <div
-                  className="w-11 h-11 rounded-2xl flex items-center justify-center mb-4"
-                  style={{ background: "rgba(52,211,153,0.12)" }}
-                >
-                  <Icon className="w-5 h-5 text-accent" />
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="card-v6 rounded-2xl p-8 sm:p-10"
+        >
+          <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">
+            {items.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={item.title} className="flex items-start gap-4">
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: "rgba(212,175,55,0.10)" }}
+                  >
+                    <Icon className="w-[18px] h-[18px]" style={{ color: V6.gold }} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-semibold mb-1.5" style={{ color: V6.fgPrimary }}>{item.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-base font-semibold text-stone-100 mb-2 leading-snug">{card.title}</h3>
-                <p className="text-sm text-stone-400 leading-relaxed">{card.desc}</p>
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: "linear-gradient(90deg, transparent, rgba(52,211,153,0.55), transparent)" }}
-                />
-              </motion.div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </motion.div>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center"
+          transition={{ delay: 0.3 }}
+          className="text-center mt-10"
         >
-          <Button
+          <ButtonV6
             href="#apply"
             data-track-event="cta"
             data-track-label="Start Your Free IB Partnership"
             data-track-section="free_to_join"
           >
             Start Your Free IB Partnership
-          </Button>
-          <p className="text-xs text-stone-400 mt-3">
+          </ButtonV6>
+          <p className="text-xs mt-3" style={{ color: V6.fgMuted }}>
             No registration fees &nbsp;·&nbsp; No membership costs &nbsp;·&nbsp; No hidden charges
           </p>
         </motion.div>

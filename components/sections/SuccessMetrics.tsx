@@ -1,15 +1,16 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { DollarSign, Users, Globe, TrendingUp, Headphones } from "lucide-react";
+import { V6 } from "@/lib/designTokensV6";
 
 const metrics = [
-  { icon: DollarSign,  prefix: "$", value: 50,  suffix: "M+", label: "IB Rebates Generated", color: "#C8952A", desc: "Paid to IB partners across our network" },
-  { icon: Users,       prefix: "",  value: 750, suffix: "+",  label: "Active IB Partners",    color: "#34D399", desc: "Professional IBs earning with us today" },
-  { icon: Globe,       prefix: "",  value: 125, suffix: "+",  label: "Countries",              color: "#C8952A", desc: "Global reach with local support" },
-  { icon: TrendingUp,  prefix: "",  value: 98,  suffix: "%",  label: "Partner Retention",      color: "#34D399", desc: "IBs who stay and grow with us" },
-  { icon: Headphones,  prefix: "",  value: 24,  suffix: "/5", label: "Dedicated Support",      color: "#C8952A", desc: "Around-the-clock partner assistance" },
+  { icon: DollarSign,  prefix: "$", value: 50,  suffix: "M+", label: "IB Rebates Generated", desc: "Paid to IB partners across our network" },
+  { icon: Users,       prefix: "",  value: 750, suffix: "+",  label: "Active IB Partners",    desc: "Professional IBs earning with us today" },
+  { icon: Globe,       prefix: "",  value: 125, suffix: "+",  label: "Countries",              desc: "Global reach with local support" },
+  { icon: TrendingUp,  prefix: "",  value: 98,  suffix: "%",  label: "Partner Retention",      desc: "IBs who stay and grow with us" },
+  { icon: Headphones,  prefix: "",  value: 24,  suffix: "/5", label: "Dedicated Support",      desc: "Around-the-clock partner assistance" },
 ];
 
 function useCounter(target: number, duration: number, active: boolean) {
@@ -32,13 +33,7 @@ function useCounter(target: number, duration: number, active: boolean) {
   return count;
 }
 
-function MetricCard({
-  metric,
-  index,
-}: {
-  metric: (typeof metrics)[0];
-  index: number;
-}) {
+function MetricCard({ metric, index }: { metric: (typeof metrics)[0]; index: number }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
   const count = useCounter(metric.value, 1800, inView);
@@ -51,39 +46,27 @@ function MetricCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="glass rounded-2xl p-6 text-center relative overflow-hidden group hover:border-white/[0.12] transition-all"
+      className="card-v6 rounded-2xl p-6 text-center"
     >
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-        style={{
-          background: `radial-gradient(circle at 50% 0%, ${metric.color}10 0%, transparent 70%)`,
-        }}
-      />
-
-      <div
-        className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4"
-        style={{ background: `${metric.color}15` }}
-      >
-        <Icon className="w-5 h-5" style={{ color: metric.color }} />
+      <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(212,175,55,0.10)" }}>
+        <Icon className="w-5 h-5" style={{ color: V6.gold }} />
       </div>
 
-      <div className="text-4xl sm:text-5xl font-semibold text-stone-100 mb-1">
-        <span style={{ color: metric.color }}>{metric.prefix}</span>
+      <div className="text-4xl sm:text-5xl font-bold mb-1" style={{ color: V6.fgPrimary }}>
+        <span style={{ color: V6.gold }}>{metric.prefix}</span>
         {count}
-        <span style={{ color: metric.color }}>{metric.suffix}</span>
+        <span style={{ color: V6.gold }}>{metric.suffix}</span>
       </div>
 
-      <div className="text-sm font-semibold text-stone-100 mb-1.5">{metric.label}</div>
-      <div className="text-xs text-stone-400 leading-snug">{metric.desc}</div>
+      <div className="text-sm font-semibold mb-1.5" style={{ color: V6.fgPrimary }}>{metric.label}</div>
+      <div className="text-xs leading-snug" style={{ color: V6.fgMuted }}>{metric.desc}</div>
     </motion.div>
   );
 }
 
 export function SuccessMetrics() {
   return (
-    <section className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-accent opacity-60 pointer-events-none" />
-
+    <section className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -91,15 +74,13 @@ export function SuccessMetrics() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-accent mb-4">
-            <TrendingUp className="w-3 h-3" />
+          <p className="text-xs font-medium uppercase tracking-[0.14em] mb-4" style={{ color: V6.gold }}>
             By The Numbers
-          </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-stone-100">
-            A Network Built On{" "}
-            <span className="gradient-text">Proven Results</span>
+          </p>
+          <h2 className="text-4xl sm:text-5xl font-bold tracking-[-0.02em]" style={{ color: V6.fgPrimary }}>
+            A network built on proven results
           </h2>
-          <p className="mt-4 text-stone-400 max-w-xl mx-auto text-sm">
+          <p className="mt-4 max-w-xl mx-auto text-sm" style={{ color: V6.fgSecondary }}>
             Equity IB has been paying out rebates to professional Introducing Brokers across the
             globe, building long-term partnerships founded on transparency and performance.
           </p>
@@ -111,7 +92,6 @@ export function SuccessMetrics() {
           ))}
         </div>
 
-        {/* Trusted worldwide strip */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,25 +99,18 @@ export function SuccessMetrics() {
           transition={{ delay: 0.4 }}
           className="mt-10 text-center"
         >
-          <p className="text-xs text-stone-400 uppercase tracking-widest mb-4">
+          <p className="text-xs uppercase tracking-widest mb-4" style={{ color: V6.fgMuted }}>
             Trusted Worldwide
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              "🇬🇧 United Kingdom",
-              "🇦🇪 UAE",
-              "🇮🇳 India",
-              "🇸🇬 Singapore",
-              "🇩🇪 Germany",
-              "🇧🇷 Brazil",
-              "🇳🇬 Nigeria",
-              "🇮🇩 Indonesia",
-              "🇵🇭 Philippines",
-              "🇿🇦 South Africa",
+              "🇬🇧 United Kingdom", "🇦🇪 UAE", "🇮🇳 India", "🇸🇬 Singapore", "🇩🇪 Germany",
+              "🇧🇷 Brazil", "🇳🇬 Nigeria", "🇮🇩 Indonesia", "🇵🇭 Philippines", "🇿🇦 South Africa",
             ].map((country) => (
               <div
                 key={country}
-                className="glass px-3 py-1.5 rounded-full text-xs text-stone-300"
+                className="px-3 py-1.5 rounded-full text-xs"
+                style={{ background: V6.bgSecondary, border: `1px solid ${V6.border}`, color: V6.fgSecondary }}
               >
                 {country}
               </div>
