@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { TierTable }          from "@/components/sections/TierTable";
 import { IBCalculator }       from "@/components/sections/IBCalculator";
 import { ApplicationSection } from "@/components/sections/ApplicationSection";
-import Link from "next/link";
+import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
+import { V6 } from "@/lib/designTokensV6";
 
 export const metadata: Metadata = {
   title: "IB Rebate Tiers — Earn $10–$30 Per Lot",
@@ -41,15 +42,9 @@ export default function IBRebatesPage() {
       />
 
       {/* Breadcrumb */}
-      <div className="pt-32 pb-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb">
-          <ol className="flex items-center gap-2 text-xs text-slate-400">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-300" aria-current="page">IB Rebates</li>
-          </ol>
-        </nav>
-        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">IB Rebate Tiers — Earn $10 to $30 Per Lot</h1>
+      <div className="pt-32 pb-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ background: V6.bg }}>
+        <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "IB Rebates" }]} />
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold" style={{ color: V6.fgPrimary }}>IB Rebate Tiers — Earn $10 to $30 Per Lot</h1>
       </div>
 
       <TierTable />

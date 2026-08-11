@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { FAQ }              from "@/components/sections/FAQ";
 import { ApplicationSection } from "@/components/sections/ApplicationSection";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
+import { V6 } from "@/lib/designTokensV6";
 
 export const metadata: Metadata = {
   title: "FAQ — Introducing Broker Questions Answered",
@@ -102,15 +102,9 @@ export default function FAQPage() {
       />
 
       {/* Page header */}
-      <div className="pt-32 pb-0 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs text-slate-400">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-300" aria-current="page">FAQ</li>
-          </ol>
-        </nav>
-        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">Introducing Broker FAQ</h1>
+      <div className="pt-32 pb-0 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8" style={{ background: V6.bg }}>
+        <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "FAQ" }]} className="mb-6" />
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold" style={{ color: V6.fgPrimary }}>Introducing Broker FAQ</h1>
       </div>
 
       <FAQ />

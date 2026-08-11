@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LEGAL_DOCS } from "@/lib/legalContent";
 import { getAllPosts } from "@/lib/insights";
+import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
+import { V6 } from "@/lib/designTokensV6";
 
 export const metadata: Metadata = {
   title:       "Sitemap",
@@ -35,14 +37,14 @@ const SECONDARY_PAGES = [
 function SitemapSection({ title, links }: { title: string; links: { href: string; label: string; desc: string }[] }) {
   return (
     <section className="mb-10">
-      <h2 className="text-lg font-bold text-white mb-4 pb-2 border-b border-white/[0.06]">{title}</h2>
+      <h2 className="text-lg font-bold mb-4 pb-2" style={{ color: V6.fgPrimary, borderBottom: `1px solid ${V6.border}` }}>{title}</h2>
       <ul className="space-y-2">
         {links.map((l) => (
           <li key={l.href} className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3">
-            <Link href={l.href} className="text-primary hover:underline font-medium text-sm min-w-[200px]">
+            <Link href={l.href} className="underline font-medium text-sm min-w-[200px]" style={{ color: V6.gold }}>
               {l.label}
             </Link>
-            <span className="text-xs text-slate-500">{l.desc}</span>
+            <span className="text-xs" style={{ color: V6.fgMuted }}>{l.desc}</span>
           </li>
         ))}
       </ul>
@@ -64,19 +66,12 @@ export default function HTMLSitemapPage() {
   }));
 
   return (
-    <div className="min-h-screen pt-32 pb-24">
+    <div className="min-h-screen pt-32 pb-24" style={{ background: V6.bg }}>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "Sitemap" }]} className="mb-8" />
 
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-xs text-slate-400">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-300" aria-current="page">Sitemap</li>
-          </ol>
-        </nav>
-
-        <h1 className="text-3xl font-extrabold text-white mb-2">Website Sitemap</h1>
-        <p className="text-slate-400 text-sm mb-10">
+        <h1 className="text-3xl font-bold mb-2" style={{ color: V6.fgPrimary }}>Website Sitemap</h1>
+        <p className="text-sm mb-10" style={{ color: V6.fgSecondary }}>
           All pages on the Equity IB website, organised by section.
         </p>
 
@@ -85,9 +80,9 @@ export default function HTMLSitemapPage() {
         <SitemapSection title="About & Contact" links={SECONDARY_PAGES} />
         <SitemapSection title="Legal Documents" links={[{ href: "/legal", label: "Legal Centre", desc: "All legal documents" }, ...legalLinks]} />
 
-        <p className="text-xs text-slate-600 mt-10">
+        <p className="text-xs mt-10" style={{ color: V6.fgMuted }}>
           For the machine-readable sitemap:{" "}
-          <Link href="/sitemap.xml" className="text-primary hover:underline">
+          <Link href="/sitemap.xml" className="underline" style={{ color: V6.gold }}>
             sitemap.xml
           </Link>
         </p>

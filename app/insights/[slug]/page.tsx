@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkGfm from "remark-gfm";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
 import { getAllSlugs, getPostBySlug } from "@/lib/insights";
 import { mdxComponents } from "@/components/insights/MDXComponents";
 import { NewsletterSignup } from "@/components/ui/NewsletterSignup";
+import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
+import { ButtonV6 } from "@/components/ui/ButtonV6";
+import { V6 } from "@/lib/designTokensV6";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -64,30 +66,24 @@ export default async function InsightArticlePage({ params }: Props) {
   };
 
   return (
-    <article className="pt-32 pb-24 relative">
+    <article className="pt-32 pb-24 relative" style={{ background: V6.bg }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex items-center gap-2 text-xs text-slate-400 flex-wrap">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li><Link href="/insights" className="hover:text-white transition-colors">Insights</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-300" aria-current="page">{post.title}</li>
-          </ol>
-        </nav>
+        <BreadcrumbV6
+          items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights" }, { label: post.title }]}
+          className="mb-6"
+        />
 
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-[-0.02em] mb-4 leading-tight" style={{ color: V6.fgPrimary }}>
           {post.title}
         </h1>
 
-        <div className="flex items-center gap-4 text-xs text-slate-400 mb-10 flex-wrap">
-          <span className="text-slate-400 font-medium">{post.author}</span>
+        <div className="flex items-center gap-4 text-xs mb-10 flex-wrap" style={{ color: V6.fgMuted }}>
+          <span className="font-medium" style={{ color: V6.fgSecondary }}>{post.author}</span>
           <span className="flex items-center gap-1.5">
             <Calendar className="w-3.5 h-3.5" /> Updated {formatDate(post.updatedAt)}
           </span>
@@ -108,17 +104,15 @@ export default async function InsightArticlePage({ params }: Props) {
           <NewsletterSignup source="insights" />
         </div>
 
-        <div className="text-center pt-6 border-t border-white/[0.06]">
-          <Link
+        <div className="text-center pt-6" style={{ borderTop: `1px solid ${V6.border}` }}>
+          <ButtonV6
             href="/apply"
             data-track-event="cta"
             data-track-label="Become an Equity IB Partner"
             data-track-section={`insights_${slug}`}
-            className="btn-glow inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-7 py-3.5 rounded-xl text-sm transition-all hover:opacity-90"
           >
             Become an Equity IB Partner
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          </ButtonV6>
         </div>
       </div>
     </article>

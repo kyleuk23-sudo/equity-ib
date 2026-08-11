@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { ApplicationSection } from "@/components/sections/ApplicationSection";
 import { FAQ }                from "@/components/sections/FAQ";
-import Link from "next/link";
+import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
+import { V6 } from "@/lib/designTokensV6";
 
 export const metadata: Metadata = {
   title: "Become an Introducing Broker — Apply Now",
@@ -40,15 +41,9 @@ export default function ApplyPage() {
       />
 
       {/* Breadcrumb */}
-      <div className="pt-32 pb-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <nav aria-label="Breadcrumb" className="mb-0">
-          <ol className="flex items-center gap-2 text-xs text-slate-400">
-            <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
-            <li aria-hidden="true">/</li>
-            <li className="text-slate-300" aria-current="page">Apply</li>
-          </ol>
-        </nav>
-        <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-white">Become an Introducing Broker</h1>
+      <div className="pt-32 pb-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ background: V6.bg }}>
+        <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "Apply" }]} />
+        <h1 className="mt-4 text-2xl sm:text-3xl font-bold" style={{ color: V6.fgPrimary }}>Become an Introducing Broker</h1>
       </div>
 
       <ApplicationSection />

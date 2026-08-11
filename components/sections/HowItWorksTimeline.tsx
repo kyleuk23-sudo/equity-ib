@@ -12,7 +12,7 @@ import { V6 } from "@/lib/designTokensV6";
 const steps = [
   { num: "01", icon: ClipboardList, title: "Apply Online",
     desc: "Complete our short IB application in under 5 minutes. Tell us about your audience, trading volume and goals. Our team reviews every application personally.",
-    color: "#8C6A1F" },
+    color: "#A17E30" },
   { num: "02", icon: CheckCircle2, title: "Receive Approval",
     desc: "Most applications are approved within 24 hours. Your dedicated account manager will contact you to complete onboarding and confirm your rebate agreement.",
     color: "#A6832B" },

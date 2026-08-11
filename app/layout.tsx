@@ -12,6 +12,7 @@ import { PageViewTracker }   from "@/components/analytics/PageViewTracker";
 import { ScrollDepthTracker } from "@/components/analytics/ScrollDepthTracker";
 import { ClickTracker }      from "@/components/analytics/ClickTracker";
 import { Toaster }      from "sonner";
+import { V6 } from "@/lib/designTokensV6";
 
 const inter = Inter({
   subsets:  ["latin"],
@@ -166,14 +167,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* DNS prefetch for any future CDN/analytics */}
         <link rel="dns-prefetch" href="//fonts.gstatic.com" />
       </head>
-      <body className={`${inter.variable} font-sans bg-background text-white antialiased`}>
+      <body className={`${inter.variable} font-sans antialiased`} style={{ background: V6.bg, color: V6.fgPrimary }}>
         <Analytics />
         <PageViewTracker />
         <ScrollDepthTracker />
         <ClickTracker />
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:rounded-lg focus:font-semibold"
+          style={{ background: V6.gold, color: V6.onAccent }}
         >
           Skip to main content
         </a>

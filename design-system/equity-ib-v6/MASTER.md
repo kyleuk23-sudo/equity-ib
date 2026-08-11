@@ -162,7 +162,10 @@ drop-shadows:
   with a label
 
 ### Tier badges (rebate tiers — Starter through Diamond)
-- Starter: `--fg-muted` (Slate Grey) · Bronze: `--gold-bronze` · Silver: a light neutral
+- Starter: `--fg-muted` (Slate Grey) · Bronze: `#A17E30` (lightened bronze, 5.19:1 —
+  `--gold-bronze` itself fails small-text AA and this token gets reused at small
+  sizes across TierTable/IBCalculator/Testimonials, see `lib/tierColorsV6.ts`)
+  · Silver: a light neutral
   (silver-metallic, not yet assigned a token — pick during TierTable cascade) · Gold:
   `--gold` · Platinum: `--fg-primary` (near-white) · Diamond: light blue-white with a thin
   gold trim (`--border-gold`) — distinct per tier, cohesive because every tier still resolves

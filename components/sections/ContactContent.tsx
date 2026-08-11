@@ -3,11 +3,13 @@
 import { useState }                  from "react";
 import { motion, AnimatePresence }   from "framer-motion";
 import {
-  ArrowRight, MessageCircle, MapPin, Mail,
+  MessageCircle, MapPin, Mail,
   CheckCircle2, Globe, AlertCircle,
 } from "lucide-react";
 import { submitApplication }          from "@/app/actions/submit-application";
 import { useFormAnalytics }           from "@/lib/analytics/useFormAnalytics";
+import { ButtonV6 } from "@/components/ui/ButtonV6";
+import { V6 } from "@/lib/designTokensV6";
 
 const LOTS_OPTIONS = [
   "< 100 lots / month",
@@ -29,15 +31,17 @@ const EMPTY: FormData = {
   country: "", broker: "", lots: "", message: "",
 };
 
-const inputCls =
-  "w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-primary/50 focus:bg-white/[0.06] transition-all";
-
 export default function ContactContent() {
   const [form, setForm]           = useState<FormData>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading]     = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
   const { onFieldTouch, onValidationError, onSubmitResult } = useFormAnalytics("contact_page");
+
+  const inputCls = "w-full rounded-xl px-4 py-3 text-sm outline-none transition-colors";
+  const inputStyle = { background: V6.bgSecondary, border: `1px solid ${V6.border}`, color: V6.fgPrimary };
+  const onFocusGold = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.currentTarget.style.borderColor = V6.gold; };
+  const onBlurNeutral = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => { e.currentTarget.style.borderColor = V6.border; };
 
   const set = (k: keyof FormData) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -74,35 +78,34 @@ export default function ContactContent() {
   };
 
   return (
-    <div className="pt-32 pb-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-hero opacity-50 pointer-events-none" />
-
+    <div className="pt-32 pb-24 relative overflow-hidden" style={{ background: V6.bg }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-
-        {/* Header */}
         <div className="mb-14">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 glass px-3 py-1.5 rounded-full text-xs font-medium text-accent mb-5"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-5"
+            style={{ background: V6.bgSecondary, border: `1px solid ${V6.border}`, color: V6.success }}
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: V6.success }} />
             IB Applications Open
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-5xl sm:text-6xl font-extrabold tracking-tight"
+            className="text-5xl sm:text-6xl font-bold tracking-[-0.02em]"
+            style={{ color: V6.fgPrimary }}
           >
-            Become An{" "}
-            <span className="gradient-text">Introducing Broker</span>
+            Become an{" "}
+            <span style={{ color: V6.gold }}>Introducing Broker</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-4 text-lg text-slate-400 max-w-xl leading-relaxed"
+            className="mt-4 text-lg max-w-xl leading-relaxed"
+            style={{ color: V6.fgSecondary }}
           >
             Complete your application below. Our IB team reviews every submission personally and
             responds within 24 hours. Most approvals happen the same day.
@@ -110,18 +113,13 @@ export default function ContactContent() {
         </div>
 
         <div className="grid lg:grid-cols-5 gap-10">
-
-          {/* Form */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="lg:col-span-3"
           >
-            <div
-              className="glass-strong rounded-3xl p-8 border border-white/[0.08]"
-              style={{ boxShadow: "0 8px 48px rgba(0,0,0,0.4)" }}
-            >
+            <div className="card-v6 rounded-2xl p-8">
               <AnimatePresence mode="wait">
                 {submitted ? (
                   <motion.div
@@ -134,19 +132,19 @@ export default function ContactContent() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                      className="w-16 h-16 rounded-2xl bg-primary/20 border border-primary/40 flex items-center justify-center mx-auto mb-5"
+                      className="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5"
+                      style={{ background: "rgba(212,175,55,0.15)", border: `1px solid ${V6.borderGold}` }}
                     >
-                      <CheckCircle2 className="w-8 h-8 text-primary" />
+                      <CheckCircle2 className="w-8 h-8" style={{ color: V6.gold }} />
                     </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Application Received</h3>
-                    <p className="text-slate-400 text-sm max-w-sm mx-auto">
+                    <h2 className="text-2xl font-bold mb-2" style={{ color: V6.fgPrimary }}>Application Received</h2>
+                    <p className="text-sm max-w-sm mx-auto" style={{ color: V6.fgSecondary }}>
                       Thank you — a member of our IB team will review your application and
                       contact you within 24 hours.
                     </p>
                   </motion.div>
                 ) : (
                   <motion.form key="form" onSubmit={handleSubmit} onInvalidCapture={onValidationError} className="space-y-4">
-
                     {serverError && (
                       <motion.div
                         initial={{ opacity: 0, y: -8 }}
@@ -154,56 +152,54 @@ export default function ContactContent() {
                         className="flex items-start gap-3 p-3.5 rounded-xl"
                         style={{ background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)" }}
                       >
-                        <AlertCircle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
-                        <p className="text-xs text-red-400">{serverError}</p>
+                        <AlertCircle className="w-4 h-4 flex-shrink-0 mt-0.5" style={{ color: V6.error }} />
+                        <p className="text-xs" style={{ color: V6.error }}>{serverError}</p>
                       </motion.div>
                     )}
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-name">Full Name *</label>
-                        <input id="ct-name" required value={form.name} onChange={set("name")} placeholder="Your name" className={inputCls} />
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-name">Full Name *</label>
+                        <input id="ct-name" required value={form.name} onChange={set("name")} placeholder="Your name" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-email">Email Address *</label>
-                        <input id="ct-email" required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className={inputCls} />
-                      </div>
-                    </div>
-
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-phone">Phone Number</label>
-                        <input id="ct-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 8900" className={inputCls} />
-                      </div>
-                      <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-telegram">Telegram Handle</label>
-                        <input id="ct-telegram" value={form.telegram} onChange={set("telegram")} placeholder="@yourusername" className={inputCls} />
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-email">Email Address *</label>
+                        <input id="ct-email" required type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
                       </div>
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-country">Country *</label>
-                        <input id="ct-country" required value={form.country} onChange={set("country")} placeholder="United Kingdom" className={inputCls} />
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-phone">Phone Number</label>
+                        <input id="ct-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 8900" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
                       </div>
                       <div>
-                        <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-broker">Current Broker</label>
-                        <input id="ct-broker" value={form.broker} onChange={set("broker")} placeholder="e.g. IC Markets" className={inputCls} />
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-telegram">Telegram Handle</label>
+                        <input id="ct-telegram" value={form.telegram} onChange={set("telegram")} placeholder="@yourusername" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
+                      </div>
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-country">Country *</label>
+                        <input id="ct-country" required value={form.country} onChange={set("country")} placeholder="United Kingdom" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
+                      </div>
+                      <div>
+                        <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-broker">Current Broker</label>
+                        <input id="ct-broker" value={form.broker} onChange={set("broker")} placeholder="e.g. IC Markets" className={inputCls} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral} />
                       </div>
                     </div>
 
                     <div>
-                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-lots">Estimated Monthly Volume *</label>
-                      <select id="ct-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} bg-[#0a0a14] [color-scheme:dark]`}>
-                        <option value="" className="bg-[#0a0a14] text-white">Select monthly lots</option>
-                        {LOTS_OPTIONS.map((o) => (
-                          <option key={o} value={o} className="bg-[#0a0a14] text-white">{o}</option>
-                        ))}
+                      <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-lots">Estimated Monthly Volume *</label>
+                      <select id="ct-lots" required value={form.lots} onChange={set("lots")} className={`${inputCls} [color-scheme:dark]`} style={inputStyle} onFocus={onFocusGold} onBlur={onBlurNeutral}>
+                        <option value="">Select monthly lots</option>
+                        {LOTS_OPTIONS.map((o) => <option key={o} value={o}>{o}</option>)}
                       </select>
                     </div>
 
                     <div>
-                      <label className="text-xs text-slate-400 mb-1.5 block" htmlFor="ct-message">Tell Us About Your Client Base</label>
+                      <label className="text-xs mb-1.5 block" style={{ color: V6.fgMuted }} htmlFor="ct-message">Tell Us About Your Client Base</label>
                       <textarea
                         id="ct-message"
                         value={form.message}
@@ -211,31 +207,19 @@ export default function ContactContent() {
                         placeholder="Briefly describe your audience, IB experience and how you intend to refer clients..."
                         rows={4}
                         className={`${inputCls} resize-none`}
+                        style={inputStyle}
+                        onFocus={onFocusGold}
+                        onBlur={onBlurNeutral}
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="btn-glow w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold py-4 rounded-xl text-sm transition-all hover:opacity-90 active:scale-[0.98] disabled:opacity-60 relative overflow-hidden group"
-                    >
-                      <span className="absolute inset-0 translate-x-[-120%] group-hover:translate-x-[120%] transition-transform duration-700 bg-gradient-to-r from-transparent via-white/15 to-transparent" />
-                      {loading ? (
-                        <span className="flex items-center gap-2">
-                          <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                          Submitting…
-                        </span>
-                      ) : (
-                        <span className="flex items-center gap-2">
-                          Submit Application
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                      )}
-                    </button>
+                    <ButtonV6 type="submit" loading={loading} className="w-full" icon={!loading}>
+                      Submit Application
+                    </ButtonV6>
 
-                    <p className="text-xs text-slate-500 text-center">
+                    <p className="text-xs text-center" style={{ color: V6.fgMuted }}>
                       Free Application · No Joining Fee · By submitting you agree to our{" "}
-                      <a href="/legal/privacy-policy" className="text-primary hover:underline">Privacy Policy</a>.
+                      <a href="/legal/privacy-policy" className="underline" style={{ color: V6.gold }}>Privacy Policy</a>.
                     </p>
                   </motion.form>
                 )}
@@ -243,56 +227,50 @@ export default function ContactContent() {
             </div>
           </motion.div>
 
-          {/* Sidebar */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="lg:col-span-2 space-y-4"
           >
-            {/* Live chat */}
-            <div className="glass rounded-2xl p-6">
+            <div className="card-v6 rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-accent/10 rounded-xl flex items-center justify-center">
-                  <MessageCircle className="w-5 h-5 text-accent" />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(212,175,55,0.10)" }}>
+                  <MessageCircle className="w-5 h-5" style={{ color: V6.gold }} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-white">Live Chat</h3>
+                  <p className="font-semibold" style={{ color: V6.fgPrimary }}>Live Chat</p>
                   <div className="flex items-center gap-1.5 mt-0.5">
-                    <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                    <span className="text-xs text-accent">Online now — 24/5</span>
+                    <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: V6.success }} />
+                    <span className="text-xs" style={{ color: V6.success }}>Online now — 24/5</span>
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400">
+              <p className="text-sm" style={{ color: V6.fgSecondary }}>
                 Quick questions about tiers, payments, or eligibility? Our IB team responds fast.
               </p>
             </div>
 
-            {/* Contact details */}
-            <div className="glass rounded-2xl p-6 space-y-4">
+            <div className="card-v6 rounded-2xl p-6 space-y-4">
               {[
-                { icon: Mail,   label: "Email",        value: "partners@equityib.uk",  color: "#6366F1", href: "mailto:partners@equityib.uk" },
-                { icon: Globe,  label: "Presence",     value: "125+ Countries",         color: "#34D399" },
-                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom", color: "#A78BFA" },
+                { icon: Mail,   label: "Email",        value: "partners@equityib.uk",  href: "mailto:partners@equityib.uk" },
+                { icon: Globe,  label: "Presence",     value: "125+ Countries" },
+                { icon: MapPin, label: "Headquarters", value: "London, United Kingdom" },
               ].map((c) => {
                 const Icon = c.icon;
                 return (
                   <div key={c.label} className="flex items-center gap-3">
-                    <div
-                      className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-                      style={{ background: `${c.color}15` }}
-                    >
-                      <Icon className="w-4 h-4" style={{ color: c.color }} />
+                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.10)" }}>
+                      <Icon className="w-4 h-4" style={{ color: V6.gold }} />
                     </div>
                     <div>
-                      <div className="text-xs text-slate-500">{c.label}</div>
+                      <div className="text-xs" style={{ color: V6.fgMuted }}>{c.label}</div>
                       {c.href ? (
-                        <a href={c.href} className="text-sm text-white font-medium hover:text-primary transition-colors">
+                        <a href={c.href} className="text-sm font-medium transition-colors" style={{ color: V6.fgPrimary }}>
                           {c.value}
                         </a>
                       ) : (
-                        <div className="text-sm text-white font-medium">{c.value}</div>
+                        <div className="text-sm font-medium" style={{ color: V6.fgPrimary }}>{c.value}</div>
                       )}
                     </div>
                   </div>
@@ -300,11 +278,10 @@ export default function ContactContent() {
               })}
             </div>
 
-            {/* What happens next */}
-            <div className="glass rounded-2xl p-5">
-              <p className="text-xs text-slate-400 mb-3 font-medium uppercase tracking-wider">
+            <div className="card-v6 rounded-2xl p-5">
+              <h2 className="text-xs mb-3 font-medium uppercase tracking-wider" style={{ color: V6.fgMuted }}>
                 What Happens Next
-              </p>
+              </h2>
               <div className="space-y-3">
                 {[
                   "Application reviewed by an IB specialist",
@@ -315,10 +292,10 @@ export default function ContactContent() {
                   "First daily rebate payment",
                 ].map((step, i) => (
                   <div key={step} className="flex items-start gap-2.5">
-                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <span className="text-xs font-bold text-primary">{i + 1}</span>
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(212,175,55,0.10)" }}>
+                      <span className="text-xs font-bold" style={{ color: V6.gold }}>{i + 1}</span>
                     </div>
-                    <span className="text-xs text-slate-400 leading-snug">{step}</span>
+                    <span className="text-xs leading-snug" style={{ color: V6.fgSecondary }}>{step}</span>
                   </div>
                 ))}
               </div>

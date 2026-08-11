@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Home, MessageSquare, BarChart3 } from "lucide-react";
 import { NotFoundTracker } from "@/components/analytics/NotFoundTracker";
+import { V6 } from "@/lib/designTokensV6";
 
 export const metadata: Metadata = {
   title: "Page Not Found",
@@ -19,16 +20,14 @@ const QUICK_LINKS = [
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-32 relative overflow-hidden">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-32 relative overflow-hidden" style={{ background: V6.bg }}>
       <NotFoundTracker />
-      {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(200,149,42,0.12) 0%, transparent 70%)" }}
+        style={{ background: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(212,175,55,0.10) 0%, transparent 70%)" }}
       />
 
       <div className="max-w-2xl w-full mx-auto text-center relative">
-        {/* Logo */}
         <div className="flex justify-center mb-8">
           <Image
             src="/logo.png"
@@ -39,11 +38,10 @@ export default function NotFound() {
           />
         </div>
 
-        {/* 404 number */}
         <div
-          className="text-[120px] sm:text-[160px] font-extrabold leading-none mb-4 select-none"
+          className="text-[120px] sm:text-[160px] font-bold leading-none mb-4 select-none"
           style={{
-            background: "linear-gradient(135deg, rgba(200,149,42,0.3) 0%, rgba(245,200,66,0.15) 50%, rgba(200,149,42,0.1) 100%)",
+            background: "linear-gradient(135deg, rgba(212,175,55,0.35) 0%, rgba(230,199,106,0.18) 50%, rgba(140,106,31,0.12) 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -53,20 +51,16 @@ export default function NotFound() {
           404
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: V6.fgPrimary }}>
           Page Not Found
         </h1>
-        <p className="text-slate-400 text-sm leading-relaxed mb-10 max-w-md mx-auto">
+        <p className="text-sm leading-relaxed mb-10 max-w-md mx-auto" style={{ color: V6.fgSecondary }}>
           The page you&apos;re looking for has moved, been removed, or never existed.
           Let&apos;s get you back on track.
         </p>
 
-        {/* Primary CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12">
-          <Link
-            href="/"
-            className="flex items-center gap-2 bg-primary text-primary-foreground font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:opacity-90 w-full sm:w-auto justify-center"
-          >
+          <Link href="/" className="btn-v6-primary flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm w-full sm:w-auto justify-center">
             <Home className="w-4 h-4" />
             Back to Home
           </Link>
@@ -75,29 +69,25 @@ export default function NotFound() {
             data-track-event="cta"
             data-track-label="Become an IB Partner"
             data-track-section="404_page"
-            className="flex items-center gap-2 glass text-white font-semibold px-6 py-3 rounded-xl text-sm transition-all hover:bg-white/[0.08] w-full sm:w-auto justify-center"
+            className="flex items-center gap-2 font-semibold px-6 py-3 rounded-xl text-sm transition-all w-full sm:w-auto justify-center"
+            style={{ background: V6.bgSecondary, border: `1px solid ${V6.border}`, color: V6.fgPrimary }}
           >
             Become an IB Partner
-            <ArrowRight className="w-4 h-4 text-primary" />
+            <ArrowRight className="w-4 h-4" style={{ color: V6.gold }} />
           </Link>
         </div>
 
-        {/* Quick links */}
         <div className="grid sm:grid-cols-2 gap-3 text-left">
           {QUICK_LINKS.map((l) => {
             const Icon = l.icon;
             return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="glass rounded-xl p-4 flex items-start gap-3 hover:border-white/[0.12] transition-all group"
-              >
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                  <Icon className="w-4 h-4 text-primary" />
+              <Link key={l.href} href={l.href} className="card-v6 rounded-xl p-4 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.10)" }}>
+                  <Icon className="w-4 h-4" style={{ color: V6.gold }} />
                 </div>
                 <div>
-                  <div className="font-semibold text-white text-sm group-hover:text-primary transition-colors">{l.label}</div>
-                  <div className="text-xs text-slate-400 mt-0.5">{l.desc}</div>
+                  <div className="font-semibold text-sm" style={{ color: V6.fgPrimary }}>{l.label}</div>
+                  <div className="text-xs mt-0.5" style={{ color: V6.fgMuted }}>{l.desc}</div>
                 </div>
               </Link>
             );
