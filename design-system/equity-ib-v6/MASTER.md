@@ -24,32 +24,60 @@ display font (Calistoga). Both were rejected:
   Vercel, Arc all run single-family grotesque sans systems (SF Pro / Inter-class). A serif
   display face reads "boutique editorial," not "precision fintech."
 
+**Superseded 2026-08-11:** the color palette originally curated here (bg `#0A0A0C`, accent
+`#D9A44E`, single `bg-elevated` tier) was replaced wholesale by an explicit "Premium Luxury
+Colour System" brief with exact hex values for every role. Typography, spacing, radius,
+motion, and the single-accent/anti-pattern rules below are unaffected and still apply.
+
 All colors below were independently verified against WCAG AA using a relative-luminance
-contrast script before being adopted — not taken as-given from the tool. Every text pair
-listed passes 4.5:1 (small text) or better.
+contrast script before being adopted — not taken as-given, whether from the tool or the brief.
+Every text pair listed passes 4.5:1 (small text) or better.
 
 ---
 
 ## Color Palette
 
+Three-tier background depth system (replaces the earlier single `bg`/`bg-elevated` pair):
+
 | Role | Hex | Contrast vs bg | Usage |
 |------|-----|-----------------|-------|
-| `--bg` | `#0A0A0C` | — | Page background, deep charcoal (not pure black) |
-| `--bg-elevated` (card) | `#131316` | — | Cards, panels, modals |
-| `--fg-primary` | `#F7F4F0` | 18.0:1 | Headlines, warm white (not `#FFF`) |
-| `--fg-secondary` | `#9C968F` | 6.8:1 | Body copy |
-| `--fg-muted` | `#8B8580` | 5.4:1 | Labels, captions, timestamps — floor, never go darker |
-| `--accent-gold` | `#D9A44E` | 8.8:1 | CTAs, active states, key numbers, brand marks only |
-| `--on-accent` | `#0A0A0C` | 8.8:1 | Text/icons on gold fill |
-| `--border` | `#2A2A2E` | 1.4:1 (decorative, not text) | Thin dividers, card outlines |
-| `--destructive` | `#E5533D` | 5.2:1 (verify before use) | Form errors only |
+| `--bg` (Midnight Black) | `#080B12` | — | Page background, hero, nav, footer |
+| `--bg-secondary` (Carbon Grey) | `#111827` | — | Section backgrounds, glass surfaces, feature panels, scrolled nav |
+| `--bg-interactive` (Graphite) | `#1B2430` | — | Interactive cards, calculator, forms, tables, hover panels |
+| `--fg-primary` | `#F8FAFC` | 18.8:1 | Headlines, nav, important content |
+| `--fg-secondary` | `#CBD5E1` | 13.3:1 | Body copy, supporting text |
+| `--fg-muted` | `#94A3B8` | 7.7:1 | Labels, metadata, captions — floor, never go darker |
+| `--gold` | `#D4AF37` | 9.4:1 | Primary buttons, icons, dividers, tier badges, highlights, active nav |
+| `--gold-champagne` | `#E6C76A` | 11.9:1 | Hover states, button gradients, premium highlights |
+| `--gold-bronze` | `#8C6A1F` | 3.9:1 (large text/graphics only — fails small-text AA) | Active/pressed states, borders, shadows, gradient stop |
+| `--on-accent` | `#080B12` | 9.4:1 | Text on gold/champagne fill |
+| `--on-accent-pressed` | `#F8FAFC` | 4.8:1 | Text on bronze fill — **accessibility override**, see below |
+| `--success` (Emerald) | `#22C55E` | 8.6:1 | Success badges, confirmations, "100% Free to Join" — sparingly |
+| `--warning` (Amber) | `#F59E0B` | 9.2:1 | Warnings, risk reminders only |
+| `--error` | `#EF4444` | 5.2:1 | Form/validation errors — **accessibility override**, see below |
+| `--border` | `rgba(255,255,255,0.08)` | decorative | Generic dividers |
+| `--border-gold` | `rgba(212,175,55,0.15)` | decorative | Card borders, nav bottom border on scroll |
 
-**Single-accent discipline:** gold is reserved exclusively for the primary CTA, active/selected
-states, and key numeric highlights (rebate figures, tier badges). Feature icons, secondary
-UI, and decorative elements default to `--fg-primary` / `--fg-secondary` at reduced opacity —
-**no second accent color** (no emerald, no alternating hues). This is a deliberate tightening
-from V5, which alternated gold/emerald; V6 follows the Stripe/Linear pattern of near-monochrome
-plus one reserved accent.
+**Two accessibility overrides from the literal brief** (the brief itself requires "at least
+WCAG AA," so these are corrections, not deviations from intent):
+1. Brief specified Crimson `#DC2626` for errors — measures 4.08:1 on Midnight Black, fails
+   AA small-text (4.5:1). Swapped for `#EF4444`, same red family, 5.23:1.
+2. Primary button's "Pressed" state (Bronze fill) with the brief's constant "Midnight Black"
+   button text measures 3.93:1 — fails. Pressed state alone uses white (`--on-accent-pressed`)
+   instead; base and hover states keep black text on Gold/Champagne exactly as specified.
+
+**Single-accent discipline unchanged:** gold (in its base/champagne/bronze forms) is the only
+accent. Feature icons and secondary UI default to `--fg-primary` / `--fg-secondary` — no
+emerald/blue pairing outside the dedicated success/warning/error semantic roles above.
+
+## Gradients & Shadows
+
+- `--gradient-gold`: `linear-gradient(135deg, #8C6A1F 0%, #D4AF37 55%, #E6C76A 100%)`
+- `--gradient-midnight`: `linear-gradient(180deg, #080B12 0%, #111827 100%)`
+- `--shadow-sm`: `0 4px 12px rgba(0,0,0,0.20)`
+- `--shadow-md`: `0 12px 30px rgba(0,0,0,0.30)`
+- `--shadow-lg`: `0 24px 60px rgba(0,0,0,0.40)`
+- `--shadow-gold-glow`: `0 0 30px rgba(212,175,55,0.20)` — sparingly, primary actions only
 
 ## Typography
 
@@ -96,33 +124,49 @@ drop-shadows:
 
 ## Component Specs
 
-### Buttons
-- **Primary:** solid `--accent-gold` fill, `--on-accent` text, `rounded-xl`, 150ms hover
-  (opacity 0.92, no translate/scale — Stripe/Linear avoid button jump on hover)
-- **Secondary:** transparent, `--fg-primary` text, `--border` outline, hover fills `--bg-elevated`
-- **Tertiary/text link:** `--fg-secondary`, permanent underline (never hover-only — WCAG
-  "don't rely on color alone")
+### Buttons — implemented as `.btn-v6-primary` / `.btn-v6-secondary` in `globals.css`
+  (real CSS pseudo-selectors, not inline styles — base/hover/pressed each swap both fill
+  and text color, which `style=` can't express)
+- **Primary:** Gold fill + `--on-accent` (black) text at rest → Champagne fill on hover
+  (+ `--shadow-gold-glow`, −1px lift) → Bronze fill + `--on-accent-pressed` (white) text
+  on `:active` (accessibility override, see Color Palette notes)
+- **Secondary:** transparent fill, Gold border + Gold text at rest → Gold fill + black text
+  on hover (+ glow)
+- **Tertiary/text link:** `--fg-secondary` → Gold on hover → Champagne on active, permanent
+  underline (never hover-only — WCAG "don't rely on color alone")
 
-### Cards
-- `--bg-elevated` fill, `--elevation-sm` at rest, `--elevation-md` on hover, `rounded-xl`,
-  no hover-scale (translate-y −2px max, if any movement at all)
+### Cards — implemented as `.card-v6` in `globals.css`
+- `--bg-secondary` (Carbon Grey) fill for feature/glass-surface cards, `--bg-interactive`
+  (Graphite) for genuinely interactive ones (calculator, forms, tables)
+- Border `--border-gold` (`rgba(212,175,55,0.15)`) at rest → `rgba(212,175,55,0.3)` + 
+  `--shadow-gold-glow` + `--shadow-lg` on hover, −2px lift, `rounded-xl`/`rounded-2xl`
 
 ### Inputs
-- Dark fill (`--bg-elevated`), `--border` outline, floating label (moves up + shrinks on
-  focus/filled, not placeholder-only), focus state = `--accent-gold` border + soft ring,
-  inline validation on blur (not keystroke), error text below field in `--destructive`
+- Fill `--bg-secondary` (Carbon Grey), `--bg-interactive` (Graphite) border, floating label
+  (moves up + shrinks on focus/filled, not placeholder-only), focus state = Gold border +
+  soft ring, inline validation on blur (not keystroke), error text below field in `--error`
 
 ### Modals
-- `--bg-elevated`, `rounded-2xl`, scrim `rgba(10,10,12,0.7)` + blur, animate from trigger
+- `--bg-secondary`, `rounded-2xl`, scrim `rgba(8,11,18,0.7)` + blur, animate from trigger
   (scale+fade), always keyboard-dismissible (Esc) with visible close affordance
 
 ### Navigation
-- Transparent at top of page, `--bg` at 80% opacity + `backdrop-blur` after scroll threshold,
-  active link = `--fg-primary` + 1px `--accent-gold` underline, inactive = `--fg-secondary`
+- Transparent at top of page → Carbon Grey (`--bg-secondary` at ~90% opacity) + backdrop-blur
+  + thin `--border-gold` bottom border after scroll threshold
+- Active link = `--fg-primary` + 1px Gold underline, inactive = `--fg-secondary`, hover =
+  warm white
 
 ### Badges / status indicators
-- Pill shape, `--bg-elevated` fill + `--border`, text `--fg-secondary`; active/success state
-  swaps text+dot to `--accent-gold` — never color-only, always paired with a label
+- Pill shape, `--bg-secondary` fill + `--border`, text `--fg-secondary`; active/success state
+  swaps text+dot to Gold or `--success` as appropriate — never color-only, always paired
+  with a label
+
+### Tier badges (rebate tiers — Starter through Diamond)
+- Starter: `--fg-muted` (Slate Grey) · Bronze: `--gold-bronze` · Silver: a light neutral
+  (silver-metallic, not yet assigned a token — pick during TierTable cascade) · Gold:
+  `--gold` · Platinum: `--fg-primary` (near-white) · Diamond: light blue-white with a thin
+  gold trim (`--border-gold`) — distinct per tier, cohesive because every tier still resolves
+  to a value already in this palette
 
 ---
 
@@ -148,7 +192,8 @@ focused two-column split (context + form) → FAQ as accordion.
 - ❌ Hover-only link underlines (color-alone violation)
 - ❌ Layout-shifting hover transforms (width/height/scale that reflows siblings)
 - ❌ More than 2 animated elements visible at once
-- ❌ Text below `--fg-muted` (5.4:1) anywhere — hard floor
+- ❌ Text below `--fg-muted` (7.7:1) anywhere — hard floor
+- ❌ `--gold-bronze` as small text color on dark backgrounds (3.9:1, fails AA — large text/graphics/borders only)
 
 ## Pre-Delivery Checklist
 

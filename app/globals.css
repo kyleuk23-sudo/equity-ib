@@ -225,6 +225,53 @@ body {
   .border-glass   { border-color: rgba(255, 255, 255, 0.07); }
 }
 
+/* ─── V6 luxury button system ────────────────────────────────────────────── */
+/* Isolated from V5's :root tokens/.btn-glow above — scoped to V6 components
+   only (Hero, Navbar) during the flagship phase. Real pseudo-selectors are
+   required here because base/hover/pressed each swap both fill and text
+   color, which inline styles can't express. */
+.btn-v6-primary {
+  background: #D4AF37;
+  color: #080B12;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 150ms ease, color 150ms ease;
+}
+.btn-v6-primary:hover {
+  background: #E6C76A;
+  box-shadow: 0 0 30px rgba(212,175,55,0.20), 0 4px 12px rgba(0,0,0,0.20);
+  transform: translateY(-1px);
+}
+.btn-v6-primary:active {
+  background: #8C6A1F;
+  color: #F8FAFC; /* accessibility override — black text on bronze fails AA, see lib/designTokensV6.ts */
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+}
+
+.btn-v6-secondary {
+  background: transparent;
+  color: #D4AF37;
+  border: 1px solid #D4AF37;
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+.btn-v6-secondary:hover {
+  background: #D4AF37;
+  color: #080B12;
+  box-shadow: 0 0 30px rgba(212,175,55,0.20);
+}
+
+.card-v6 {
+  background: #111827;
+  border: 1px solid rgba(212,175,55,0.15);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.30);
+  transition: box-shadow 250ms ease, transform 250ms ease, border-color 250ms ease;
+}
+.card-v6:hover {
+  box-shadow: 0 0 30px rgba(212,175,55,0.20), 0 24px 60px rgba(0,0,0,0.40);
+  border-color: rgba(212,175,55,0.3);
+  transform: translateY(-2px);
+}
+
 /* ─── Reduced motion ─────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

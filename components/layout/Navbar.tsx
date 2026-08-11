@@ -62,10 +62,10 @@ export function Navbar() {
           animate={
             scrolled
               ? {
-                  background: `${V6.bg}CC`,
+                  background: `${V6.bgSecondary}E6`,
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",
-                  borderBottomColor: V6.border,
+                  borderBottomColor: V6.borderGold,
                 }
               : { background: "transparent", backdropFilter: "blur(0px)", borderBottomColor: "transparent" }
           }
@@ -77,7 +77,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
               <Image src="/logo.png" alt="Equity IB" width={36} height={36} className="rounded-full" priority />
               <span className="font-semibold text-[16px] tracking-tight hidden sm:block" style={{ color: V6.fgPrimary }}>
-                Equity <span style={{ color: V6.accentGold }}>IB</span>
+                Equity <span style={{ color: V6.gold }}>IB</span>
               </span>
             </Link>
 
@@ -96,7 +96,7 @@ export function Navbar() {
                       <motion.span
                         layoutId="nav-active"
                         className="absolute left-4 right-4 -bottom-0.5 h-px"
-                        style={{ background: V6.accentGold }}
+                        style={{ background: V6.gold }}
                       />
                     )}
                   </Link>
@@ -110,8 +110,7 @@ export function Navbar() {
                 data-track-event="cta"
                 data-track-label="Apply Now"
                 data-track-section="navbar_desktop"
-                className="inline-flex items-center font-semibold px-5 py-2.5 rounded-xl text-sm transition-opacity duration-150 hover:opacity-[0.92]"
-                style={{ background: V6.accentGold, color: V6.onAccent }}
+                className="btn-v6-primary inline-flex items-center font-semibold px-5 py-2.5 rounded-xl text-sm"
               >
                 Apply Now
               </Link>
@@ -120,7 +119,7 @@ export function Navbar() {
             <button
               onClick={() => setMenuOpen((o) => !o)}
               className="lg:hidden w-11 h-11 rounded-xl flex items-center justify-center"
-              style={{ background: V6.bgElevated, border: `1px solid ${V6.border}` }}
+              style={{ background: V6.bgSecondary, border: `1px solid ${V6.border}` }}
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
             >
@@ -142,7 +141,7 @@ export function Navbar() {
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
             className="fixed inset-x-0 top-[80px] z-40 mx-4 rounded-2xl overflow-hidden"
-            style={{ background: `${V6.bg}F5`, backdropFilter: "blur(24px)", border: `1px solid ${V6.border}` }}
+            style={{ background: `${V6.bgSecondary}F5`, backdropFilter: "blur(24px)", border: `1px solid ${V6.border}` }}
           >
             <div className="p-6 space-y-1">
               {NAV_LINKS.map((item, i) => (
@@ -171,8 +170,7 @@ export function Navbar() {
                   data-track-event="cta"
                   data-track-label="Apply Now"
                   data-track-section="navbar_mobile"
-                  className="flex items-center justify-center font-semibold px-5 py-3.5 rounded-xl text-sm w-full"
-                  style={{ background: V6.accentGold, color: V6.onAccent }}
+                  className="btn-v6-primary flex items-center justify-center font-semibold px-5 py-3.5 rounded-xl text-sm w-full"
                 >
                   Apply Now
                 </Link>

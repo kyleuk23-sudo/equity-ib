@@ -57,7 +57,7 @@ export function Hero() {
       />
       <motion.div
         className="absolute right-[-10%] top-[-10%] w-[640px] h-[640px] rounded-full pointer-events-none"
-        style={{ background: `radial-gradient(circle, rgba(217,164,78,0.10) 0%, transparent 70%)` }}
+        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)" }}
         animate={{ opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -70,7 +70,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-xs font-medium uppercase tracking-[0.14em] mb-5"
-            style={{ color: V6.accentGold }}
+            style={{ color: V6.gold }}
           >
             Introducing Broker Partnership
           </motion.p>
@@ -112,8 +112,7 @@ export function Hero() {
               data-track-event="cta"
               data-track-label="Apply Now"
               data-track-section="hero"
-              className="inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl text-sm transition-opacity duration-150 hover:opacity-[0.92]"
-              style={{ background: V6.accentGold, color: V6.onAccent }}
+              className="btn-v6-primary inline-flex items-center gap-2 font-semibold px-7 py-3.5 rounded-xl text-sm"
             >
               Apply Now
               <ArrowUpRight className="w-4 h-4" />
@@ -121,10 +120,9 @@ export function Hero() {
 
             <a
               href="#calculator"
-              className="inline-flex items-center gap-2 font-medium px-7 py-3.5 rounded-xl text-sm border transition-colors duration-150"
-              style={{ borderColor: V6.border, color: V6.fgPrimary }}
+              className="btn-v6-secondary inline-flex items-center gap-2 font-medium px-7 py-3.5 rounded-xl text-sm"
             >
-              <Calculator className="w-4 h-4" style={{ color: V6.fgSecondary }} />
+              <Calculator className="w-4 h-4" />
               Calculate Your Earnings
             </a>
           </motion.div>
@@ -152,8 +150,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.35, ease: easeOut }}
-            className="absolute left-0 bottom-6 w-[220px] rounded-xl p-5"
-            style={{ background: V6.bgElevated, border: `1px solid ${V6.border}` }}
+            className="card-v6 absolute left-0 bottom-6 w-[220px] rounded-xl p-5"
           >
             <span className="text-xs" style={{ color: V6.fgMuted }}>Average approval time</span>
             <div className="mt-1.5 text-2xl font-bold" style={{ color: V6.fgPrimary }}>&lt; 24 hours</div>
@@ -164,12 +161,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: easeOut }}
-            className="absolute right-0 top-0 w-full max-w-[380px] rounded-2xl p-6"
-            style={{
-              background: V6.bgElevated,
-              border: `1px solid ${V6.border}`,
-              boxShadow: "0 16px 48px rgba(217,164,78,0.10)",
-            }}
+            className="card-v6 absolute right-0 top-0 w-full max-w-[380px] rounded-2xl p-6"
           >
             <div className="flex items-center justify-between mb-1">
               <span className="text-xs font-medium uppercase tracking-[0.1em]" style={{ color: V6.fgMuted }}>
@@ -178,9 +170,9 @@ export function Hero() {
               <span className="relative flex h-1.5 w-1.5">
                 <span
                   className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
-                  style={{ background: V6.accentGold }}
+                  style={{ background: V6.gold }}
                 />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: V6.accentGold }} />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: V6.gold }} />
               </span>
             </div>
             <div className="text-4xl font-bold tracking-tight" style={{ color: V6.fgPrimary }}>
