@@ -58,7 +58,7 @@ export function CookieBanner() {
                   </button>
                 </div>
               </div>
-              <button onClick={() => decide(false)} aria-label="Dismiss cookie notice" className="text-slate-500 hover:text-white transition-colors flex-shrink-0">
+              <button onClick={() => decide(false)} aria-label="Dismiss cookie notice" className="p-3.5 -m-3.5 text-slate-500 hover:text-white transition-colors flex-shrink-0">
                 <X className="w-4 h-4" />
               </button>
             </div>
