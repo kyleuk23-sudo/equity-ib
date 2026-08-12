@@ -9,6 +9,7 @@ import { NewsletterSignup } from "@/components/ui/NewsletterSignup";
 import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -66,13 +67,14 @@ export default async function InsightArticlePage({ params }: Props) {
   };
 
   return (
-    <article className="pt-32 pb-24 relative" style={{ background: V6.bg }}>
+    <article className="pt-32 pb-24 relative overflow-hidden" style={{ background: V6.bg }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
+      <MeshGradientBg variant="calm" />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <BreadcrumbV6
           items={[{ label: "Home", href: "/" }, { label: "Insights", href: "/insights" }, { label: post.title }]}
           className="mb-6"

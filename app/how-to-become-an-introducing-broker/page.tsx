@@ -6,6 +6,8 @@ import {
 import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { SectionDivider } from "@/components/visual/SectionDivider";
 
 export const metadata: Metadata = {
   title: "How To Become An Introducing Broker — Step-By-Step Guide",
@@ -94,7 +96,8 @@ export default function HowToBecomeAnIntroducingBrokerPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <section className="pt-32 pb-16 relative" style={{ background: V6.bg }}>
+      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="hero" />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <BreadcrumbV6
             items={[{ label: "Home", href: "/" }, { label: "How To Become An Introducing Broker" }]}
@@ -112,6 +115,8 @@ export default function HowToBecomeAnIntroducingBrokerPage() {
           </p>
         </div>
       </section>
+
+      <SectionDivider />
 
       <section className="py-8 relative" style={{ background: V6.bg }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -147,8 +152,11 @@ export default function HowToBecomeAnIntroducingBrokerPage() {
         </div>
       </section>
 
-      <section className="py-16 relative" style={{ background: V6.bg }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionDivider />
+
+      <section className="py-16 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="corner" />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="card-v6 rounded-2xl p-6 mb-10 flex items-start gap-3">
             <HelpCircle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: V6.gold }} />
             <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>

@@ -10,6 +10,8 @@ import { submitApplication }          from "@/app/actions/submit-application";
 import { useFormAnalytics }           from "@/lib/analytics/useFormAnalytics";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { IconMark } from "@/components/visual/IconMark";
 
 const LOTS_OPTIONS = [
   "< 100 lots / month",
@@ -79,6 +81,7 @@ export default function ContactContent() {
 
   return (
     <div className="pt-32 pb-24 relative overflow-hidden" style={{ background: V6.bg }}>
+      <MeshGradientBg variant="hero" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="mb-14">
           <motion.div
@@ -233,11 +236,11 @@ export default function ContactContent() {
             transition={{ delay: 0.3 }}
             className="lg:col-span-2 space-y-4"
           >
-            <div className="card-v6 rounded-2xl p-6">
+            <div className="group card-v6 rounded-2xl p-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: "rgba(212,175,55,0.10)" }}>
-                  <MessageCircle className="w-5 h-5" style={{ color: V6.gold }} />
-                </div>
+                <IconMark size={40}>
+                  <MessageCircle className="w-4 h-4" style={{ color: V6.gold }} />
+                </IconMark>
                 <div>
                   <p className="font-semibold" style={{ color: V6.fgPrimary }}>Live Chat</p>
                   <div className="flex items-center gap-1.5 mt-0.5">
@@ -259,10 +262,10 @@ export default function ContactContent() {
               ].map((c) => {
                 const Icon = c.icon;
                 return (
-                  <div key={c.label} className="flex items-center gap-3">
-                    <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,175,55,0.10)" }}>
+                  <div key={c.label} className="group flex items-center gap-3">
+                    <IconMark size={38}>
                       <Icon className="w-4 h-4" style={{ color: V6.gold }} />
-                    </div>
+                    </IconMark>
                     <div>
                       <div className="text-xs" style={{ color: V6.fgMuted }}>{c.label}</div>
                       {c.href ? (

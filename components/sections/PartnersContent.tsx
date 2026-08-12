@@ -8,6 +8,10 @@ import {
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
 import { TIER_COLORS_V6 } from "@/lib/tierColorsV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { MetallicCube } from "@/components/visual/MetallicCube";
+import { IconMark } from "@/components/visual/IconMark";
+import { SectionDivider } from "@/components/visual/SectionDivider";
 
 const features = [
   { icon: TrendingUp, title: "IB Rebate Tiers", desc: "Earn increasingly competitive rebates as your monthly trading volume grows — six tiers from Starter to Diamond." },
@@ -46,10 +50,8 @@ export default function PartnersContent() {
   return (
     <div className="pt-28 pb-0" style={{ background: V6.bg }}>
       <section className="relative pb-20 overflow-hidden">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%)" }}
-        />
+        <MeshGradientBg variant="hero" />
+        <MetallicCube size={40} className="absolute right-[10%] top-[14%] hidden lg:block pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <motion.div
@@ -114,7 +116,11 @@ export default function PartnersContent() {
         </div>
       </section>
 
-      <section className="pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionDivider />
+
+      <section className="pb-24 relative overflow-hidden">
+        <MeshGradientBg variant="left" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -142,10 +148,12 @@ export default function PartnersContent() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07 }}
-                className="card-v6 rounded-2xl p-6"
+                className="group card-v6 rounded-2xl p-6"
               >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(212,175,55,0.10)" }}>
-                  <Icon className="w-5 h-5" style={{ color: V6.gold }} />
+                <div className="mb-4">
+                  <IconMark size={48}>
+                    <Icon className="w-5 h-5" style={{ color: V6.gold }} />
+                  </IconMark>
                 </div>
                 <h3 className="font-semibold mb-2" style={{ color: V6.fgPrimary }}>{f.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>{f.desc}</p>
@@ -153,9 +161,13 @@ export default function PartnersContent() {
             );
           })}
         </div>
+        </div>
       </section>
 
+      <SectionDivider />
+
       <section id="tiers" className="pb-24 relative overflow-hidden">
+        <MeshGradientBg variant="corner" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -245,7 +257,11 @@ export default function PartnersContent() {
         </div>
       </section>
 
-      <section id="payments" className="pb-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionDivider />
+
+      <section id="payments" className="pb-24 relative overflow-hidden">
+        <MeshGradientBg variant="right" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -302,9 +318,13 @@ export default function PartnersContent() {
             ))}
           </div>
         </div>
+        </div>
       </section>
 
+      <SectionDivider />
+
       <section className="pb-28 relative overflow-hidden">
+        <MeshGradientBg variant="calm" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

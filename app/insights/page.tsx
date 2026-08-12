@@ -4,6 +4,7 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import { getAllPosts } from "@/lib/insights";
 import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 export const metadata: Metadata = {
   title: "Insights — Introducing Broker Guides & Industry Updates",
@@ -41,13 +42,14 @@ export default function InsightsIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <section className="pt-32 pb-24 relative" style={{ background: V6.bg }}>
+    <section className="pt-32 pb-24 relative overflow-hidden" style={{ background: V6.bg }}>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
+      <MeshGradientBg variant="hero" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "Insights" }]} className="mb-6" />
 
         <div className="mb-14">

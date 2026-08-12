@@ -6,6 +6,9 @@ import {
 import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { IconMark } from "@/components/visual/IconMark";
+import { SectionDivider } from "@/components/visual/SectionDivider";
 
 export const metadata: Metadata = {
   title: "Introducing Broker Program — What to Look For & How Equity IB Delivers",
@@ -96,7 +99,8 @@ export default function IntroducingBrokerProgramPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
-      <section className="pt-32 pb-16 relative" style={{ background: V6.bg }}>
+      <section className="pt-32 pb-16 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="hero" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <BreadcrumbV6
             items={[{ label: "Home", href: "/" }, { label: "Introducing Broker Program" }]}
@@ -116,15 +120,20 @@ export default function IntroducingBrokerProgramPage() {
         </div>
       </section>
 
-      <section className="py-12 relative" style={{ background: V6.bg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <SectionDivider />
+
+      <section className="py-12 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="left" />
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid sm:grid-cols-2 gap-5">
             {criteria.map((c) => {
               const Icon = c.icon;
               return (
-                <div key={c.title} className="card-v6 rounded-2xl p-6">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(212,175,55,0.10)" }}>
-                    <Icon className="w-5 h-5" style={{ color: V6.gold }} />
+                <div key={c.title} className="card-v6 rounded-2xl p-6 group">
+                  <div className="mb-4">
+                    <IconMark size={44}>
+                      <Icon className="w-5 h-5" style={{ color: V6.gold }} />
+                    </IconMark>
                   </div>
                   <h2 className="font-bold mb-1.5" style={{ color: V6.fgPrimary }}>{c.title}</h2>
                   <p className="text-xs italic mb-3 leading-relaxed" style={{ color: V6.fgMuted }}>{c.ask}</p>
@@ -143,8 +152,11 @@ export default function IntroducingBrokerProgramPage() {
         </div>
       </section>
 
-      <section className="py-16 relative" style={{ background: V6.bg }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <SectionDivider />
+
+      <section className="py-16 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="calm" />
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <div className="card-v6 rounded-2xl p-10">
             <div className="flex items-center justify-center gap-2 mb-4">
               <CheckCircle2 className="w-5 h-5" style={{ color: V6.success }} />

@@ -12,6 +12,7 @@ import {
 import type { LegalDoc, LegalSection, LegalCallout, LegalTable } from "@/lib/legalContent";
 import { LEGAL_DOCS } from "@/lib/legalContent";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Shield, FileText, AlertTriangle, Users, Info, Megaphone, Award,
@@ -274,8 +275,9 @@ export function LegalDocContent({ doc }: { doc: LegalDoc }) {
         .print-header { display: none; }
       `}</style>
 
-      <div className="min-h-screen py-8" style={{ background: V6.bg }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen py-8 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="calm" className="no-print" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}

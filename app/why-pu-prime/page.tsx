@@ -3,6 +3,7 @@ import { WhyPUPrime }         from "@/components/sections/WhyPUPrime";
 import { ApplicationSection } from "@/components/sections/ApplicationSection";
 import { BreadcrumbV6 } from "@/components/ui/BreadcrumbV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 export const metadata: Metadata = {
   title: "Why PU Prime — Premium Broker Technology for Your Clients",
@@ -41,9 +42,12 @@ export default function WhyPUPrimePage() {
       />
 
       {/* Breadcrumb */}
-      <div className="pt-32 pb-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ background: V6.bg }}>
-        <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "Why PU Prime" }]} />
-        <h1 className="mt-4 text-2xl sm:text-3xl font-bold" style={{ color: V6.fgPrimary }}>Why PU Prime</h1>
+      <div className="pt-32 pb-0 relative overflow-hidden" style={{ background: V6.bg }}>
+        <MeshGradientBg variant="corner" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <BreadcrumbV6 items={[{ label: "Home", href: "/" }, { label: "Why PU Prime" }]} />
+          <h1 className="mt-4 text-2xl sm:text-3xl font-bold" style={{ color: V6.fgPrimary }}>Why PU Prime</h1>
+        </div>
       </div>
 
       <WhyPUPrime />

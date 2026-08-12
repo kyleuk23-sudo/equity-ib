@@ -11,6 +11,7 @@ import {
 import { LEGAL_DOCS, LEGAL_CATEGORIES, type LegalDoc } from "@/lib/legalContent";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   Shield, FileText, AlertTriangle, Users, Info, Megaphone, Award,
@@ -137,10 +138,7 @@ export function LegalHubContent() {
   return (
     <div className="min-h-screen" style={{ background: V6.bg }}>
       <section className="pt-20 pb-12 relative overflow-hidden">
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at center, rgba(212,175,55,0.08) 0%, transparent 70%)" }}
-        />
+        <MeshGradientBg variant="hero" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
           <motion.div
