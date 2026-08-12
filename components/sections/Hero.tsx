@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, Calculator, ShieldCheck, Globe2, Clock } from "lucide-react";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { LightBeams } from "@/components/visual/LightBeams";
+import { NetworkLines } from "@/components/visual/NetworkLines";
+import { FloatingRing } from "@/components/visual/FloatingRing";
+import { GlassSphere } from "@/components/visual/GlassSphere";
 
 const trustIndicators = [
   { icon: ShieldCheck, label: "Regulated broker partner" },
@@ -40,27 +45,58 @@ const easeOut = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   const monthlyRebate = useCountUp(26140, 1400, true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+
+  // Subtle mouse parallax on the decorative layer only -- content never
+  // moves. A few px of travel, springed for a calm, non-jittery feel.
+  // Disabled entirely under prefers-reduced-motion (vestibular-sensitive
+  // users get static positioning, not spring-animated movement).
+  const mx = useMotionValue(0.5);
+  const my = useMotionValue(0.5);
+  const sx = useSpring(mx, { stiffness: 40, damping: 20 });
+  const sy = useSpring(my, { stiffness: 40, damping: 20 });
+  const ringX = useTransform(sx, (v) => `${reduceMotion ? 0 : (v - 0.5) * -16}px`);
+  const ringY = useTransform(sy, (v) => `${reduceMotion ? 0 : (v - 0.5) * -16}px`);
+  const sphereX = useTransform(sx, (v) => `${reduceMotion ? 0 : (v - 0.5) * 22}px`);
+  const sphereY = useTransform(sy, (v) => `${reduceMotion ? 0 : (v - 0.5) * 22}px`);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    if (reduceMotion) return;
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mx.set((e.clientX - rect.left) / rect.width);
+    my.set((e.clientY - rect.top) / rect.height);
+  };
 
   return (
     <section
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className="relative pt-[140px] pb-24 lg:pb-32 overflow-hidden"
       style={{ background: V6.bg }}
     >
-      {/* Subtle animated background — fine dot-grid + one soft drifting glow, confined to the visual half */}
+      {/* Bespoke background composition -- mesh light, golden beams,
+          abstract network, floating glass/metal accents. No stock charts,
+          no dashboards. */}
+      <MeshGradientBg variant="hero" />
+      <LightBeams className="absolute inset-0 opacity-70" />
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.5]"
+        className="absolute inset-0 pointer-events-none opacity-40"
         style={{
           backgroundImage: `radial-gradient(${V6.border} 1px, transparent 1px)`,
           backgroundSize: "28px 28px",
           maskImage: "radial-gradient(ellipse 70% 60% at 75% 30%, black 0%, transparent 75%)",
         }}
       />
-      <motion.div
-        className="absolute right-[-10%] top-[-10%] w-[640px] h-[640px] rounded-full pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)" }}
-        animate={{ opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <NetworkLines className="absolute right-[-4%] top-[6%] w-[420px] h-[280px] opacity-60 hidden lg:block" />
+
+      <motion.div style={{ x: ringX, y: ringY }} className="absolute right-[8%] bottom-[10%] hidden lg:block pointer-events-none">
+        <FloatingRing size={130} />
+      </motion.div>
+      <motion.div style={{ x: sphereX, y: sphereY }} className="absolute left-[42%] top-[8%] hidden xl:block pointer-events-none">
+        <GlassSphere size={54} floatDelay={0.6} />
+      </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative grid lg:grid-cols-[1.05fr_0.95fr] gap-16 lg:gap-8 items-center">
         {/* Left — headline & conversion path */}
@@ -145,7 +181,6 @@ export function Hero() {
 
         {/* Right — bespoke composed visual, no stock photography */}
         <div className="relative h-[440px] lg:h-[480px]">
-          {/* Trailing offset card — trust micro-detail, sits behind/lower-left */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -156,7 +191,6 @@ export function Hero() {
             <div className="mt-1.5 text-2xl font-bold" style={{ color: V6.fgPrimary }}>&lt; 24 hours</div>
           </motion.div>
 
-          {/* Primary floating panel — live partner activity feed */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
