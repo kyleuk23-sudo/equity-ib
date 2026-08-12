@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { DollarSign, Users, Globe, TrendingUp, Headphones } from "lucide-react";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 const metrics = [
   { icon: DollarSign,  prefix: "$", value: 50,  suffix: "M+", label: "IB Rebates Generated", desc: "Paid to IB partners across our network" },
@@ -42,10 +43,10 @@ function MetricCard({ metric, index }: { metric: (typeof metrics)[0]; index: num
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
+      transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
       className="card-v6 rounded-2xl p-6 text-center"
     >
       <div className="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ background: "rgba(212,175,55,0.10)" }}>
@@ -67,7 +68,8 @@ function MetricCard({ metric, index }: { metric: (typeof metrics)[0]; index: num
 export function SuccessMetrics() {
   return (
     <section className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <MeshGradientBg variant="corner" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}

@@ -6,6 +6,8 @@ import {
 } from "lucide-react";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { IconMark } from "@/components/visual/IconMark";
 
 const features = [
   { icon: Monitor,     title: "Professional Client Portal",
@@ -29,7 +31,8 @@ const features = [
 export function WhyPUPrime() {
   return (
     <section id="why-pu-prime" className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <MeshGradientBg variant="calm" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,14 +58,18 @@ export function WhyPUPrime() {
             return (
               <motion.div
                 key={f.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, filter: "blur(6px)" }}
+                whileInView={{ opacity: 1, filter: "blur(0px)" }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.06 }}
-                className="pt-6"
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                className="group pt-6"
                 style={{ borderTop: `1px solid ${V6.border}` }}
               >
-                <Icon className="w-5 h-5 mb-4" style={{ color: V6.gold }} />
+                <div className="mb-4">
+                  <IconMark size={44}>
+                    <Icon className="w-[18px] h-[18px]" style={{ color: V6.gold }} />
+                  </IconMark>
+                </div>
                 <h3 className="font-semibold mb-2" style={{ color: V6.fgPrimary }}>{f.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>{f.desc}</p>
               </motion.div>

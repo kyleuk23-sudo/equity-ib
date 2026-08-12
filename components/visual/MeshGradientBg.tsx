@@ -17,6 +17,12 @@ const VARIANTS: Record<string, string> = {
     radial-gradient(ellipse 55% 45% at 90% 100%, rgba(212,175,55,0.08) 0%, transparent 60%),
     radial-gradient(ellipse 40% 35% at 5% 0%, rgba(230,199,106,0.05) 0%, transparent 60%)
   `,
+  left: `
+    radial-gradient(ellipse 45% 55% at 0% 50%, rgba(212,175,55,0.08) 0%, transparent 60%)
+  `,
+  right: `
+    radial-gradient(ellipse 45% 55% at 100% 50%, rgba(230,199,106,0.07) 0%, transparent 60%)
+  `,
 };
 
 export function MeshGradientBg({ variant = "calm", className = "" }: { variant?: keyof typeof VARIANTS; className?: string }) {

@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import { ClipboardList, CheckCircle2, Link2, TrendingUp, Wallet } from "lucide-react";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
 
 // Bronze -> Gold -> Champagne progression, matching the tier/calculator
 // gold family used elsewhere on the site.
@@ -30,6 +31,7 @@ const steps = [
 function Step({ step, index, isLast }: { step: typeof steps[0]; index: number; isLast: boolean }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
+  const reduceMotion = useReducedMotion();
   const Icon = step.icon;
 
   return (
@@ -63,6 +65,15 @@ function Step({ step, index, isLast }: { step: typeof steps[0]; index: number; i
               className="absolute top-0 left-0 w-full rounded-full"
               style={{ background: `linear-gradient(to bottom, ${step.color}, ${steps[index + 1]?.color ?? step.color})` }}
             />
+            {!reduceMotion && inView && (
+              <motion.div
+                className="absolute left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                style={{ background: step.color, boxShadow: `0 0 6px ${step.color}` }}
+                initial={{ top: "0%", opacity: 0 }}
+                animate={{ top: ["0%", "100%"], opacity: [0, 1, 0] }}
+                transition={{ duration: 1.8, delay: index * 0.12 + 1, repeat: Infinity, repeatDelay: 1.5, ease: "easeInOut" }}
+              />
+            )}
           </div>
         )}
       </div>
@@ -86,7 +97,8 @@ function Step({ step, index, isLast }: { step: typeof steps[0]; index: number; i
 export function HowItWorksTimeline() {
   return (
     <section id="how-it-works" className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <MeshGradientBg variant="right" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="lg:sticky lg:top-28">
             <motion.div

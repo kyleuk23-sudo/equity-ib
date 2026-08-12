@@ -11,6 +11,7 @@ import { Testimonials }        from "@/components/sections/Testimonials";
 import { ApplicationSection }  from "@/components/sections/ApplicationSection";
 import { FAQ }                 from "@/components/sections/FAQ";
 import { FreeToJoin }          from "@/components/sections/FreeToJoin";
+import { SectionDivider }      from "@/components/visual/SectionDivider";
 
 export const metadata: Metadata = {
   alternates: { canonical: "https://equityib.uk" },
@@ -67,15 +68,25 @@ export default function Home() {
       />
       <Hero />
       <ValueProposition />
+      <SectionDivider />
       <WhyEquityIB />
+      <SectionDivider />
       <FreeToJoin />
+      <SectionDivider />
       <TierTable />
+      <SectionDivider />
       <IBCalculator />
+      <SectionDivider />
       <HowItWorksTimeline />
+      <SectionDivider />
       <WhyPUPrime />
+      <SectionDivider />
       <SuccessMetrics />
+      <SectionDivider />
       <Testimonials />
+      <SectionDivider />
       <ApplicationSection />
+      <SectionDivider />
       <FAQ />
     </>
   );

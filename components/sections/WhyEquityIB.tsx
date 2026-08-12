@@ -8,6 +8,8 @@ import {
 import Link from "next/link";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { IconMark } from "@/components/visual/IconMark";
 
 const features = [
   { icon: BarChart3,  title: "Competitive Rebate Tiers",  desc: "Earn up to $30 per traded lot across six tier levels, with rates that grow automatically as your monthly volume increases." },
@@ -27,8 +29,9 @@ const features = [
  */
 export function WhyEquityIB() {
   return (
-    <section id="why-equity-ib" className="py-24 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-equity-ib" className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
+      <MeshGradientBg variant="left" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -80,15 +83,12 @@ export function WhyEquityIB() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: i * 0.05 }}
-                  className="flex items-start gap-4 py-5"
+                  className="group flex items-start gap-4 py-5"
                   style={{ borderBottom: i < features.length - 1 ? `1px solid ${V6.border}` : "none" }}
                 >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: V6.bgSecondary, border: `1px solid ${V6.borderGold}` }}
-                  >
+                  <IconMark size={44}>
                     <Icon className="w-[18px] h-[18px]" style={{ color: V6.gold }} />
-                  </div>
+                  </IconMark>
                   <div>
                     <h3 className="font-semibold text-sm mb-1" style={{ color: V6.fgPrimary }}>{f.title}</h3>
                     <p className="text-sm leading-relaxed" style={{ color: V6.fgSecondary }}>{f.desc}</p>

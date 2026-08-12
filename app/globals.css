@@ -230,6 +230,31 @@ body {
    only (Hero, Navbar) during the flagship phase. Real pseudo-selectors are
    required here because base/hover/pressed each swap both fill and text
    color, which inline styles can't express. */
+.btn-v6-primary, .btn-v6-secondary {
+  position: relative;
+  overflow: hidden;
+}
+/* Ripple: pure-CSS, no click-position tracking. Appears fast on press
+   (short transition), fades slowly on release (the base rule's longer
+   transition takes over once :active is removed) -- reads as a soft
+   pulse rather than a literal Material ripple. */
+.btn-v6-primary::after, .btn-v6-secondary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 65%);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: transform 500ms ease-out, opacity 500ms ease-out;
+  pointer-events: none;
+}
+.btn-v6-primary:active::after, .btn-v6-secondary:active::after {
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 80ms ease-out, opacity 80ms ease-out;
+}
+
 .btn-v6-primary {
   background: #D4AF37;
   color: #080B12;
@@ -244,27 +269,49 @@ body {
 .btn-v6-primary:active {
   background: #8C6A1F;
   color: #F8FAFC; /* accessibility override — black text on bronze fails AA, see lib/designTokensV6.ts */
-  transform: translateY(0);
+  transform: translateY(0) scale(0.97);
   box-shadow: 0 4px 12px rgba(0,0,0,0.20);
+  transition: background-color 200ms ease, box-shadow 200ms ease, transform 100ms ease, color 150ms ease;
 }
 
 .btn-v6-secondary {
   background: transparent;
   color: #D4AF37;
   border: 1px solid #D4AF37;
-  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease, transform 150ms ease;
 }
 .btn-v6-secondary:hover {
   background: #D4AF37;
   color: #080B12;
   box-shadow: 0 0 30px rgba(212,175,55,0.20);
 }
+.btn-v6-secondary:active {
+  transform: scale(0.97);
+  transition: transform 100ms ease;
+}
 
 .card-v6 {
+  position: relative;
   background: #111827;
   border: 1px solid rgba(212,175,55,0.15);
   box-shadow: 0 12px 30px rgba(0,0,0,0.30);
   transition: box-shadow 250ms ease, transform 250ms ease, border-color 250ms ease;
+}
+/* Glass reflection -- a soft diagonal sheen that sweeps across on hover,
+   the same shine-sweep language as the primary button's fill, applied
+   here as a light-over-glass reflection rather than a gold flash. */
+.card-v6::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.05) 45%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 700ms ease;
+  pointer-events: none;
+}
+.card-v6:hover::before {
+  transform: translateX(100%);
 }
 .card-v6:hover {
   box-shadow: 0 0 30px rgba(212,175,55,0.20), 0 24px 60px rgba(0,0,0,0.40);

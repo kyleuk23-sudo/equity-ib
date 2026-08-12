@@ -66,10 +66,10 @@ export function FreeToJoin() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
           className="card-v6 rounded-2xl p-8 sm:p-10"
         >
           <div className="grid sm:grid-cols-2 gap-x-10 gap-y-8">

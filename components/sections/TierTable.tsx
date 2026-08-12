@@ -5,6 +5,8 @@ import { Zap, Shield, Star, Crown, BarChart3, Check } from "lucide-react";
 import { ButtonV6 } from "@/components/ui/ButtonV6";
 import { V6 } from "@/lib/designTokensV6";
 import { TIER_COLORS_V6 } from "@/lib/tierColorsV6";
+import { MeshGradientBg } from "@/components/visual/MeshGradientBg";
+import { FloatingRing } from "@/components/visual/FloatingRing";
 
 const tiers = [
   {
@@ -42,7 +44,9 @@ const tiers = [
 export function TierTable() {
   return (
     <section id="ib-rebates" className="py-24 relative overflow-hidden" style={{ background: V6.bg }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <MeshGradientBg variant="corner" />
+      <FloatingRing size={100} duration={26} className="absolute right-[6%] top-[4%] hidden lg:block pointer-events-none opacity-70" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
